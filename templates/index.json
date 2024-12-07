@@ -87,27 +87,7 @@
         "button_url2": "shopify://pages/shop"
       }
     },
-    "feature": {
-      "type": "feature",
-      "settings": {
-        "maintitle": "Why Shop with Shoehive",
-        "title1": "Seamless Shopping",
-        "description1": "Shopping for your favorite sneakers is easy—browse our extensive collection, choose your perfect pair, and enjoy a seamless shopping experience.",
-        "title2": "Secure Payments",
-        "description2": "Checkout is quick and secure with various payment options, ensuring a smooth purchase so you can focus on getting the best sneakers.",
-        "title3": "Fast and Reliable Delivery",
-        "description3": "Our efficient delivery process ensures your sneakers arrive quickly and securely, whether it's the latest Nike release or classic Adidas kicks."
-      }
-    },
-    "offer": {
-      "type": "offer",
-      "settings": {
-        "select_product": "",
-        "product_desc": "Made using clean, non-toxic ingredients, our products are designed for everyone.",
-        "offer_price": "$39",
-        "countdown_duration": 72
-      }
-    },
+    
     "blog": {
       "type": "blog",
       "settings": {
@@ -124,8 +104,6 @@
     "collection",
     "productList",
     "banner",
-    "feature",
-    "offer",
     "blog",
     "newsletter"
   ]

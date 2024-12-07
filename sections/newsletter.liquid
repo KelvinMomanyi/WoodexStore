@@ -1,33 +1,32 @@
-<div id="newsletter-popup" class="newsletter-popup">
-    <div class="newsletter-popup-content">
-      <button class="close-popup" onclick="closePopup()">
-        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
-      </button>
-      <div class="newsletter-card">
-        <div class="card-image">
-          {% if section.settings.image1 != blank %}
-            <img src="{{ section.settings.image1 | image_url}}" alt="Newsletter Image" loading="lazy"> 
-           {% else %}
-            <img src="{{'shoes.jpg' | asset_url}}" alt="Newsletter Image" loading="lazy">   
-          {% endif %}
-        </div>
-        <div class="newcard-content">
-          <h2>Stay Updated!</h2>
-          <p>Subscribe to our newsletter and get the latest updates right in your inbox.</p>
-          {% form 'customer' %}
-          <form action="{{ shop.url }}/contact#contact_form" method="post" accept-charset="UTF-8" class="subscribe-form">
-            <input type="hidden" name="form_type" value="customer">
-            <input type="hidden" name="utf8" value="✓">
-            <input type="email" name="contact[email]" placeholder="Enter your email" required>
-            <button type="submit" class='btn btn-primary'>Subscribe</button>
-          </form>
-        {% endform %}
-        </div>
-      </div>
-    </div>
-  </div>
-  
+ <!-- 
+        - #NEWSLETTER
+      -->
 
+      <section class="section newsletter" aria-label="newsletter">
+        <div class="container">
+
+          <div class="newsletter-card">
+
+            <div class="card-content">
+              <h2 class="h2 section-title">Our Newsletter</h2>
+
+              <p class="section-text">
+                Subscribe our newsletter and get discount 50% off
+              </p>
+            </div>
+
+            <form action="" class="card-form">
+              <input type="email" name="email_address" placeholder="Your email address" required class="email-field">
+
+              <button type="submit" class="newsletter-btn" aria-label="subscribe">
+                <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+              </button>
+            </form>
+
+          </div>
+
+        </div>
+      </section>
 
 <style>
     .newsletter-popup {
