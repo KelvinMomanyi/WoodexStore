@@ -1,84 +1,151 @@
 
-                 <!--
-                   #BLOG
-                -->
-                {% comment %} data-section {% endcomment %}
-                <section class="section-blog" id="blog" aria-label="blog" >
-                    <div class="container">
-                       <h2 class="h2-large section-title">{{section.settings.heading_text}}</h2>
-                       <ul class="flex-list">
-                        {% assign selected_blog_handle = section.settings.blog_type %}
+               
+      <!-- 
+        - #BLOG
+      -->
 
-                        {% if selected_blog_handle %}
-                          <!-- Fetch the selected blog and its articles -->
-                          {% for article in blogs[selected_blog_handle].articles limit: 3 %}
-                            <li class="flex-item">
-                              <div class="blog-card">
-                                <figure class="card-banner img-holder has-before hover:shine" style="--width:700; --height:450;">
-                                  <img src="{{ article.image | img_url : 'large' }}" alt="{{ article.title }}" class="img-cover" width="700" height="450" loading="lazy">
-                                </figure>
-                        
-                                <h3 class="h3">
-                                  <a href="{{ article.url }}" class="card-title">{{ article.title }}</a>
-                                </h3>
-                                
-                                <a href="{{ article.url }}" class="btn-link">
-                                  <span class="span">Read More</span>
-                                  <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                                </a>
-                              </div>
-                            </li>
-                          {% endfor %}
-                        {% else %}
-                         <li class="flex-item">
-                          <div class="blog-card">
-                              <figure class="card-banner img-holder has-before hover:shine" style="--width:700; --height:450;">
-                                <img src="{{ 'shoBlog1.jpg' | asset_url }}" alt="From Our Blog" class="img-cover" width="700" height="450" loading="lazy">
-                              </figure>
+      <section class="section blog" id="blog" aria-label="blog">
+        <div class="container">
 
-                              <h3 class="h3">
-                                  <a href="#" class="card-title">Our New Store</a>
-                              </h3>
-                              <a href="#" class="btn-link">
-                                 <span class="span">Read More</span>
-                                 <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                              </a>
-                          </div>
-                         </li>
-                         <li class="flex-item">
-                          <div class="blog-card">
-                              <figure class="card-banner img-holder has-before hover:shine" style="--width:700; --height:450;">
-                                <img src="{{ 'shoBlog2.jpg' | asset_url }}" alt="From Our Blog" class="img-cover" width="700" height="450" loading="lazy">
-                              </figure>
+          <div class="title-wrapper">
+            <h2 class="h2 section-title">Explore our blog</h2>
 
-                              <h3 class="h3">
-                                  <a href="#" class="card-title">From Our Blog</a>
-                              </h3>
-                              <a href="#" class="btn-link">
-                                 <span class="span">Read More</span>
-                                 <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                              </a>
-                          </div>
-                         </li>
-                         <li class="flex-item">
-                           <div class="blog-card">
-                              <figure class="card-banner img-holder has-before hover:shine" style="--width:700; --height:450;">
-                                <img src="{{ 'shoBlog3.jpg' | asset_url }}" alt="Our Story" class="img-cover" width="700" height="450" loading="lazy">
-                              </figure>
+            <a href="#" class="btn-link">
+              <span class="span">View All</span>
 
-                              <h3 class="h3">
-                                  <a href="#" class="card-title">Our Story</a>
-                              </h3>
-                              <a href="#" class="btn-link">
-                                 <span class="span">Read More</span>
-                                 <ion-icon name="arrow-forward-outline" aria-hidden="true"></ion-icon>
-                              </a>
-                           </div>
-                         </li>
-                        {% endif %}
-                       </ul>
-                    </div>
-                  </section>
+              <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
+            </a>
+          </div>
+
+          <ul class="grid-list">
+
+            <li>
+              <div class="blog-card">
+
+                <div class="card-banner img-holder" style="--width: 374; --height: 243;">
+                  <img src="./assets/images/blog-1.jpg" width="374" height="243" loading="lazy"
+                    alt="Unique products that will impress your home in 2022." class="img-cover">
+
+                  <a href="#" class="card-btn">
+                    <span class="span">Read more</span>
+
+                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                  </a>
+                </div>
+
+                <div class="card-content">
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Unique products that will impress your home in 2022.</a>
+                  </h3>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <time class="card-meta-text" datetime="2022-09-27">November 27, 2022</time>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <a href="#" class="card-meta-text">Admin</a>
+                    </li>
+
+                    <li class="card-meta-item">
+                      in <a href="#" class="card-meta-text">deco</a>
+                    </li>
+
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+
+                <div class="card-banner img-holder" style="--width: 374; --height: 243;">
+                  <img src="./assets/images/blog-2.jpg" width="374" height="243" loading="lazy"
+                    alt="Navy Blue & White Striped Area Rugs" class="img-cover">
+
+                  <a href="#" class="card-btn">
+                    <span class="span">Read more</span>
+
+                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                  </a>
+                </div>
+
+                <div class="card-content">
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Navy Blue & White Striped Area Rugs</a>
+                  </h3>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <time class="card-meta-text" datetime="2022-09-25">November 25, 2022</time>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <a href="#" class="card-meta-text">Admin</a>
+                    </li>
+
+                    <li class="card-meta-item">
+                      in <a href="#" class="card-meta-text">deco</a>
+                    </li>
+
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+            <li>
+              <div class="blog-card">
+
+                <div class="card-banner img-holder" style="--width: 374; --height: 243;">
+                  <img src="./assets/images/blog-3.jpg" width="374" height="243" loading="lazy"
+                    alt="Woodex White Coated Staircase Floating" class="img-cover">
+
+                  <a href="#" class="card-btn">
+                    <span class="span">Read more</span>
+
+                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                  </a>
+                </div>
+
+                <div class="card-content">
+
+                  <h3 class="h3">
+                    <a href="#" class="card-title">Woodex White Coated Staircase Floating</a>
+                  </h3>
+
+                  <ul class="card-meta-list">
+
+                    <li class="card-meta-item">
+                      <time class="card-meta-text" datetime="2022-09-18">November 18, 2022</time>
+                    </li>
+
+                    <li class="card-meta-item">
+                      <a href="#" class="card-meta-text">Admin</a>
+                    </li>
+
+                    <li class="card-meta-item">
+                      in <a href="#" class="card-meta-text">deco</a>
+                    </li>
+
+                  </ul>
+
+                </div>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+      </section>
 {% schema %}
 {
   "name": "blog",
