@@ -1,5 +1,5 @@
 {{ 'application.css' | asset_url | stylesheet_tag }} 
-{% comment %} {% if section.settings.image1 != blank %}
+{% if section.settings.image1 != blank %}
   <link rel="preload" as="image" href="{{ section.settings.image1 | image_url }}">
 {% else %}
   <link rel="preload" as="image" href="{{ 'shoe8.jpg' | asset_url }}">
@@ -17,7 +17,7 @@
   <link rel="preload" as="image" href="{{ 'shoe16.jpg' | asset_url }}">
 {% endif %}
 
-<link rel="preload" as="image" href="{{ 'MainLogo_png.svg' | asset_url }}"> {% endcomment %}
+<link rel="preload" as="image" href="{{ 'MainLogo_png.svg' | asset_url }}">
 
 
 {% comment %} <section class="hero text-center" aria-label="home" id="home">
