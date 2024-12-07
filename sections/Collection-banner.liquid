@@ -1,78 +1,33 @@
-<section class="section collection" id="collection" data-header>
-    <div class="container">
-      <ul class="collection-list">
-          <li>
-              <div class="collection-card has-before hover:shine">
-                  <h2 class="h2 card-title">{{section.settings.title1 }}</h2>
-                  <p class="card-text">{{section.settings.subtitle1 }}</p>
-                  <a {% if section.settings.link %}
-                    href="{{ section.settings.link }}"
-                  {% else %}
-                    role="link" aria-disabled="true"
-                  {% endif %}
-                  class="btn-link">
-                   {{section.settings.btn_label1 }}
-                   
-                </a>
-                <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                  {% if section.settings.image1 != blank %}  
-                    <div class="has-bg-image" style="background-image: url('{{ section.settings.image1 | image_url }}');">
-                    </div> 
-                   {% else %}
-                   <div class="has-bg-image" style="background-image: url('{{ 'shoes4.jpg' | asset_url }}');">
-                   </div>   
-                  {% endif %}
-              </div>
-          </li>
-          <li>
-              <div class="collection-card has-before hover:shine">
-                  <h2 class="h2 card-title">{{section.settings.title2 }}</h2>
-                  <p class="card-text">{{section.settings.subtitle2 }}</p>
-                  <a {% if section.settings.link %}
-                    href="{{ section.settings.link }}"
-                  {% else %}
-                    role="link" aria-disabled="true"
-                  {% endif %}
-                  class="btn-link">
-                  {{section.settings.btn_label2}}
-                  <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                </a>
-                  {% if section.settings.image2 != blank %}  
-                    <div class="has-bg-image" style="background-image: url('{{ section.settings.image2 | image_url }}');">
-                    </div> 
-                   {% else %}
-                   <div class="has-bg-image" style="background-image: url('{{ 'shoe13.jpg' | asset_url }}');">
-                   </div>   
-                  {% endif %}
-              </div>
-          </li>
-          <li>
-            <a href="/collection">
-              <div class="collection-card has-before hover:shine">
-                  <h2 class="h2 card-title">{{section.settings.title3 }}</h2>
-                  <p class="card-text">{{section.settings.subtitle3 }}</p>
-                  <a {% if section.settings.link %}
-                    href="{{ section.settings.link }}"
-                  {% else %}
-                    role="link" aria-disabled="true"
-                  {% endif %}
-                  class="btn-link">
-                  {{section.settings.btn_label3}}
-                  <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                </a>
-                  {% if section.settings.image3 != blank %}  
-                    <div class="has-bg-image" style="background-image: url('{{ section.settings.image3 | image_url }}');">
-                    </div> 
-                   {% else %}
-                   <div class="has-bg-image" style="background-image: url('{{ 'sho1.jpg' | asset_url }}');">
-                   </div>   
-                  {% endif %}
-              </div>
-            </a>
-          </li>
-      </ul>
-    </div> 
-</section>
+   <!-- 
+        - #ABOUT
+      -->
+
+      <section class="section about" id="about" aria-label="about">
+        <div class="container">
+
+          <h2 class="section-title">Woodex Store</h2>
+
+          <p class="section-text">
+            When you start with a portrait and search for a pure form, a clear volume, through successive eliminations,
+            you arrive
+            inevitably at the egg. Likewise, starting with the egg and following the same process in reverse, one
+            finishes with the
+            portrait.
+          </p>
+
+          <div class="about-card">
+            <figure class="card-banner img-holder" style="--width: 1170; --height: 450;">
+              <img src="./assets/images/about-banner.jpg" width="1170" height="450" loading="lazy" alt="Woodex promo"
+                class="img-cover">
+            </figure>
+
+            <button class="play-btn" aria-label="play video">
+              <ion-icon name="play-circle-outline" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+
+        </div>
+      </section>
 
   <style>
     /*-----------------------------------*\
