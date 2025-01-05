@@ -49,7 +49,8 @@
   --fs-4: 1.8rem;
   --fs-5: 1.4rem;
   --fs-6: 1.2rem;
-
+  
+  --fw-900: 900;
   --fw-700: 700;
   --fw-500: 500;
 
@@ -254,8 +255,8 @@ body.active { overflow: hidden; }
 }
 
 .logo {
-  font-size: 4.3rem;
-  font-weight: var(--fw-700);
+  font-size: 3.3rem;
+  font-weight: var(--fw-900);
   font-family: var(--ff-mr_de_haviland);
 }
 
