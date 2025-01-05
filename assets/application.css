@@ -394,7 +394,7 @@ body.active { overflow: hidden; }
 
 .hero-list {
   display: grid;
-  gap: 15px;
+  /*gap: 15px;*/
 }
 
 .hero-card { position: relative; }
