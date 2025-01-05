@@ -40,7 +40,7 @@
    * typography
    */
 
-  --ff-roboto: 'Quicksand', sans-serif;
+  --ff-roboto: 'Roboto', sans-serif;
   --ff-mr_de_haviland: 'Mr De Haviland', cursive;
 
   --fs-1: 6rem;
@@ -256,7 +256,7 @@ body.active { overflow: hidden; }
 .logo {
   font-size: 3.3rem;
   font-weight: var(--fw-700);
-  font-family: var(--ff-mr_de_haviland);
+
 }
 
 .header-action {
@@ -285,16 +285,7 @@ body.active { overflow: hidden; }
 }
 
 
-.alert{
-  /* background-color: var(--black);
-  color:var(--white); */
-  font-size: var(--fs-9);
-  font-weight: var(--fw-400);
-  letter-spacing: 2px;
-  text-align: center;
-  padding-block: 15px;
-   /* margin-bottom: 20px;   */
-}
+
 
 
 /*-----------------------------------*\
@@ -390,12 +381,12 @@ body.active { overflow: hidden; }
   #HERO
 \*-----------------------------------*/
 
-.hero { padding-block-start: calc(var(--section-padding) + 60px); }
+/* .hero { padding-block-start: calc(var(--section-padding) + 60px); } */
 
 .hero-list {
   display: grid;
-  /* gap: 15px; */
-} 
+  gap: 15px;
+}
 
 .hero-card { position: relative; }
 
@@ -992,7 +983,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * REUSED STYLE
    */
 
-  .container { max-width: 992px; }
+  .container { max-width: 992px; } 
 
   .grid-list > li:last-child { all: unset; }
 
@@ -1077,7 +1068,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * REUSED STYLE
    */
 
-  .container { max-width: 1200px; }
+   .container { max-width: 1200px; } 
 
 
 
