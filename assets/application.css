@@ -994,7 +994,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * REUSED STYLE
    */
 
-  .container { max-width: 992px; }
+  /* .container { max-width: 992px; } */
 
   .grid-list > li:last-child { all: unset; }
 
@@ -1079,7 +1079,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * REUSED STYLE
    */
 
-  /* .container { max-width: 900px; } */
+  .container { max-width: 1200px; }
 
 
 
