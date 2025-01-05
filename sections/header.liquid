@@ -2,7 +2,7 @@
     - #HEADER
   -->
 
-  <header class="header" >
+  <header class="header" data-header>
     <div class="container">
 
       <div class="input-wrapper">
@@ -311,7 +311,7 @@
 
 
 
-  <script>
+  {% comment %} <script>
         document.getElementById('search-input').addEventListener('input', function() {
               const query = this.value.trim();
               const searchResultsContainer = document.getElementById('search-results');
@@ -633,7 +633,7 @@
 
        fetchCart()  
         
-  </script> 
+  </script>  {% endcomment %}
       
 
 {% schema %}
