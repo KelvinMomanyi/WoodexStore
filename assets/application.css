@@ -390,7 +390,7 @@ body.active { overflow: hidden; }
   #HERO
 \*-----------------------------------*/
 
-/*.hero { padding-block-start: calc(var(--section-padding) + 60px); }
+/*.hero { padding-block-start: calc(var(--section-padding) + 60px); }*/
 
 .hero-list {
   display: grid;
@@ -418,7 +418,7 @@ body.active { overflow: hidden; }
 }
 
 .hero-card .card-title:is(:hover, :focus) { color: var(--tan-crayola); }
-*/
+
 
 
 
