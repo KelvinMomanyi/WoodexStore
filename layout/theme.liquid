@@ -64,9 +64,11 @@
 <body id="top">
   {% sections 'header-group' %}
   <main role="main">
+    <article>
     {{ content_for_layout }}
     {% comment %} Include CSS once, if needed {% endcomment %}
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    </article>
   </main>
   {% sections 'cookie-group' %}
   {% sections 'backToTop-group' %}
