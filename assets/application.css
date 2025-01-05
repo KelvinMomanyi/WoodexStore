@@ -390,12 +390,12 @@ body.active { overflow: hidden; }
   #HERO
 \*-----------------------------------*/
 
-/*.hero { padding-block-start: calc(var(--section-padding) + 60px); }*/
+/*.hero { padding-block-start: calc(var(--section-padding) + 60px); }
 
 .hero-list {
   display: grid;
   gap: 15px;
-}
+}*/
 
 .hero-card { position: relative; }
 
