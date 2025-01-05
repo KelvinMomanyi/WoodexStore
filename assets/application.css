@@ -254,7 +254,7 @@ body.active { overflow: hidden; }
 }
 
 .logo {
-  font-size: 3.3rem;
+  font-size: 4.3rem;
   font-weight: var(--fw-700);
   font-family: var(--ff-mr_de_haviland);
 }
