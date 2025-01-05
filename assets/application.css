@@ -392,10 +392,10 @@ body.active { overflow: hidden; }
 
 .hero { padding-block-start: calc(var(--section-padding) + 60px); }
 
-/* .hero-list {
+.hero-list {
   display: grid;
   gap: 15px;
-} */
+} 
 
 .hero-card { position: relative; }
 
