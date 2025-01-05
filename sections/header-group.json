@@ -12,7 +12,7 @@
       }
     },
     "order": [
-      "announcement-bar"
-      // "header"
+      // "announcement-bar",
+      "header"
     ]
   }
