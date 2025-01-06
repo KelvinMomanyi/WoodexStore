@@ -5,14 +5,14 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "settings": {}
-      }
-      // "header": {
-      //   "type": "header",
-      //   "settings": {}
-      // }
+      },
+       "header": {
+         "type": "header",
+        "settings": {}
+       }
     },
     "order": [
-      "announcement-bar"
-    //  "header"
+      "announcement-bar",
+       "header"
     ]
   }
