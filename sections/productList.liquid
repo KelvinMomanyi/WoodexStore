@@ -90,7 +90,8 @@
           {% endfor %} {% endcomment %}
           
           {% if collection.products.size > 0 %}
-            {% for product in collection.products %}
+            {% assign selected_collection = collections['Women'] %}
+            {% for product in selected_collection.products %}
               <li class="decoration">
                 <div class="product-card">
           
