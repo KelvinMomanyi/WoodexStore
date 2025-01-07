@@ -91,7 +91,7 @@
           
           {% if collections['Women'].products.size > 0 %}
             {% assign selected_collection = collections['Women'] %}
-            {% for product in selected_collection.products %}
+            {% for product in all_products %}
               <li class="decoration">
                 <div class="product-card">
           
