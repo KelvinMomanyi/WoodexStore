@@ -293,7 +293,7 @@ body.active { overflow: hidden; }
   font-weight: var(--fw-400);
   letter-spacing: 2px;
   text-align: center;
-  padding-block: 15px;
+  padding-block: 5px;
    /* margin-bottom: 20px;   */
 }
 
