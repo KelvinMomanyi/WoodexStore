@@ -92,7 +92,7 @@
             
            </li>
           
-          {% if collection.products.size < 0 %}
+   
             {% for product in collection.products %}
               <li class="decoration">
                 <div class="product-card">
@@ -162,9 +162,7 @@
                 </div>
               </li>
             {% endfor %}
-          {% else %}
-            <p>No products found in this collection.</p>
-          {% endif %}
+          
           
           {% for product in all_products %}
             <li class="accessory">
