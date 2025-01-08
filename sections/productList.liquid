@@ -166,6 +166,16 @@
             <p>No products found in this collection.</p>
           {% endif %}
           
+          {% for product in collection.products %}
+            <div class="product">
+              <h2>{{ product.title }}</h2>
+              <a href="{{ product.url }}">
+                <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+              </a>
+              <p>Price: {{ product.price | money }}</p>
+              <a href="{{ product.url }}">View Product</a>
+            </div>
+          {% endfor %}
              <li class="decoration">
               <div class="product-card">
 
