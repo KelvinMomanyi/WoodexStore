@@ -88,7 +88,11 @@
                 </div>
               </li>
           {% endfor %} {% endcomment %}
+           <li>
+            
+           </li>
           
+          {% if collection.products.size > 0 %}
             {% for product in collection.products %}
               <li class="decoration">
                 <div class="product-card">
@@ -158,9 +162,11 @@
                 </div>
               </li>
             {% endfor %}
-        
+          {% else %}
+            <p>No products found in this collection.</p>
+          {% endif %}
           
-            {% comment %} <li class="decoration">
+             <li class="decoration">
               <div class="product-card">
 
                 <a href="#" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
@@ -991,7 +997,7 @@
                 </div>
 
               </div>
-            </li> {% endcomment %}
+            </li> 
 
           </ul>
 
