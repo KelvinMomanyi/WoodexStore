@@ -231,7 +231,7 @@ body.active { overflow: hidden; }
   left: 0;
   width: 100%;
   background-color: var(--white);
-  padding-block: 5px;
+  padding-block: 10px;
   z-index: 4;
 }
 
