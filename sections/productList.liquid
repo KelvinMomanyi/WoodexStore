@@ -94,7 +94,10 @@
           
    
             {% for product in collection.products %}
-              <li class="decoration">
+              <li>
+                <p>New</p>
+              </li> 
+              {% comment %} <li class="decoration">
                 <div class="product-card">
           
                   <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
@@ -160,7 +163,7 @@
                   </div>
           
                 </div>
-              </li>
+              </li> {% endcomment %}
             {% endfor %}
           
              {% comment %} <li class="decoration">
