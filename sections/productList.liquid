@@ -94,10 +94,7 @@
           
    
             {% for product in all_products %}
-              <li>
-                <p>{{product.name }}</p>
-              </li> 
-              {% comment %} <li class="decoration">
+              <li class="decoration">
                 <div class="product-card">
           
                   <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
@@ -163,7 +160,7 @@
                   </div>
           
                 </div>
-              </li> {% endcomment %}
+              </li> 
             {% endfor %}
           
              {% comment %} <li class="decoration">
