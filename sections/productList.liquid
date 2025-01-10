@@ -97,28 +97,28 @@
           {% for product in collections[collection_handle].products %}
              <li class="decoration">
                <div class="product-card">
-      <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-        {% if product.featured_image %}
-          <img src="{{ product.featured_image | img_url: 'large' }}" 
-               alt="{{ product.featured_image.alt | escape }}" 
-               class="img-cover" 
-               width="300" 
-               height="300" 
-               loading="lazy">
-        {% else %}
-          <img src="default-image.jpg" 
-               alt="No image available" 
-               class="img-cover" 
-               width="300" 
-               height="300" 
-               loading="lazy">
-        {% endif %}
-        <ul class="card-action-list">
-          <li>
-            <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-              <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-            </button>
-          </li>
+                 <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                   {% if product.featured_image %}
+                     <img src="{{ product.featured_image | img_url: 'large' }}" 
+                       alt="{{ product.featured_image.alt | escape }}" 
+                       class="img-cover" 
+                       width="300" 
+                       height="300" 
+                       loading="lazy">
+                   {% else %}
+                    <img src="default-image.jpg" 
+                       alt="No image available" 
+                       class="img-cover" 
+                        width="300" 
+                        height="300" 
+                        loading="lazy">
+                   {% endif %}
+                <ul class="card-action-list">
+                 <li>
+                  <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                    <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                  </button>
+               </li>
           <li>
             <button class="card-action-btn" aria-label="view cart" title="view cart">
               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
@@ -159,7 +159,7 @@
            {% endfor %}
 
           
-             {% comment %} <li class="decoration">
+            <li class="decoration">
               <div class="product-card">
 
                 <a href="#" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
@@ -990,7 +990,7 @@
                 </div>
 
               </div>
-            </li>  {% endcomment %}
+            </li>  
 
           </ul>
 
