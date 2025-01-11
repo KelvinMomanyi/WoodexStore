@@ -605,7 +605,8 @@ body.active { overflow: hidden; }
 }
 
 
-#OFFER
+/*-----------------------------------*\
+  #OFFER
 \*-----------------------------------*/
 .offer-banner{
   display: grid;
