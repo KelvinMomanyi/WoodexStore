@@ -273,10 +273,7 @@ body.active { overflow: hidden; }
   transition: var(--transition-1);
 }
 
-.header-inputIcons{
-  display: flex;
-  gap: 5px;
-}
+
 
 
 .header-action-btn:is(:hover, :focus) { color: var(--tan-crayola); }
