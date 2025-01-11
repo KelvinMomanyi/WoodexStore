@@ -264,7 +264,7 @@ body.active { overflow: hidden; }
 
 .header-action {
   display: flex;
-  gap: 10px;
+  gap: 15px;
 }
 
 .header-action-btn {
@@ -935,7 +935,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * HEADER
    */
 
-  .header-action { gap: 35px; }
+  .header-action { gap: 30px; }
 
   .sidebar .input-wrapper { width: 200px; }
 
