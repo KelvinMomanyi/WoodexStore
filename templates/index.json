@@ -87,7 +87,10 @@
         "button_url2": "shopify://pages/shop"
       }
     },
-    
+    "offer": {
+      "type": "offer",
+      "settings": {}
+    },
     "blog": {
       "type": "blog",
       "settings": {
@@ -104,6 +107,7 @@
     "collection",
     "productList",
     "banner",
+    "offer",
     "blog",
     "newsletter"
   ]
