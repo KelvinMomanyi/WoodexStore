@@ -1,51 +1,74 @@
 <section class="clients" id="client">
     <div>
-     <ul>
-        <li><img  src='{{ 'DIOR.png' | asset_url }}' alt=""/></li>
-        <li><img  src='{{ 'CHANNEL.png' | asset_url }}' alt=""/></li>
-        <li><img  src='{{ 'DOLCHE.png' | asset_url }}' alt=""/></li>
-        <li><img src='{{ 'ESCADA.png' | asset_url }}' alt=""/></li>
-        <li><img  src='{{ 'Juliet.png' | asset_url }}' alt=""/></li>
-        <li><img  src='{{ 'Hugo.png' | asset_url }}' alt=""/></li>
-        <li><img src='{{ 'Vers.png' | asset_url }}' alt=""/></li>
-       
-     </ul>
-   </div>
- </section>
-
- <style>
-    /*Clients*/
-.clients{
+      <ul class="carousel">
+        <li><img src='{{ "DIOR.png" | asset_url }}' alt="DIOR" /></li>
+        <li><img src='{{ "CHANNEL.png" | asset_url }}' alt="CHANNEL" /></li>
+        <li><img src='{{ "DOLCHE.png" | asset_url }}' alt="DOLCHE" /></li>
+        <li><img src='{{ "ESCADA.png" | asset_url }}' alt="ESCADA" /></li>
+        <li><img src='{{ "Juliet.png" | asset_url }}' alt="Juliet" /></li>
+        <li><img src='{{ "Hugo.png" | asset_url }}' alt="Hugo" /></li>
+        <li><img src='{{ "Vers.png" | asset_url }}' alt="Vers" /></li>
+        <!-- Duplicate items for seamless animation -->
+        <li><img src='{{ "DIOR.png" | asset_url }}' alt="DIOR" /></li>
+        <li><img src='{{ "CHANNEL.png" | asset_url }}' alt="CHANNEL" /></li>
+        <li><img src='{{ "DOLCHE.png" | asset_url }}' alt="DOLCHE" /></li>
+        <li><img src='{{ "ESCADA.png" | asset_url }}' alt="ESCADA" /></li>
+        <li><img src='{{ "Juliet.png" | asset_url }}' alt="Juliet" /></li>
+        <li><img src='{{ "Hugo.png" | asset_url }}' alt="Hugo" /></li>
+        <li><img src='{{ "Vers.png" | asset_url }}' alt="Vers" /></li>
+      </ul>
+    </div>
+  </section>
+  
+  <style>
+  /* Clients */
+  .clients {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:100%;
-   height:250px;
-
-
-}
-.clients ul{
- display: flex;
- flex-wrap: wrap;
- align-items: center;
- justify-items: center;
- justify-content: space-around;
- gap: 80px; 
- list-style: none;
- filter: grayscale(100%);
-}
-.clients li img{
+    width: 100%;
+    height: 250px;
+    overflow: hidden; /* Hide overflow for seamless animation */
+    position: relative;
+  }
+  
+  .clients .carousel {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    animation: moveCarousel 20s linear infinite;
+    list-style: none;
+  }
+  
+  .clients li img {
     width: 100px;
     margin: 2px;
-}
-
-@media screen and (max-width: 1000px) {
-    .clients li img{
-        width: 80px;
-        margin: 2px;
+    filter: grayscale(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .clients li img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+  }
+  
+  @media screen and (max-width: 1000px) {
+    .clients li img {
+      width: 80px;
     }
-}
- </style>
+  }
+  
+  /* Animation for the carousel */
+  @keyframes moveCarousel {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  </style>
+  
 
  {% schema %}
 {
