@@ -1,14 +1,6 @@
 <section class="clients" id="client">
-    <div>
+    <div class="carousel-wrapper">
       <ul class="carousel">
-        <li><img src='{{ "DIOR.png" | asset_url }}' alt="DIOR" /></li>
-        <li><img src='{{ "CHANNEL.png" | asset_url }}' alt="CHANNEL" /></li>
-        <li><img src='{{ "DOLCHE.png" | asset_url }}' alt="DOLCHE" /></li>
-        <li><img src='{{ "ESCADA.png" | asset_url }}' alt="ESCADA" /></li>
-        <li><img src='{{ "Juliet.png" | asset_url }}' alt="Juliet" /></li>
-        <li><img src='{{ "Hugo.png" | asset_url }}' alt="Hugo" /></li>
-        <li><img src='{{ "Vers.png" | asset_url }}' alt="Vers" /></li>
-        <!-- Duplicate items for seamless animation -->
         <li><img src='{{ "DIOR.png" | asset_url }}' alt="DIOR" /></li>
         <li><img src='{{ "CHANNEL.png" | asset_url }}' alt="CHANNEL" /></li>
         <li><img src='{{ "DOLCHE.png" | asset_url }}' alt="DOLCHE" /></li>
@@ -28,16 +20,23 @@
     align-items: center;
     width: 100%;
     height: 250px;
-    overflow: hidden; /* Hide overflow for seamless animation */
+    overflow: hidden; /* Hide overflow */
     position: relative;
   }
   
-  .clients .carousel {
+  .carousel-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .carousel {
     display: flex;
     align-items: center;
     gap: 80px;
-    animation: moveCarousel 20s linear infinite;
     list-style: none;
+    transition: transform 0.5s linear;
+    will-change: transform;
   }
   
   .clients li img {
@@ -57,18 +56,38 @@
       width: 80px;
     }
   }
-  
-  /* Animation for the carousel */
-  @keyframes moveCarousel {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
   </style>
-  
+<script>  
+    document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.querySelector(".carousel");
+        const items = document.querySelectorAll(".carousel li");
+        const itemWidth = items[0].offsetWidth + 80; // Include gap (80px)
+        let scrollPosition = 0;
+      
+        function moveCarousel() {
+          scrollPosition -= 1; // Move left 1px at a time
+          carousel.style.transform = `translateX(${scrollPosition}px)`;
+      
+          // Reset carousel when the last item is fully out of view
+          if (Math.abs(scrollPosition) >= itemWidth * items.length) {
+            scrollPosition = 0;
+            carousel.style.transition = "none"; // Disable transition for reset
+            carousel.style.transform = `translateX(${scrollPosition}px)`;
+      
+            // Re-enable smooth transition
+            setTimeout(() => {
+              carousel.style.transition = "transform 0.5s linear";
+            });
+          }
+      
+          requestAnimationFrame(moveCarousel); // Continue the animation
+        }
+      
+        // Start the animation
+        moveCarousel();
+      });
+      
+</script>    
 
  {% schema %}
 {
