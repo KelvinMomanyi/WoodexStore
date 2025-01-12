@@ -8,6 +8,14 @@
         <li><img src='{{ "Juliet.png" | asset_url }}' alt="Juliet" /></li>
         <li><img src='{{ "Hugo.png" | asset_url }}' alt="Hugo" /></li>
         <li><img src='{{ "Vers.png" | asset_url }}' alt="Vers" /></li>
+        <!-- Duplicate items -->
+        <li><img src='{{ "DIOR.png" | asset_url }}' alt="DIOR" /></li>
+        <li><img src='{{ "CHANNEL.png" | asset_url }}' alt="CHANNEL" /></li>
+        <li><img src='{{ "DOLCHE.png" | asset_url }}' alt="DOLCHE" /></li>
+        <li><img src='{{ "ESCADA.png" | asset_url }}' alt="ESCADA" /></li>
+        <li><img src='{{ "Juliet.png" | asset_url }}' alt="Juliet" /></li>
+        <li><img src='{{ "Hugo.png" | asset_url }}' alt="Hugo" /></li>
+        <li><img src='{{ "Vers.png" | asset_url }}' alt="Vers" /></li>
       </ul>
     </div>
   </section>
@@ -57,21 +65,26 @@
     }
   }
   </style>
+  
+
 <script>  
     document.addEventListener("DOMContentLoaded", () => {
         const carousel = document.querySelector(".carousel");
         const items = document.querySelectorAll(".carousel li");
+        const totalItems = items.length;
         const itemWidth = items[0].offsetWidth + 80; // Include gap (80px)
+        const visibleItems = Math.ceil(document.querySelector(".carousel-wrapper").offsetWidth / itemWidth);
+        const resetPosition = -itemWidth * totalItems / 2; // Halfway through the list
         let scrollPosition = 0;
       
         function moveCarousel() {
           scrollPosition -= 1; // Move left 1px at a time
           carousel.style.transform = `translateX(${scrollPosition}px)`;
       
-          // Reset carousel when the last item is fully out of view
-          if (Math.abs(scrollPosition) >= itemWidth * items.length) {
+          // Reset position when we reach the end of the duplicated list
+          if (scrollPosition <= resetPosition) {
             scrollPosition = 0;
-            carousel.style.transition = "none"; // Disable transition for reset
+            carousel.style.transition = "none"; // Disable transition for instant reset
             carousel.style.transform = `translateX(${scrollPosition}px)`;
       
             // Re-enable smooth transition
@@ -86,6 +99,7 @@
         // Start the animation
         moveCarousel();
       });
+      
       
 </script>    
 
