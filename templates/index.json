@@ -87,6 +87,10 @@
         "button_url2": "shopify://pages/shop"
       }
     },
+    "brands":{
+      "type": "brands",
+      "settings": {}
+    },
     "offer": {
       "type": "offer",
       "settings": {}
