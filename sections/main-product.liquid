@@ -3,14 +3,14 @@
      <div class="container">
 
        <div class="product-banner"> 
+           
+          <div class="card-banner img-holder">
+             <img src="{{product.featured_image | img_url : 'large'}}" alt="{{product.featured_image.alt | escape }}" class="img-cover"  loading="lazy">
+          </div>
           <div class="thumbs">
             {% for image in product.images %}
                 <img src="{{ image | image_url}}"  alt="{{ image.alt }}" class="{% if forloop.first %}thumb-active{% endif %}">
               {% endfor %}
-       
-          </div> 
-          <div class="card-banner img-holder">
-             <img src="{{product.featured_image | img_url : 'large'}}" alt="{{product.featured_image.alt | escape }}" class="img-cover"  loading="lazy">
           </div>
        </div>
         <div class="offer-content">
