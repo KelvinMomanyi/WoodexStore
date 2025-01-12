@@ -1,0 +1,115 @@
+<section class="clients" id="client">
+    <ul>
+        <li><img  src='{{ 'r5.jpg' | asset_url }}' alt=""/></li>
+        <li><img  src='{{ 'r5.jpg' | asset_url }}' alt=""/></li>
+        <li><img  src='{{ 'r5.jpg' | asset_url }}' alt=""/></li>
+        <li><img src='{{ 'r5.jpg' | asset_url }}' alt=""/></li>
+        <li><img  src='{{ 'r5.jpg' | asset_url }}' alt=""/></li>
+    </ul>
+ </section>
+
+ <style>
+    /*Clients*/
+.clients{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+   height:250px;
+    background-color: #000000;
+
+}
+.clients ul{
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-items: center;
+ justify-content: space-around;
+ gap: 80px; 
+ list-style: none;
+ filter: grayscale(100%);
+}
+.clients li img{
+    width: 100px;
+    margin: 2px;
+}
+
+@media screen and (max-width: 1000px) {
+    .clients li img{
+        width: 80px;
+        margin: 2px;
+    }
+}
+ </style>
+
+ {% schema %}
+{
+  "name": "banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image1",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "subtitle1",
+      "label": "Subtitle 1",
+      "default": "NEW COLLECTION"
+    },
+    {
+      "type": "text",
+      "id": "title1",
+      "label": "Title 1",
+      "default": "Discover New Sneaker Collection"
+    },
+    {
+      "type": "text",
+      "id": "btn_label1",
+      "label": "Button Label",
+      "default":"Explore More"
+    },
+    {
+      "type": "url",
+      "id": "button_url1",
+      "label": "Button URL 1",
+      "default": "/collections/all"
+    },
+    {
+      "type": "image_picker",
+      "id": "image2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "title2",
+      "label": "Title 2",
+      "default": "25% off Everything"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "Sneakers in a range of styles and colors for every taste"
+    },
+    {
+      "type": "text",
+      "id": "btn_label2",
+      "label": "Button Label 2",
+      "default":"Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url2",
+      "label": "Button URL 2",
+      "default": "/collections/all"
+    }
+  ],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "banner"
+    }
+  ]
+}
+{% endschema %}
