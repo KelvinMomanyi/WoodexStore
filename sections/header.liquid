@@ -112,7 +112,7 @@
 
         <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
     </div> 
-    <nav class="navbar">
+    {% comment %} <nav class="navbar">
       <ul class="navbar-list">
 
         <li class="navbar-item">
@@ -134,8 +134,18 @@
         </li>
 
       </ul>
+    </nav> {% endcomment %}
+    <nav class="navbar">
+      <ul class="navbar-list">
+        {% assign nav_links = linklists.main-menu.links %} <!-- Replace 'main-menu' with your menu handle -->
+        {% for link in nav_links %}
+          <li class="navbar-item">
+            <a href="{{ link.url }}" class="navbar-link" data-nav-link>{{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
     </nav>
-
+    
     <ul class="contact-list">
 
       <li>
