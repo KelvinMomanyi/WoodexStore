@@ -329,7 +329,7 @@ body.active { overflow: hidden; }
   transition: 0.5s var(--cubic-out);
 }
 
-.nav-close-btn { font-size: 30px; right: 0;}
+.nav-close-btn { font-size: 30px;}
 
 .sidebar .wrapper {
   display: grid;
