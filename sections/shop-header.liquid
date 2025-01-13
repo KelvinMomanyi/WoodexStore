@@ -15,6 +15,7 @@
 
 
 <section class="hero  text-center" style="min-height: 50vh;" aria-label="home" id="home">
+  <div class="container">
     <ul class="hero-slider" data-hero-slider>
       {% if section.blocks.size == 0 %}
         <li class="slider-item active" data-hero-slider-item style="padding-block-start: 70px;">
@@ -141,11 +142,12 @@
   
     <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
     <ion-icon name="chevron-back"></ion-icon>
-   </button>
+    </button>
   
-   <button class="slider-btn next" aria-label="slide to next" data-next-btn>
-    <ion-icon name="chevron-forward"></ion-icon>
-   </button>
+    <button class="slider-btn next" aria-label="slide to next" data-next-btn>
+     <ion-icon name="chevron-forward"></ion-icon>
+    </button>
+  </div>
 </section>
 <style>
    /*-----------------------------------*\
