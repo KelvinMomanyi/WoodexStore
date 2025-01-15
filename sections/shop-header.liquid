@@ -172,12 +172,11 @@
   width: 80%; 
   height: 100%;
   display: grid;
-  place-content: center;
+  place-content: start;
   padding-block-start: 130px;
   padding-inline-start: 50px;
   opacity: 0;
   visibility: hidden;
-  overflow:hidden;
   transition: var(--transition-3);
   z-index: 1;
 }
@@ -196,6 +195,8 @@
   transform: scale(1.15);
   pointer-events: none;
   user-select: none;
+  overflow:hidden
+
   z-index: -1;
 }
 
