@@ -118,9 +118,15 @@
                   </button>
                 </li>
                 <li>
-                <button class="card-action-btn" aria-label="view cart" title="view cart">
+                  <form action="/cart/add" method="post" enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                    <button type="submit" class="card-action-btn" aria-label="add to cart">
+                      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                  </form>
+                {% comment %} <button class="card-action-btn" aria-label="view cart" title="view cart">
                 <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-            </button>
+            </button> {% endcomment %}
           </li>
           <li>
             <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
