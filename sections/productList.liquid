@@ -100,15 +100,15 @@
                      <img src="{{ product.featured_image | img_url: 'large' }}" 
                        alt="{{ product.featured_image.alt | escape }}" 
                        class="img-cover" 
-                       width="300" 
-                       height="300" 
+                       width="200" 
+                       height="200" 
                        loading="lazy">
                    {% else %}
                     <img src="default-image.jpg" 
                        alt="No image available" 
                        class="img-cover" 
-                        width="300" 
-                        height="300" 
+                        width="200" 
+                        height="200" 
                         loading="lazy">
                    {% endif %}
                 <ul class="card-action-list">
