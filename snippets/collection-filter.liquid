@@ -11,17 +11,6 @@
         <li class="collection-option-item" class='li-item'><a href="{{ collection.url }}">{{ collection.title }}</a></li>
       {% endfor %}
     </ul>
-  
-    <!-- Search Input for Shoe Sizes -->
-    <input type="text" id="size-filter-input" placeholder="Shoe size" autocomplete="off">
-  
-    <!-- Shoe Size Options List -->
-    <ul id="size-options-list" class='ul-list'>
-      {% assign shoe_sizes = "6, 7, 8, 9, 10, 11, 12" | split: ", " %}
-      {% for size in shoe_sizes %}
-        <li class="size-option-item" class='li-item'><a href="?size={{ size }}">Size {{ size }}</a></li>
-      {% endfor %}
-    </ul>
   </div>
   
   <!-- JavaScript for Filtering -->
