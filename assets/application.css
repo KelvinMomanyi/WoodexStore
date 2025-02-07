@@ -1036,6 +1036,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     justify-content: space-between;
     align-items: center;
     margin-block-end: 80px;
+    width:max-content;
   }
 
   .filter-btn-list { margin: 0; }
