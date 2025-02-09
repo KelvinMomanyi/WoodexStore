@@ -412,9 +412,10 @@ body.active { overflow: hidden; }
 
  .hero-card .card-content {
   position: absolute;
-  top:20%;
+  top:30%;
   left: 30px;
   right: 30px;
+  color:'white';
 }
 
 .hero-card :is(.card-title, .card-text) { font-weight: var(--fw-500); }
