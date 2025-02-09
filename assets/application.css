@@ -410,12 +410,12 @@ body.active { overflow: hidden; }
 
 .hero-card:is(:hover, :focus) .img-cover { transform: scale(1.1); }
 
- /* .hero-card .card-content {
+ .hero-card .card-content {
   position: absolute;
-  top: 30px;
+  top: 50%;
   left: 30px;
   right: 30px;
-} */
+}
 
 .hero-card :is(.card-title, .card-text) { font-weight: var(--fw-500); }
 
