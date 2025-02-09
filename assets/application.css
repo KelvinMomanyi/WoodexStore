@@ -842,6 +842,8 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   text-align: center;
   padding-block: 20px;
   display:flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .copyright-link { display: inline-block; }
