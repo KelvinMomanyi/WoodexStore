@@ -415,7 +415,7 @@ body.active { overflow: hidden; }
   top:30%;
   left: 30px;
   right: 30px;
-  color:'white';
+  color:white;
 }
 
 .hero-card :is(.card-title, .card-text) { font-weight: var(--fw-500); }
