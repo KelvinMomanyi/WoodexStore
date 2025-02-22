@@ -4,25 +4,6 @@
     <div class="container">
         <ul class="banner-list">
             <li>
-                <div class="banner-card banner-card-2  has-before hover:shine">
-                   <p class="card-subtitle">{{section.settings.subtitle1 }}</p>
-                   <h2 class="h2 card-title">{{section.settings.title1 }}</h2>
-                   <a {% if section.settings.link %}
-                     href="{{ section.settings.link }}"
-                     {% else %}
-                      role="link" aria-disabled="true"
-                      {% endif %}
-                     class="btn btn-secondary">{{section.settings.btn_label1}}</a>
-                     {% if section.settings.image1 != blank %}
-                      <div class="has-bg-image" style="background-image: url('{{ section.settings.image1 | image_url}}');">
-                      </div>   
-                     {% else %}
-                     <div class="has-bg-image" style="background-image: url('{{ 'P2.jpg' | asset_url}}');">
-                     </div> 
-                    {% endif %}
-                </div>
-            </li>
-            <li>
                <div class="banner-card banner-card-1 has-before hover:shine">
                   <h2 class="h2 card-title">{{section.settings.title2 }}</h2>
                   <p class="card-text">
@@ -40,6 +21,25 @@
                      {% else %}
                      <div class="has-bg-image" style="background-image: url('{{ 'P1.jpg' | asset_url}}');">
                      </div>
+                    {% endif %}
+                </div>
+            </li>
+            <li>
+                <div class="banner-card banner-card-2  has-before hover:shine">
+                   <p class="card-subtitle">{{section.settings.subtitle1 }}</p>
+                   <h2 class="h2 card-title">{{section.settings.title1 }}</h2>
+                   <a {% if section.settings.link %}
+                     href="{{ section.settings.link }}"
+                     {% else %}
+                      role="link" aria-disabled="true"
+                      {% endif %}
+                     class="btn btn-secondary">{{section.settings.btn_label1}}</a>
+                     {% if section.settings.image1 != blank %}
+                      <div class="has-bg-image" style="background-image: url('{{ section.settings.image1 | image_url}}');">
+                      </div>   
+                     {% else %}
+                     <div class="has-bg-image" style="background-image: url('{{ 'P2.jpg' | asset_url}}');">
+                     </div> 
                     {% endif %}
                 </div>
             </li>
