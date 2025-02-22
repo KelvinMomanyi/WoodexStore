@@ -329,6 +329,11 @@ body.active { overflow: hidden; }
   transition: 0.5s var(--cubic-out);
 }
 
+.sidebar .nav-close-btn{
+  display: flex;
+  align-items: flex-end;
+
+}
 .nav-close-btn { font-size: 30px;}
 
 .sidebar .wrapper {
