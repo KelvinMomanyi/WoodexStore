@@ -1055,7 +1055,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     align-items: center;
     margin-block-end: 80px;
     width:max-content;
-    gap: 10px;
+    gap:2rem;
   }
 
   .filter-btn-list { margin: 0; }
