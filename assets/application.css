@@ -1052,10 +1052,10 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   .product .title-wrapper {
     display: flex;
     justify-content: space-between;
-    /* align-items: center; */
+    align-items: center;
     margin-block-end: 80px;
     width:max-content;
-    gap:2rem;
+    gap:5em;
   }
 
   .filter-btn-list { margin: 0; }
