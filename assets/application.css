@@ -329,7 +329,7 @@ body.active { overflow: hidden; }
   transition: 0.5s var(--cubic-out);
 }
 
-.sidebar .nav-close-btn{
+.nav-close-btn{
   display: flex;
   width:100%;
   align-items: flex-end;
