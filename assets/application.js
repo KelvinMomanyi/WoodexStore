@@ -253,6 +253,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+  AOS.init({
+      duration: 800, // Animation duration
+      easing: "ease-in-out", // Easing function
+      once: true, // Whether animation should happen only once
+  });
+});
 
 
 
