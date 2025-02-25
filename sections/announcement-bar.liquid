@@ -16,15 +16,16 @@
           
           <!-- Language and Currency Selectors Container -->
         <div id="language-currency-container">
-          <select name="locale_code" class="locale-selector" style="color:{{section.settings.text_color }};">
+          <select name="locale_code" class="locale-selector" style="color:{{ section.settings.text_color }};">
             {% for language in localization.available_languages %}
               {% if language.iso_code == localization.language.iso_code %}
-                <option value="{{ language.iso_code }}" selected="selected">{{ language.iso_code | upcase }}</option>
+                <option value="{{ language.iso_code }}" selected="selected">{{ language.name }}</option>
               {% else %}
-                <option value="{{ language.iso_code }}">{{ language.iso_code | upcase }}</option>
+                <option value="{{ language.iso_code }}">{{ language.name }}</option>
               {% endif %}
             {% endfor %}
           </select>
+          
         
           <div class='separator' style="color: {{section.settings.text_color }};"></div>
 
