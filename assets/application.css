@@ -224,7 +224,7 @@ body.active { overflow: hidden; }
   #HEADER
 \*-----------------------------------*/
 
-.sidebar .input-wrapper { display: none; }
+.header-action .input-wrapper { display: none; }
 
 .header {
   position: absolute;
@@ -942,7 +942,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .header .container { gap: 35px; }
 
-  .sidebar .input-wrapper {
+  .header-action .input-wrapper {
     display: block;
     position: relative;
   }
@@ -959,7 +959,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .sidebar .input-field:focus { border-block-end-color: var(--tan-crayola); }
 
-  .sidebar .input-wrapper ion-icon {
+  .header-action .input-wrapper ion-icon {
     position: absolute;
     top: 50%;
     right: 0;
@@ -1026,7 +1026,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .header-action { gap: 30px; }
 
-  .sidebar .input-wrapper { width: 200px; }
+  .header-action .input-wrapper { width: 200px; }
 
 
 
