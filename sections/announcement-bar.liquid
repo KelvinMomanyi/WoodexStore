@@ -160,7 +160,7 @@
                   </option>
                 {% else %}
                   <option value="{{ currency.iso_code }}">
-                    {{ country_name }}  {{ currency.iso_code }} {{ currency.symbol }}
+                    {{ currency.country }}  {{ currency.iso_code }} {{ currency.symbol }}
                   </option>
                 {% endif %}
               {% endfor %}
