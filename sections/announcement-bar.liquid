@@ -156,11 +156,11 @@
                 {% assign country_code = currency.iso_code | slice: 0, 2 | downcase %}
                 {% if currency == cart.currency %}
                   <option selected="true" value="{{ currency.iso_code }}">
-                   {{ currency.iso_code }} {{ currency.symbol }}
+                  {{ currency.name }} {{ currency.iso_code }} {{ currency.symbol }}
                   </option>
                 {% else %}
                   <option value="{{ currency.iso_code }}">
-                    {{ currency.iso_code }} {{ currency.symbol }}
+                  {{ currency.name }} {{ currency.iso_code }} {{ currency.symbol }}
                   </option>
                 {% endif %}
               {% endfor %}
