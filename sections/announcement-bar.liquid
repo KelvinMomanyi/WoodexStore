@@ -34,6 +34,7 @@
               <div class="dropdown">
                 {% for currency in shop.enabled_currencies %}
                   {% assign country_code = '' %}
+                  {% assign country_name = '' %}
                  {% comment %} {% case currency.iso_code %}
                   {% when 'USD' %} {% assign country_code = 'us' %}
                   {% when 'CAD' %} {% assign country_code = 'ca' %}
@@ -90,7 +91,7 @@
                 {% when 'LKR' %} {% assign country_code = 'lk' %}
                 {% endcomment %}
 
-                  {% when 'USD' %} {% assign country_code = 'us' %} {% assign country_name = 'United States' %}
+                    {% when 'USD' %} {% assign country_code = 'us' %} {% assign country_name = 'United States' %}
                     {% when 'CAD' %} {% assign country_code = 'ca' %} {% assign country_name = 'Canada' %}
                     {% when 'EUR' %} {% assign country_code = 'eu' %} {% assign country_name = 'Eurozone' %}
                     {% when 'GBP' %} {% assign country_code = 'gb' %} {% assign country_name = 'United Kingdom' %}
