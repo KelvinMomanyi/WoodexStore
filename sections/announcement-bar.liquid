@@ -661,6 +661,8 @@ dropdowns.forEach(dropdown => {
 
 
 //Dropdown icon spacing 
+function adjustArrowPosition() {
+        const select = document.getElementById("currencySelect");
 const optionText = select.options[select.selectedIndex].text;
         
         // Create a temporary span element to measure text width
