@@ -149,7 +149,7 @@
               </div>
 
             
-             <div class="custom-select">
+          
              <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};" id="dynamicSelect">
               {% for currency in shop.enabled_currencies %}
                 {% assign country_name = currency.iso_code %}
@@ -165,7 +165,7 @@
                 {% endif %}
               {% endfor %}
              </select> 
-             </div>
+             
             </div> 
           {% endform %}
            {% comment %} <ion-icon name="close-outline"></ion-icon> {% endcomment %}
