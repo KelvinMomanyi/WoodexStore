@@ -149,8 +149,8 @@
               </div>
 
             
-
-             <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};">
+             <div class="custom-select">
+             <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};" id="dynamicSelect">
               {% for currency in shop.enabled_currencies %}
                 {% assign country_name = currency.iso_code %}
                 {% assign country_code = currency.iso_code | slice: 0, 2 | downcase %}
@@ -165,6 +165,7 @@
                 {% endif %}
               {% endfor %}
              </select> 
+             </div>
             </div> 
           {% endform %}
            {% comment %} <ion-icon name="close-outline"></ion-icon> {% endcomment %}
@@ -489,6 +490,34 @@
   border-left: 1px solid white; /* Adjust the border thickness and color */
 }
 
+
+display: inline-block;
+            width: auto;
+        }
+
+        .custom-select select {
+            appearance: none; /* Hide default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .custom-select::after {
+            content: "▼"; /* Custom dropdown arrow */
+            position: absolute;
+            right: 10px; /* Default position */
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-size: 14px;
+            color: #555;
+        }
+
   @media screen and (max-width: 575px){
     .alert-text{
       font-size:12px;
@@ -629,6 +658,29 @@ dropdowns.forEach(dropdown => {
         })
     })
 }) 
+
+
+
+
+//Dropdown icon spacing 
+    function adjustArrowPosition() {
+        const select = document.getElementById("dynamicSelect");
+        const selectWidth = select.offsetWidth; 
+        const selectedOptionText = select.options[select.selectedIndex].text;
+        const textLength = selectedOptionText.length;
+
+        // Adjust the padding and arrow position dynamically
+        let paddingRight = Math.max(30, textLength * 5); // Dynamically adjust padding based on text length
+        select.style.paddingRight = `${paddingRight}px`;
+
+        // Update the arrow position (for wider select elements)
+        document.querySelector(".custom-select::after").style.right = `${paddingRight - 20}px`;
+    }
+
+    // Adjust on change
+    document.getElementById("dynamicSelect").addEventListener("change", adjustArrowPosition);
+    // Adjust on page load
+    window.addEventListener("load", adjustArrowPosition);
 </script>
 
 {% schema %}
