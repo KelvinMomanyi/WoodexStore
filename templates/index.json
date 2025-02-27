@@ -114,6 +114,7 @@
     "brands",
     "offer",
     "blog",
-    "newsletter"
+    "newsletter",
+    "newsletter-popup"
   ]
 }
