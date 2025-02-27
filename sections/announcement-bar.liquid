@@ -661,31 +661,28 @@ dropdowns.forEach(dropdown => {
 
 
 //Dropdown icon spacing 
-function adjustArrowPosition() {
-        const select = document.getElementById("currencySelect");
-const optionText = select.options[select.selectedIndex].text;
-        
-        // Create a temporary span element to measure text width
-        const tempSpan = document.createElement("span");
-        tempSpan.style.position = "absolute";
-        tempSpan.style.visibility = "hidden";
-        tempSpan.style.fontSize = window.getComputedStyle(select).fontSize;
-        tempSpan.textContent = optionText;
-        
-        document.body.appendChild(tempSpan);
-        const textWidth = tempSpan.offsetWidth;
-        document.body.removeChild(tempSpan);
+function adjustSelectWidth(select) {
+    let temp = document.createElement("span");
+    temp.style.position = "absolute";
+    temp.style.visibility = "hidden";
+    temp.style.whiteSpace = "nowrap";
+    temp.style.font = getComputedStyle(select).font; // Match font style
+    document.body.appendChild(temp);
 
-        // Adjust the background position of the arrow based on text width
-        const paddingRight = Math.max(15, textWidth + 10); // Ensure a minimum spacing
-        select.style.backgroundPosition = `right ${paddingRight}px center`;
+    function updateWidth() {
+        temp.textContent = select.options[select.selectedIndex].text;
+        select.style.width = `${temp.offsetWidth + 25}px`; // Add some padding
     }
 
-    // Adjust when selection changes
-    document.getElementById("currencySelect").addEventListener("change", adjustArrowPosition);
+    select.addEventListener("change", updateWidth);
+    
+    updateWidth(); // Initial adjustment
+}
 
-    // Adjust on page load
-    window.addEventListener("load", adjustArrowPosition);
+document.addEventListener("DOMContentLoaded", function () {
+    const selectElement = document.querySelector("select");
+    adjustSelectWidth(selectElement);
+});
 </script>
 
 {% schema %}
