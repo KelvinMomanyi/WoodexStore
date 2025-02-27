@@ -150,7 +150,7 @@
 
             
           
-             <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};" id="dynamicSelect">
+             <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};">
               {% for currency in shop.enabled_currencies %}
                 {% assign country_name = currency.iso_code %}
                 {% assign country_code = currency.iso_code | slice: 0, 2 | downcase %}
@@ -287,7 +287,7 @@
     background-repeat: no-repeat;
     background-position: right 10px center; /* Position the arrow */
     background-size: 12px 12px; /* Size of the arrow */
-    padding-right: auto; /
+  
   }
   
   .currency-selector:focus {
