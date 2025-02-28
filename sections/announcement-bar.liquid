@@ -659,30 +659,6 @@ dropdowns.forEach(dropdown => {
 
 
 
-
-//Dropdown icon spacing 
-function adjustSelectWidth(select) {
-    let temp = document.createElement("span");
-    temp.style.position = "absolute";
-    temp.style.visibility = "hidden";
-    temp.style.whiteSpace = "nowrap";
-    temp.style.font = getComputedStyle(select).font; // Match font style
-    document.body.appendChild(temp);
-
-    function updateWidth() {
-        temp.textContent = select.options[select.selectedIndex].text;
-        select.style.width = `${temp.offsetWidth + 25}px`; // Add some padding
-    }
-
-    select.addEventListener("change", updateWidth);
-    
-    updateWidth(); // Initial adjustment
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    const selectElement = document.querySelector("select");
-    adjustSelectWidth(selectElement);
-});
 </script>
 
 {% schema %}

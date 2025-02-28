@@ -23,8 +23,10 @@
 
         <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
       </div> {% endcomment %}
-      <div class="header-action">
-
+      <div class="header-action"  id="headerActions">
+        <a href="#" class="header-action-btn" aria-label="favourite-item" id="search-icon">
+          <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+        </a> 
        
         
         {% comment %}<div class="input-wrapper">
@@ -32,9 +34,9 @@
   
           <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
        </div>{% endcomment %}
-       <button class="header-action-btn" aria-label="favorite list">
+       {% comment %} <button class="header-action-btn" aria-label="favorite list">
            <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
-        </button> 
+        </button>  {% endcomment %}
         {% comment %} <button class="header-action-btn" aria-label="favorite list">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
