@@ -56,6 +56,13 @@
       </div>
 
     </div>
+
+    <!-- SEARCH BAR TOP -->
+  
+   <div id="search-bar" class="search-bar">
+    <input type="text" id="search-input" placeholder="Search for products...">
+    <div id="search-results"></div>
+  </div>
   </header>
 
 
@@ -348,12 +355,7 @@
     </div>
  {% endcomment %}
 
-<!-- SEARCH BAR TOP -->
-  
-   <div id="search-bar" class="search-bar">
-      <input type="text" id="search-input" placeholder="Search for products...">
-      <div id="search-results"></div>
-    </div>
+
 
 
   <script>
@@ -697,8 +699,8 @@
        /* Search bar styling */
 .search-bar {
   display: none;
-  position: fixed;
-  top:18px;
+  position: absolute;
+  top: 100%; 
   left: 0;
   width: 100%;
   background-color: #fff;
