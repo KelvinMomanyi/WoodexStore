@@ -1,0 +1,238 @@
+<div class="about-page">
+    <!-- Hero Section -->
+    <div class="about-hero" style="background-image: url('{{ 'about-hero.jpg' | asset_url }}');">
+      <div class="hero-overlay">
+        <h1 class="hero-title">About Us</h1>
+        <p class="hero-subtitle">Discover the essence of luxury and sophistication</p>
+      </div>
+    </div>
+  
+    <!-- Our Story Section -->
+    <section class="our-story section-padding">
+      <div class="container">
+        <h2 class="section-title">Our Story</h2>
+        <p class="section-text">
+          At [Store Name], we believe that fragrance is an art form that transcends time and evokes emotions. Since our inception, we've been dedicated to curating an exquisite collection of luxury perfumes that embody elegance, passion, and individuality.
+        </p>
+        <img src="{{ 'our-story.jpg' | asset_url }}" alt="Perfume collection" class="section-image">
+      </div>
+    </section>
+  
+    <!-- Why Choose Us Section -->
+    <section class="why-choose-us section-padding">
+      <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="features-grid">
+          <div class="feature-item">
+            <ion-icon name="flower-outline" class="feature-icon"></ion-icon>
+            <h3>Exquisite Craftsmanship</h3>
+            <p>Each fragrance is crafted with precision using the finest ingredients sourced globally.</p>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="earth-outline" class="feature-icon"></ion-icon>
+            <h3>Eco-Friendly</h3>
+            <p>We prioritize sustainability, ensuring our products are kind to the planet.</p>
+          </div>
+          <div class="feature-item">
+            <ion-icon name="heart-outline" class="feature-icon"></ion-icon>
+            <h3>Personalized Service</h3>
+            <p>Our team is here to guide you in finding the perfect fragrance for every moment.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Testimonials Section -->
+    <section class="testimonials section-padding">
+      <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonials-slider">
+          <div class="testimonial-item">
+            <p>"This is the only store I trust for my signature scent. Their perfumes are divine!"</p>
+            <span>- Jane D.</span>
+          </div>
+          <div class="testimonial-item">
+            <p>"Unparalleled service and an amazing collection. I found my forever fragrance here."</p>
+            <span>- Michael S.</span>
+          </div>
+          <div class="testimonial-item">
+            <p>"Every scent tells a story. This store is a haven for perfume lovers."</p>
+            <span>- Sarah K.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- CTA Section -->
+    <section class="cta section-padding">
+      <div class="container">
+        <h2>Explore Our Signature Collection</h2>
+        <a href="/collections/all" class="btn btn-primary">Shop Now</a>
+      </div>
+    </section>
+  </div>
+<style>
+    .about-page {
+        font-family: 'DM Sans', sans-serif;
+        color: #333;
+      }
+      
+      .about-hero {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .hero-overlay {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
+      }
+      
+      .hero-title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .section-padding {
+        padding: 4rem 2rem;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        color: #111;
+      }
+      
+      .section-text {
+        text-align: center;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+      }
+      
+      .section-image {
+        display: block;
+        margin: 2rem auto;
+        max-width: 100%;
+        border-radius: 10px;
+      }
+      
+      .features-grid {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        text-align: center;
+      }
+      
+      .feature-item {
+        flex: 1 1 calc(33.333% - 2rem);
+        background: #f9f9f9;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #ff6f61;
+      }
+      
+      .testimonials-slider {
+        display: flex;
+        gap: 2rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 2rem 0;
+      }
+      
+      .testimonial-item {
+        flex: 0 0 calc(33.333% - 1rem);
+        scroll-snap-align: center;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .testimonial-item p {
+        font-style: italic;
+        margin-bottom: 1rem;
+      }
+      
+      .testimonial-item span {
+        font-weight: bold;
+      }
+      
+      .cta {
+        background: #ff6f61;
+        color: #fff;
+        text-align: center;
+        padding: 3rem 1rem;
+        border-radius: 10px;
+      }
+      
+      .cta h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .btn-primary {
+        background: #fff;
+        color: #ff6f61;
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-primary:hover {
+        background: #ff6f61;
+        color: #fff;
+        border: 2px solid #fff;
+      }
+      
+      @media (max-width: 768px) {
+        .features-grid {
+          flex-direction: column;
+        }
+      
+        .testimonial-item {
+          flex: 0 0 90%;
+        }
+      }
+      
+</style>     
+{% schema %}
+{
+  "name": "about",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "about"
+    }
+  ]
+}
+{% endschema %}
+
