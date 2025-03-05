@@ -1076,11 +1076,11 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    */
 
   .hero-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
   }
 
-  .hero-list .colspan-2 { grid-column: span 1; }
+  .hero-list .colspan-2 { grid-column: span 3; }
 
 
 
