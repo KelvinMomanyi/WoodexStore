@@ -1080,7 +1080,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     gap: 10px;
   }
 
-  .hero-list .colspan-2 { grid-column: span 2; }
+  .hero-list .colspan-2 { grid-column: span 3; }
 
 
 
