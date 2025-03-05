@@ -1083,7 +1083,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   .hero-list .colspan-2 { grid-column: span 2; }
 
 
-
+  .hero-card .card-title { --fs-3: 1.4rem; }
   /**
    * ABOUT
    */
