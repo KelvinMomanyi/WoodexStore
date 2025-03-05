@@ -1059,7 +1059,9 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .container { max-width: 768px; }
 
-
+  .btn{
+    padding: 5px 15px;
+  }
 
   /**
    * HEADER
