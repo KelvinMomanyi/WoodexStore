@@ -3,7 +3,7 @@
       <button class="close-popup" onclick="closePopup()">
         <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
       </button>
-      <div class="newsletter-card">
+      <div class="newsletter-card1">
         <div class="card-image">
           {% if section.settings.image1 != blank %}
             <img src="{{ section.settings.image1 | image_url}}" alt="Newsletter Image" loading="lazy"> 
@@ -53,7 +53,7 @@
       }
       
  
-    .newsletter-card {
+    .newsletter-card1 {
       display: flex;
       width: 100%;
       max-width: 800px;
@@ -125,7 +125,7 @@
     }
 
     @media screen and (max-width: 575px) {
-      .newsletter-card {
+      .newsletter-card1 {
         display: flex;
         flex-direction: column;
       }
