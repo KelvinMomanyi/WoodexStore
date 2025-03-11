@@ -870,6 +870,87 @@
        //  });
     
         
+
+
+       //CURRENCY SELECTOR
+       //Currency  Selector
+function currencyFormSubmit(event) {
+  event.target.form.submit();
+}
+
+document.querySelectorAll('.shopify-currency-form select').forEach(function(element) {
+  element.addEventListener('change', currencyFormSubmit);
+}); 
+
+
+
+const dropdowns = document.querySelectorAll('.dropdown');
+
+document.addEventListener('DOMContentLoaded', function() {
+// Get all currency list items
+var currencyItems = document.querySelectorAll('.newmenu li');
+
+currencyItems.forEach(function(item) {
+  item.addEventListener('click', function() {
+    // Get the selected currency data
+    var selectedCurrency = this.getAttribute('data-currency');
+    var selectedSymbol = this.getAttribute('data-symbol');
+    var countryCode = this.getAttribute('data-country-code');
+
+    // Update the displayed selected currency
+    document.getElementById('selected-currency').innerText = selectedCurrency;
+    document.getElementById('selected-symbol').innerText = selectedSymbol;
+    document.querySelector('.select .flag-icon').style.backgroundImage = `url('https://flagcdn.com/16x12/${countryCode}.png')`;
+
+    // Update currency using Shopify's JS method
+    Currency.convertAll(shop.currency, selectedCurrency);
+
+    // Store the new currency in local storage or cookies if needed
+    localStorage.setItem('currency', selectedCurrency);
+
+    // Optionally, update the URL to include the selected currency
+    window.location.search = '?currency=' + selectedCurrency;
+  });
+});
+});
+
+
+//loop through the elements
+dropdowns.forEach(dropdown => {
+  //get inner elements from each dropdown
+  const select = dropdown.querySelector('.select');
+  const caret = dropdown.querySelector('.caret');
+  const menu = dropdown.querySelector('.newmenu');
+  const options = dropdown.querySelectorAll('.newmenu li');
+  const selected = dropdown.querySelector('.selected');
+
+  select.addEventListener('click', () => {
+      select.classList.toggle('select-clicked');
+
+      caret.classList.toggle('caret-rotate');
+
+      menu.classList.toggle('menu-open')
+  });
+
+  options.forEach(option => {
+      option.addEventListener('click', ()=> {
+          selected.innerText = option.innerText;
+          //Add the clicked select style to the select element
+          selected.classList.remove('select-clicked');
+          //Add the rotate styles to the caret element
+          caret.classList.remove('caret-rotate');
+          //Add the open styles to the menu element
+          menu.classList.remove('menu-open');
+          //Remove active class from all option elements 
+          options.forEach(option => {
+              option.classList.remove('active')
+          })
+          //Add active class to clicked option element
+          option.classList.add("active")
+      })
+  })
+}) 
+
   </script> 
      
   
