@@ -347,7 +347,7 @@
           {% endcase %}
           
             {% if currency == cart.currency %}
-            <div class="select" id="currency-selector" style="color: {{section.settings.text_color }};">
+            <div class="select" id="curr-selector" style="color: {{section.settings.text_color }};">
               <span class="selected">
                 <div class="flag-icon" style="background-image: url('https://flagcdn.com/16x12/{{ country_code }}.png');" aria-label="{{ currency }} flag"></div>
               </span>
@@ -362,7 +362,7 @@
 
         
       
-         <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};" id="currencySelect">
+         <select name="currency" class="curr-selector" style="color: {{section.settings.text_color }};" id="currencySelect">
           {% for currency in shop.enabled_currencies %}
             {% assign country_name = currency.iso_code %}
             {% assign country_code = currency.iso_code | slice: 0, 2 | downcase %}
@@ -960,7 +960,7 @@
   {% comment %} margin-bottom: 10px; /* Space below the container */ {% endcomment %}
 }
 
-#language-selector, #currency-selector {
+#lang-selector, #curren-selector {
     padding: 0; /* Add padding for a better look */
     border: 1px solid #ddd; /* Optional: Add a border */
     border-radius: 4px; /* Optional: Rounded corners */
