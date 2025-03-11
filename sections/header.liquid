@@ -228,7 +228,7 @@
 
 
     <!-- Language and Currency Selectors Container -->
-    <div id="language-currency-container">
+    <div id="currency-language-container ">
       <select name="locale_code" class="locale-selector" style="color:{{ section.settings.text_color }};">
         {% for language in localization.available_languages %}
           {% if language.iso_code == localization.language.iso_code %}
@@ -953,7 +953,7 @@
 
 
 
-#language-currency-container {
+#currency-language-container {
   display: none;
   gap: 10px; /* Space between selectors */
   align-items: center;
@@ -1206,7 +1206,7 @@
 
 
   @media screen and (max-width: 875px){
-    #language-currency-container {
+    #currency-language-container  {
       display: block;
     }
   }
