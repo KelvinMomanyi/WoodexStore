@@ -954,7 +954,7 @@
 
 
 #language-currency-container {
-  display: flex;
+  display: none;
   gap: 10px; /* Space between selectors */
   align-items: center;
   {% comment %} margin-bottom: 10px; /* Space below the container */ {% endcomment %}
@@ -1205,30 +1205,9 @@
         }
 
 
-  @media screen and (max-width: 575px){
-    .alert-text{
-      font-size:12px;
-
-    }
-    .alert-text.visible {
-      left: 50%; /* Move to the visible position */
-
-    }
-     #text1, #text2, #text3 {
-      height:100%;
-    }
-  }
-
   @media screen and (max-width: 875px){
     #language-currency-container {
-      display: none;
-    }
-    #phone-container{
-      display:none;
-    }
-
-    .alert-text.visible{
-       left:50%;
+      display: block;
     }
   }
 
