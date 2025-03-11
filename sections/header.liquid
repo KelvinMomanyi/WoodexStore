@@ -159,68 +159,28 @@
         {% endfor %}
       </ul>
     </nav>
-    {% form 'currency' %}
+
+      <!-- Language and Currency Selectors Container -->
+      <div id="language-currency-container">
+        <select name="locale_code" class="locale-selector" style="color:{{ section.settings.text_color }};">
+          {% for language in localization.available_languages %}
+            {% if language.iso_code == localization.language.iso_code %}
+              <option value="{{ language.iso_code }}" selected="selected">{{ language.name }}</option>
+            {% else %}
+              <option value="{{ language.iso_code }}">{{ language.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        
+      
+      <div class='separator' style="color: {{section.settings.text_color }};"></div>
+      {% form 'currency' %}
       <div style="display:flex; gap:5px;">
         <div class="dropdown">
           {% for currency in shop.enabled_currencies %}
             {% assign country_code = '' %}
             {% assign country_name = '' %}
-           {% comment %} {% case currency.iso_code %}
-            {% when 'USD' %} {% assign country_code = 'us' %}
-            {% when 'CAD' %} {% assign country_code = 'ca' %}
-            {% when 'EUR' %} {% assign country_code = 'eu' %}
-            {% when 'GBP' %} {% assign country_code = 'gb' %}
-            {% when 'AUD' %} {% assign country_code = 'au' %}
-            {% when 'JPY' %} {% assign country_code = 'jp' %}
-            {% when 'INR' %} {% assign country_code = 'in' %}
-            {% when 'KES' %} {% assign country_code = 'ke' %}
-            <!-- Add more cases as needed -->
-          {% endcase %} {% endcomment %}
           {% case currency.iso_code %}
-           {% comment %}
-          {% when 'USD' %} {% assign country_code = 'us' %}
-          {% when 'CAD' %} {% assign country_code = 'ca' %}
-          {% when 'EUR' %} {% assign country_code = 'eu' %}
-          {% when 'GBP' %} {% assign country_code = 'gb' %}
-          {% when 'AUD' %} {% assign country_code = 'au' %}
-          {% when 'JPY' %} {% assign country_code = 'jp' %}
-          {% when 'INR' %} {% assign country_code = 'in' %}
-          {% when 'KES' %} {% assign country_code = 'ke' %}
-          {% when 'CHF' %} {% assign country_code = 'ch' %}
-          {% when 'CNY' %} {% assign country_code = 'cn' %}
-          {% when 'SEK' %} {% assign country_code = 'se' %}
-          {% when 'NZD' %} {% assign country_code = 'nz' %}
-          {% when 'MXN' %} {% assign country_code = 'mx' %}
-          {% when 'SGD' %} {% assign country_code = 'sg' %}
-          {% when 'HKD' %} {% assign country_code = 'hk' %}
-          {% when 'NOK' %} {% assign country_code = 'no' %}
-          {% when 'ZAR' %} {% assign country_code = 'za' %}
-          {% when 'BRL' %} {% assign country_code = 'br' %}
-          {% when 'RUB' %} {% assign country_code = 'ru' %}
-          {% when 'KRW' %} {% assign country_code = 'kr' %}
-          {% when 'TRY' %} {% assign country_code = 'tr' %}
-          {% when 'SAR' %} {% assign country_code = 'sa' %}
-          {% when 'AED' %} {% assign country_code = 'ae' %}
-          {% when 'THB' %} {% assign country_code = 'th' %}
-          {% when 'IDR' %} {% assign country_code = 'id' %}
-          {% when 'PLN' %} {% assign country_code = 'pl' %}
-          {% when 'MYR' %} {% assign country_code = 'my' %}
-          {% when 'DKK' %} {% assign country_code = 'dk' %}
-          {% when 'PHP' %} {% assign country_code = 'ph' %}
-          {% when 'HUF' %} {% assign country_code = 'hu' %}
-          {% when 'CZK' %} {% assign country_code = 'cz' %}
-          {% when 'ILS' %} {% assign country_code = 'il' %}
-          {% when 'CLP' %} {% assign country_code = 'cl' %}
-          {% when 'PKR' %} {% assign country_code = 'pk' %}
-          {% when 'VND' %} {% assign country_code = 'vn' %}
-          {% when 'EGP' %} {% assign country_code = 'eg' %}
-          {% when 'NGN' %} {% assign country_code = 'ng' %}
-          {% when 'BDT' %} {% assign country_code = 'bd' %}
-          {% when 'COP' %} {% assign country_code = 'co' %}
-          {% when 'PEN' %} {% assign country_code = 'pe' %}
-          {% when 'LKR' %} {% assign country_code = 'lk' %}
-          {% endcomment %}
-
               {% when 'USD' %} {% assign country_code = 'us' %} {% assign country_name = 'United States' %}
               {% when 'CAD' %} {% assign country_code = 'ca' %} {% assign country_name = 'Canada' %}
               {% when 'EUR' %} {% assign country_code = 'eu' %} {% assign country_name = 'Eurozone' %}
@@ -297,7 +257,10 @@
        </select> 
        
       </div> 
-    {% endform %}
+      {% endform %}
+
+
+
     <div class="header-action" style="display:flex; justify-content:flex-end">
      <button class="header-action-btn" aria-label="user">
         <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
