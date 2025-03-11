@@ -4,13 +4,6 @@
         <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
       </button>
       <div class="newsletter-card1">
-        <div class="card-image">
-          {% if section.settings.image1 != blank %}
-            <img src="{{ section.settings.image1 | image_url}}" alt="Newsletter Image" loading="lazy"> 
-           {% else %}
-            <img src="{{'about-banner.jpg' | asset_url}}" alt="Newsletter Image" loading="lazy">   
-          {% endif %}
-        </div>
         <div class="newcard-content">
           <h2>Stay Updated!</h2>
           <p>Subscribe to our newsletter and get the latest updates right in your inbox.</p>
@@ -22,6 +15,13 @@
             <button type="submit" class='btn btn-primary'>Subscribe</button>
           </form>
         {% endform %}
+        </div>
+        <div class="card-image">
+          {% if section.settings.image1 != blank %}
+            <img src="{{ section.settings.image1 | image_url}}" alt="Newsletter Image" loading="lazy"> 
+           {% else %}
+            <img src="{{'about-banner.jpg' | asset_url}}" alt="Newsletter Image" loading="lazy">   
+          {% endif %}
         </div>
       </div>
     </div>
