@@ -1052,7 +1052,185 @@
   
 
    
+  .currency-selector {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .dropdown-toggle {
+    padding: 8px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    {% comment %} border: 1px solid #ccc; {% endcomment %}
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+  
+  .currency-selector:hover .dropdown-menu {
+    display: block; /* Show menu on hover */
+  }
+  
+  .dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f0f0f0;
+  }
 
+
+  .flag-icon {
+    width: 16px;  /* Same width as the original image */
+    height: 12px; /* Same height as the original image */
+    display: inline-block; /* Allows it to be treated like text/image */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image within the div */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    vertical-align: middle; /* Aligns with text if placed next to text */
+  }
+
+  .dropdown{
+    position: relative;
+    z-index:999;
+  }
+
+
+.select{
+
+  padding: 0; /* Adjust padding as needed */
+  font-size: 12px; /* Adjust font size as needed */
+  appearance: none; /* Remove the default browser appearance */
+  -webkit-appearance: none; /* Remove appearance for Safari */
+  -moz-appearance: none; /* Remove appearance for Firefox */
+  position: relative; 
+    display: flex;
+    align-items: center;
+    gap:5px;
+    cursor: pointer;
+    /*transition: background 0.3s;*/
+}
+.selected{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  border: none;
+}
+
+
+.newmenu{
+    list-style-type: none;
+    padding: 0.1em 0.2em;
+    background: #323741;
+    color:#9fa5b5;
+    position:fixed; 
+    top: 3em;
+    right: 0;
+    width:8%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 9999999;
+}
+
+.newmenu li {
+    padding: 0.7em 0.5em;
+    /*margin: 0.3em 0;*/
+    border-radius: 0.5em;
+    cursor: pointer;
+    display:flex;
+    gap:3px;
+    align-items:center;
+}
+
+.newmenu li:hover{
+    background: #2a2d35;
+}
+
+.active{
+    background: #23242a;
+}
+
+
+.menu-open{
+    display: block;
+    opacity: 1;
+    z-index:999
+}
+
+.separator {
+  height: 16px; /* Adjust the height as needed */
+  border-left: 1px solid white; /* Adjust the border thickness and color */
+}
+
+.custom-select {
+            position: relative;
+            display: inline-block;
+            width: auto;
+        }
+
+        .custom-select select {
+            appearance: none; /* Hide default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+        }
+
+        .custom-select::after {
+            content: "▼"; /* Custom dropdown arrow */
+            position: absolute;
+            right: 10px; /* Default position */
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: #555;
+        }
+
+
+  @media screen and (max-width: 575px){
+    .alert-text{
+      font-size:12px;
+
+    }
+    .alert-text.visible {
+      left: 50%; /* Move to the visible position */
+
+    }
+     #text1, #text2, #text3 {
+      height:100%;
+    }
+  }
+
+  @media screen and (max-width: 875px){
+    #language-currency-container {
+      display: none;
+    }
+    #phone-container{
+      display:none;
+    }
+
+    .alert-text.visible{
+       left:50%;
+    }
+  }
 
 
 
