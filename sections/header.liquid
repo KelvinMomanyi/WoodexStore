@@ -13,8 +13,24 @@
  
       </div>
       
-
-      <a href="#" class="logo">Fragrance</a>
+      <a href="/" class="logo"  >
+        {% assign default_width = 69 %}
+        {% assign default_height = 26 %}
+        {% assign scaled_width = default_width | times: section.settings.logo_scale %}
+        {% assign scaled_height = default_height | times: section.settings.logo_scale %}
+          {% if section.settings.logo_image != blank %}
+            <img 
+              src="{{ section.settings.logo_image | image_url  }}"  
+              alt="logo"
+              width="{{ scaled_width }}" 
+              height="{{ scaled_height }}" 
+              loading="lazy"
+            />
+           {% else %}
+            <a href="#" class="logo">Fragrance</a>
+          {% endif %} 
+        </a>
+      
       
      
     
