@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                video.currentTime = 0; // Restart video
+                video.currentTime = 0.3; // Restart video
                 video.play(); // Play video
             } else {
                 video.pause(); // Pause video when out of view
