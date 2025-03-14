@@ -8,7 +8,7 @@
                 <br>update interesting videos</p>
         </div>
         <div class="image">
-            <img src="images/mouth.png" alt="">
+            <img src="{{ 'P1.jpg' | asset_url}}" alt="">
         </div>
     </div>
 </section>
@@ -16,10 +16,10 @@
 
 <section class="grid grid-1">
     <figure>
-        <img src="images/sich.png" alt="">
+        <img src="{{ 'P1.jpg' | asset_url}}" alt="">
     </figure>
     <figure>
-        <img src="images/3.png" alt="" class="autoRotate">
+        <img src="{{ 'P1.jpg' | asset_url}}" alt="" class="autoRotate">
     </figure>
     <h2 class="autoShow">Introduce</h2>
 </section>
@@ -27,7 +27,7 @@
 <section class="grid grid-2">
     <div class="autoShow">
         <figure>
-            <img src="images/6.png" alt="">
+            <img src="{{ 'P1.jpg' | asset_url}}" alt="">
         </figure>
         <p>
             When an unknown printer took a galley of type and scrambled it to make a type specimen b <br>
@@ -43,7 +43,7 @@
 
     <div class="autoShow">
         <figure>
-            <img src="images/2.png" alt="">
+            <img src="{{ 'P1.jpg' | asset_url}}" alt="">
         </figure>
         <p>
             When an unknown printer took a galley of type and scrambled it to make a type specimen b <br>
@@ -52,7 +52,7 @@
     </div>
     <div class="autoShow">
         <figure>
-            <img src="images/candy.png" alt="">
+            <img src="{{ 'P1.jpg' | asset_url}}" alt="">
         </figure>
     </div>
 </section>
@@ -292,12 +292,12 @@
 
 {% schema %}
 {
-  "name": "Poster",
+  "name": "poster",
   "settings": [],
   "blocks": [],
   "presets": [
     {
-      "name": "Poster",
+      "name": "poster",
     }
   ]
 }
