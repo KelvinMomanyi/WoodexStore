@@ -1,4 +1,4 @@
-<section class="banner">
+<section class="poster">
     <div class="content">
         <h1 class="left">CSS ONLY</h1>
         <div class="right">
@@ -66,31 +66,31 @@
 </section>
 
 <style>
-    .banner .content{
+    .poster .content{
         font-family: "Odibee Sans", sans-serif;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
-    .banner .content h1{
+    .poster .content h1{
         font-size: 17em;
     }
-    .banner .content .right{
+    .poster .content .right{
         text-align: right;
         transform: translateY(-30px);
     }
-    .banner .content .right h2{
+    .poster .content .right h2{
         font-size: 7em;
         font-weight: 200;
     }
-    .banner .image{
+    .poster .image{
         width: 100%;
         height: 600px;
         background-image: url(images/banner.png);
         position: relative;
     }
-    .banner .image img{
+    .poster .image img{
         position: absolute;
         height: 130%;
         left: 50%;
@@ -163,15 +163,6 @@
     .grid-3 div:nth-child(4){
         grid-column: 1/ 7;
     }
-    footer{
-        border-top: 1px solid #2E373A55;
-        min-height: 100vh;
-    }
-    footer .content{
-        width: min(1400px, 100vw);
-        margin: auto;
-        padding: 100px 20px;
-    }
     .grid-5{
         --row: 5;
         font-size:1.7em;
@@ -197,10 +188,10 @@
         header img{
             height: 2em;
         }
-        .banner .content h1{
+        .poster .content h1{
             font-size: 12em;
         }
-        .banner .content .right{
+        .poster .content .right{
             transform: none;
         }
         .grid-2 div:nth-child(1){
@@ -222,16 +213,16 @@
             height: unset;
             width: 100%;
         }
-        .banner .content h1{
+        .poster .content h1{
             font-size: 7em;
         }
-        .banner .content{
+        .poster .content{
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .banner{
+        .poster{
             overflow: hidden;
         }
         .grid-1 h2:nth-child(3){
