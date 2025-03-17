@@ -1,12 +1,12 @@
 <section class="poster">
     <div class="content">
-        <h1 class="left">CSS ONLY</h1>
+        {% comment %}<h1 class="left">CSS ONLY</h1>
         <div class="right">
             <h2>LUNDEV</h2>
             <p>Web Design</p>
             <p>Don't forget to subscribe to the channel to continuously
                 <br>update interesting videos</p>
-        </div>
+         </div>{% endcomment %}
         <div class="image">
             <img src="{{ 'frag.jpg' | asset_url}}" alt="">
         </div>
@@ -73,7 +73,7 @@
         flex-wrap: wrap;
     }
     .poster .content h1{
-        font-size: 3em;
+        font-size: 10em;
     }
     .poster .content .right{
         text-align: right;
@@ -147,7 +147,7 @@
     }
     .grid-3{
         --row: 6;
-        font-size: 4em;
+        font-size: 10em;
     }
     .grid-3 div{
         grid-column: 2/ 6;
@@ -203,7 +203,7 @@
             grid-row: 5;
         }
         .grid-3{
-            font-size: 2em;
+            font-size: 5em;
             line-height: 1em;
         }
     }
@@ -231,7 +231,7 @@
             display: block;
         }
         .grid-3{
-            font-size: 1em;
+            font-size: 4em;
             display: block;
             margin-bottom: 100px;
         }
