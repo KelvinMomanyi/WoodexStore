@@ -1,4 +1,4 @@
-<section class="poster">
+{% comment %}<section class="poster">
     <div class="content">
         {% comment %}<h1 class="left">CSS ONLY</h1>
         <div class="right">
@@ -7,11 +7,11 @@
             <p>Don't forget to subscribe to the channel to continuously
                 <br>update interesting videos</p>
          </div>{% endcomment %}
-        <div class="image">
+        {%comment %}<div class="image">
             <img src="{{ 'frag.jpg' | asset_url}}" alt="">
-        </div>
-    </div>
-</section>
+        </div>{% endcomment %}
+    {% comment %}</div>
+</section>{% endcomment %}
 
 
 {% comment %}<section class="grid grid-1">
