@@ -161,12 +161,108 @@
           
 
           </ul>
+          
+
+
+          <ul class="product-slider">
+  {% assign collection_handle = 'all' %}
+  {% for product in collections[collection_handle].products limit:8 %}
+    <li class="decoration">
+      <div class="product-card">
+        <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: 'large' }}" 
+              alt="{{ product.featured_image.alt | escape }}" 
+              class="img-cover" 
+              width="200" 
+              height="200" 
+              loading="lazy">
+          {% else %}
+            <img src="default-image.jpg" 
+              alt="No image available" 
+              class="img-cover" 
+              width="200" 
+              height="200" 
+              loading="lazy">
+          {% endif %}
+        </a>
+        <div class="card-content">
+          <h3 class="h3">
+            <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+          </h3>
+          <div class="card-price">
+            {% if product.compare_at_price > product.price %}
+              <del class="del">{{ product.compare_at_price | money }}</del>
+            {% endif %}
+            <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
+          </div>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+          </ul>
 
         </div>
       </section>
 
 
+<!-- jQuery (Required for Slick Slider) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Slick Slider JS -->
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('.product-slider').slick({
+      slidesToShow: 4,  // Adjust for desktop
+      slidesToScroll: 1,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 3000,
+      arrows: true,
+      dots: true,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1
+          }
+        }
+      ]
+    });
+  });
+</script>
+
+<style>
+.product-slider {
+  display: flex;
+  overflow: hidden;
+}
+
+.product-card {
+  text-align: center;
+  padding: 10px;
+}
+
+.slick-prev, .slick-next {
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+}
+</style>
 
 {% schema %}
 {
