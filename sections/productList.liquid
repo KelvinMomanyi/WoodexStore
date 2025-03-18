@@ -98,6 +98,39 @@
                        width="200" 
                        height="200" 
                        loading="lazy">
+                       <ul class="card-action-list">
+  
+                        <li>
+                          <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                            <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+    
+                        <li>
+                          <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                            <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+    
+                        <li>
+                          <button class="card-action-btn" aria-label="add to whishlist" title="add to whishlist">
+                            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                          </button>
+                        </li>
+    
+                      </ul>
+    
+                      <ul class="badge-list">
+    
+                        <li>
+                          <div class="badge orange">Sale</div>
+                        </li>
+    
+                        <li>
+                          <div class="badge cyan">-10%</div>
+                        </li>
+    
+                      </ul>
                    {% else %}
                     <img src="default-image.jpg" 
                        alt="No image available" 
@@ -105,6 +138,39 @@
                         width="200" 
                         height="200" 
                         loading="lazy">
+                        <ul class="card-action-list">
+  
+                          <li>
+                            <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                              <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                          </li>
+      
+                          <li>
+                            <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                              <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                          </li>
+      
+                          <li>
+                            <button class="card-action-btn" aria-label="add to whishlist" title="add to whishlist">
+                              <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                            </button>
+                          </li>
+      
+                        </ul>
+      
+                        <ul class="badge-list">
+      
+                          <li>
+                            <div class="badge orange">Sale</div>
+                          </li>
+      
+                          <li>
+                            <div class="badge cyan">-10%</div>
+                          </li>
+      
+                        </ul>
                    {% endif %}
                 <ul class="card-action-list">
                  <li>
@@ -141,7 +207,7 @@
           </li>
         </ul>
         {% endif %}
-      </a>
+                  </a>
            <div class="card-content">
               <h3 class="h3">
                 <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
@@ -165,41 +231,41 @@
 
 
           <ul class="product-slider">
-  {% assign collection_handle = 'all' %}
-  {% for product in collections[collection_handle].products limit:8 %}
-    <li class="decoration">
-      <div class="product-card">
-        <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-          {% if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: 'large' }}" 
-              alt="{{ product.featured_image.alt | escape }}" 
-              class="img-cover" 
-              width="200" 
-              height="200" 
-              loading="lazy">
-          {% else %}
-            <img src="default-image.jpg" 
-              alt="No image available" 
-              class="img-cover" 
-              width="200" 
-              height="200" 
-              loading="lazy">
-          {% endif %}
-        </a>
-        <div class="card-content">
-          <h3 class="h3">
-            <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-          </h3>
-          <div class="card-price">
-            {% if product.compare_at_price > product.price %}
-              <del class="del">{{ product.compare_at_price | money }}</del>
-            {% endif %}
-            <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
-          </div>
-        </div>
-      </div>
-    </li>
-  {% endfor %}
+                {% assign collection_handle = 'all' %}
+                {% for product in collections[collection_handle].products limit:8 %}
+                  <li class="decoration">
+                    <div class="product-card">
+                      <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                        {% if product.featured_image %}
+                          <img src="{{ product.featured_image | img_url: 'large' }}" 
+                            alt="{{ product.featured_image.alt | escape }}" 
+                            class="img-cover" 
+                            width="200" 
+                            height="200" 
+                            loading="lazy">
+                        {% else %}
+                          <img src="default-image.jpg" 
+                            alt="No image available" 
+                            class="img-cover" 
+                            width="200" 
+                            height="200" 
+                            loading="lazy">
+                        {% endif %}
+                      </a>
+                      <div class="card-content">
+                        <h3 class="h3">
+                          <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+                        </h3>
+                        <div class="card-price">
+                          {% if product.compare_at_price > product.price %}
+                            <del class="del">{{ product.compare_at_price | money }}</del>
+                          {% endif %}
+                          <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                {% endfor %}
           </ul>
 
         </div>
