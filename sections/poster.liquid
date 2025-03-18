@@ -66,7 +66,46 @@
 </section>
 
 <style>
-    .poster .content{
+    .poster {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Adjust height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white; /* Ensure text is visible */
+}
+
+.poster::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("{{ 'frag.jpg' | asset_url}}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.poster .content {
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+}
+
+.poster h1, .poster .right h2, .poster .right p {
+    margin: 0;
+}
+
+
+
+
+
+    /*.poster .content{
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -74,7 +113,7 @@
     }
     .poster .content h1{
         font-size: 10em;
-    }
+    }*/
     .poster .content .right{
         text-align: right;
         transform: translateY(-30px);
@@ -90,7 +129,7 @@
         position: relative;
         background-size:cover;
         background-position:center;
-        overflow:hidden;
+        
     }
 
     .grid figure img{
