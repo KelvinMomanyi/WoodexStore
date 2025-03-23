@@ -1,4 +1,12 @@
-<div class="faq-container">
+<div class="container">
+  <!-- Hero Section -->
+  <div class="faq-hero" style="background-image: url('{{ 'aboutUS-banner.jpg' | asset_url }}');">
+    <div class="faq-overlay">
+      <h1 class="faq-title">About Us</h1>
+      <p class="faq-subtitle">Discover the essence of luxury and sophistication</p>
+    </div>
+  </div>  
+  <div class="faq-container">
     <h1>Frequently Asked Questions</h1>
     
     <div class="faq">
@@ -63,8 +71,8 @@
             <p>Orders can only be modified or canceled within 24 hours of purchase. Contact our customer support team as soon as possible for assistance.</p>
         </div>
     </div>
+  </div>
 </div>
-
 <script>
     function toggleFaq(button) {
         const faqItem = button.parentElement;
@@ -72,6 +80,32 @@
     }
 </script>
 <style>
+    .faq-hero {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 40vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .faq-overlay {
+        color: #fff;
+        text-align: center;
+        padding: 2rem;
+      }
+      
+      .faq-title {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      
+      .faq-subtitle {
+        font-size: 1.5rem;
+      }
+      
     .faq-container {
         max-width: 800px;
         margin: 50px auto;
