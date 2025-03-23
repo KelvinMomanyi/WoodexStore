@@ -2,62 +2,75 @@
     <h1>Frequently Asked Questions</h1>
     
     <div class="faq">
-        <input type="checkbox" id="faq1">
-        <label for="faq1">What types of perfumes do you sell?</label>
+        <button onclick="toggleFaq(this)">What types of perfumes do you sell?</button>
         <div class="faq-content">
             <p>We offer a wide variety of perfumes, including designer fragrances, niche perfumes, and exclusive scents for both men and women. Popular brands include Chanel, Dior, and Tom Ford.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq2">
-        <label for="faq2">Do you offer international shipping?</label>
+        <button onclick="toggleFaq(this)">Do you offer international shipping?</button>
         <div class="faq-content">
             <p>Yes! We ship worldwide. Shipping rates and delivery times vary depending on your location. Estimated delivery times are provided at checkout.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq3">
-        <label for="faq3">Are your perfumes authentic?</label>
+        <button onclick="toggleFaq(this)">Are your perfumes authentic?</button>
         <div class="faq-content">
             <p>Absolutely! We guarantee 100% authentic perfumes sourced directly from authorized distributors and brands. Every fragrance comes in its original packaging.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq4">
-        <label for="faq4">What is your return policy?</label>
+        <button onclick="toggleFaq(this)">What is your return policy?</button>
         <div class="faq-content">
             <p>We accept returns within 14 days of purchase, provided the perfume is unopened and in its original packaging. Please contact our support team for return instructions.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq5">
-        <label for="faq5">How can I track my order?</label>
+        <button onclick="toggleFaq(this)">How can I track my order?</button>
         <div class="faq-content">
             <p>Once your order has been shipped, we will send you a tracking number via email. You can use this to track your package on our shipping partner's website.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq6">
-        <label for="faq6">Do you offer gift wrapping?</label>
+        <button onclick="toggleFaq(this)">Do you offer gift wrapping?</button>
         <div class="faq-content">
             <p>Yes! We offer premium gift wrapping options at checkout, perfect for special occasions. Each wrapped item includes a personalized message if desired.</p>
         </div>
     </div>
     
     <div class="faq">
-        <input type="checkbox" id="faq7">
-        <label for="faq7">What payment methods do you accept?</label>
+        <button onclick="toggleFaq(this)">What payment methods do you accept?</button>
         <div class="faq-content">
             <p>We accept major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, and Google Pay. All transactions are secure and encrypted.</p>
         </div>
     </div>
+
+    <div class="faq">
+        <button onclick="toggleFaq(this)">How long does shipping take?</button>
+        <div class="faq-content">
+            <p>Shipping times depend on your location. Domestic orders typically take 3-5 business days, while international orders can take 7-14 business days.</p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button onclick="toggleFaq(this)">Can I modify or cancel my order?</button>
+        <div class="faq-content">
+            <p>Orders can only be modified or canceled within 24 hours of purchase. Contact our customer support team as soon as possible for assistance.</p>
+        </div>
+    </div>
 </div>
 
+<script>
+    function toggleFaq(button) {
+        const faqItem = button.parentElement;
+        faqItem.classList.toggle("active");
+    }
+</script>
 <style>
     .faq-container {
         max-width: 800px;
@@ -73,20 +86,21 @@
     .faq {
         border-bottom: 1px solid #ddd;
     }
-    .faq input {
-        display: none;
-    }
-    .faq label {
+    .faq button {
         display: block;
+        width: 100%;
         font-size: 18px;
         font-weight: bold;
         padding: 15px;
         cursor: pointer;
         background: #f1f1f1;
+        border: none;
+        text-align: left;
+        outline: none;
         border-radius: 5px;
         transition: background 0.3s;
     }
-    .faq label:hover {
+    .faq button:hover {
         background: #e0e0e0;
     }
     .faq-content {
@@ -95,7 +109,7 @@
         padding: 0 15px;
         transition: max-height 0.3s ease-out;
     }
-    .faq input:checked + .faq-content {
+    .faq.active .faq-content {
         max-height: 200px;
         padding: 15px;
     }
