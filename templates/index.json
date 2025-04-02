@@ -1,4 +1,12 @@
-
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -63,8 +71,7 @@
         "collection_section_8w7bjt",
         "collection_section_d4mEAT"
       ],
-      "settings": {
-      }
+      "settings": {}
     },
     "banner": {
       "type": "banner",
@@ -79,32 +86,71 @@
         "button_url2": "shopify://pages/shop"
       }
     },
-    "brands":{
+    "brands": {
       "type": "brands",
-      "settings": {}
+      "settings": {
+        "subtitle1": "NEW COLLECTION",
+        "title1": "Discover New Sneaker Collection",
+        "btn_label1": "Explore More",
+        "button_url1": "shopify://collections/all",
+        "title2": "25% off Everything",
+        "description": "Sneakers in a range of styles and colors for every taste",
+        "btn_label2": "Shop Now",
+        "button_url2": "shopify://collections/all"
+      }
     },
-    "poster":{
-      "type":"poster",
-      "settings":{}
+    "poster": {
+      "type": "poster",
+      "settings": {}
     },
     "offer": {
       "type": "offer",
-      "settings": {}
+      "settings": {
+        "percent_offer": "-20%",
+        "select_product": "",
+        "product_desc": "Conceived as an ode to nature, Sauvage is an act of creation inspired by wide-open spaces. Compositions marked by raw freshness, combining power and nobility.",
+        "offer_price": "$39",
+        "countdown_duration": 72
+      }
     },
     "blog": {
       "type": "blog",
       "settings": {
+        "heading_text": "Explore Our Blog",
+        "blog_type": ""
       }
     },
     "newsletter": {
       "type": "newsletter",
-      "settings": {
-      }
+      "settings": {}
     },
-    "newsletter-popup":{
-      "type":"newsletter-popup",
-      "settings":{
-      }
+    "newsletter-popup": {
+      "type": "newsletter-popup",
+      "settings": {}
+    },
+    "17435657639bcdb0f0": {
+      "type": "apps",
+      "blocks": {
+        "carousel_slider_carousel_slider_Ai9E7H": {
+          "type": "shopify://apps/carousel-slider/blocks/carousel_slider/fbbe315f-3658-4f01-a003-060ca46c0a49",
+          "settings": {
+            "selected_collection": "",
+            "text_color": "#000000",
+            "font_size": 28,
+            "font_weight": 400,
+            "text_color2": "#000000",
+            "font_size1": 28,
+            "font_weight1": 400,
+            "icon_color": "#000000",
+            "icon_thickness": 1.2,
+            "icon_size": 50
+          }
+        }
+      },
+      "block_order": [
+        "carousel_slider_carousel_slider_Ai9E7H"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -117,6 +163,7 @@
     "offer",
     "blog",
     "newsletter",
-    "newsletter-popup"
+    "newsletter-popup",
+    "17435657639bcdb0f0"
   ]
 }
