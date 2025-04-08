@@ -627,6 +627,17 @@
       </li>
     </ul>
     {% comment %} {% if product.compare_at_price > product.price %} {% endcomment %}
+    {% comment %} <ul class="badge-list">
+      <li>
+        <div class="badge orange">Sale</div>
+      </li>
+      <li>
+        <div class="badge cyan">
+          10%
+        </div>
+      </li>
+    </ul> {% endcomment %}
+
     <ul class="badge-list">
   {% if product.available %}
     {% if product.compare_at_price > product.price %}
