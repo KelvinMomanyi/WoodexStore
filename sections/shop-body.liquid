@@ -551,7 +551,7 @@
                   </li>
 
                 </ul>
-
+                
                 <ul class="badge-list">
 
                   <li>
@@ -626,7 +626,7 @@
         </button>
       </li>
     </ul>
-    {% if product.compare_at_price > product.price %}
+    {% comment %} {% if product.compare_at_price > product.price %} {% endcomment %}
     <ul class="badge-list">
       <li>
         <div class="badge orange">Sale</div>
@@ -637,7 +637,7 @@
         </div>
       </li>
     </ul>
-    {% endif %}
+    {% comment %} {% endif %} {% endcomment %}
   </a>
        <div class="card-content">
           <h3 class="h3">
