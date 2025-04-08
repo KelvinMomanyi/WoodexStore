@@ -628,15 +628,25 @@
     </ul>
     {% comment %} {% if product.compare_at_price > product.price %} {% endcomment %}
     <ul class="badge-list">
+  {% if product.available %}
+    {% if product.compare_at_price > product.price %}
       <li>
         <div class="badge orange">Sale</div>
       </li>
+    {% endif %}
+    {% assign discount = 100 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round %}
+    {% if discount > 0 %}
       <li>
-        <div class="badge cyan">
-          10%
-        </div>
+        <div class="badge cyan">{{ discount }}%</div>
       </li>
-    </ul>
+    {% endif %}
+  {% else %}
+    <li>
+      <div class="badge gray">Out of Stock</div>
+    </li>
+  {% endif %}
+</ul>
+
     {% comment %} {% endif %} {% endcomment %}
   </a>
        <div class="card-content">
