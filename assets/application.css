@@ -593,9 +593,23 @@ body.active { overflow: hidden; }
   margin-block-end: 10px;
 }
 
+
+.product-card .badge1 {
+  color: var(--white);
+  font-size: var(--fs-5);
+  font-weight: var(--fw-500);
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  margin-block-end: 10px;
+}
+
+
 .product-card .badge.orange { background-color: var(--red-orange-color-wheel); }
 
 .product-card .badge.cyan { background-color: var(--middle-blue-green); }
+
+.product-card .badge1.gray { background-color: var(--middle-blue-green); }
 
 .product-card .card-badge {
   position: absolute;
