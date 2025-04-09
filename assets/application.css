@@ -609,7 +609,7 @@ body.active { overflow: hidden; }
 
 .product-card .badge.cyan { background-color: var(--middle-blue-green); }
 
-.product-card .badge1.gray { background-color: var(--middle-blue-green); }
+.product-card .badge1.gray { background-color:gray; }
 
 .product-card .card-badge {
   position: absolute;
