@@ -599,7 +599,7 @@ body.active { overflow: hidden; }
   font-size: var(--fs-5);
   font-weight: var(--fw-500);
   width: 45px;
-  height: 45px;
+  height: 25px;
   line-height: 15px;
   margin-block-end: 10px;
 }
