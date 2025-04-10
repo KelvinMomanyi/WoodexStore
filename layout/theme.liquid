@@ -80,7 +80,7 @@
     {{ 'application.css' | asset_url | stylesheet_tag }}
    
   </main>
-  {% sections 'cookie-group' %}
+  {% comment %} {% sections 'cookie-group' %} {% endcomment %}
   {% sections 'backToTop-group' %}
   {% sections 'footer-group' %}
 
