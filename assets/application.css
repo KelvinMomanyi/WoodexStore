@@ -964,6 +964,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
 .footer-bottom{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -1273,6 +1274,12 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     padding-block-end: 60px;
   }
 
+
+
+  .footer-bottom{
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 
