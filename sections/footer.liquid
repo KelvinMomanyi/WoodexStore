@@ -59,7 +59,29 @@
         
                 </div>
         
-               
+                {% comment %} <ul class="footer-list">
+        
+                  <li>
+                    <p class="footer-list-title">Help & Information</p>
+                  </li>
+        
+                  <li>
+                    <a href="#" class="footer-link">Help & Contact Us</a>
+                  </li>
+        
+                  <li>
+                    <a href="#" class="footer-link">Returns & Refunds</a>
+                  </li>
+        
+                  <li>
+                    <a href="#" class="footer-link">Online Stores</a>
+                  </li>
+        
+                  <li>
+                    <a href="#" class="footer-link">Terms & Conditions</a>
+                  </li>
+        
+                </ul> {% endcomment %}
         
                 <ul class="footer-list">
         
@@ -116,7 +138,20 @@
                   <span id="year"></span> Powered by Shopify
                   
                 </p>
-                
+                <div class="footer__column footer__column--info">
+                  {%- if section.settings.payment_enable -%}
+                    <div class="footer__payment">
+                      <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+                      <ul class="list list-payment" role="list">
+                        {%- for type in shop.enabled_payment_types -%}
+                          <li class="list-payment__item">
+                            {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                </div>
         
               </div>
         
