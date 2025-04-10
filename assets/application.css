@@ -968,7 +968,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 }
 
 
-.footer-bottom .footer__column--info .footer__payment .list .list-payment{
+.footer__column--info .footer__payment .list {
   display: flex;
 }
 .copyright {
