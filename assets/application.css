@@ -961,6 +961,11 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   margin-block-start: 20px;
 }
 
+
+.footer-bottom{
+  display: flex;
+  justify-content: space-between;
+}
 .copyright {
   text-align: center;
   padding-block: 20px;
@@ -971,6 +976,8 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 }
 
 .copyright-link { display: inline-block; }
+
+
 
 
 
