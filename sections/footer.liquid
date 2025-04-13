@@ -84,26 +84,15 @@
                 </ul> {% endcomment %}
         
                 <ul class="footer-list">
-        
                   <li>
                     <p class="footer-list-title">About Us</p>
                   </li>
-        
-                  <li>
-                    <a href="#" class="footer-link">About Us</a>
-                  </li>
-        
-                  <li>
-                    <a href="#" class="footer-link">What We Do</a>
-                  </li>
-        
-                  <li>
-                    <a href="#" class="footer-link">FAQ Page</a>
-                  </li>
-        
-                  <li>
-                    <a href="#" class="footer-link">Contact Us</a>
-                  </li>
+                  {% assign nav_links = linklists.footer-menu.links %} <!-- Replace 'main-menu' with your menu handle -->
+                  {% for link in nav_links %}
+                    <li class="navbar-item">
+                      <a href="{{ link.url }}" class="footer-link" data-nav-link>{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
         
                 </ul>
         
