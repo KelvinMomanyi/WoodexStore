@@ -14,7 +14,7 @@
                     {% assign nike_collection = collections['Gucci'] %}
                     {% if nike_collection != blank %}
                         {% for product in nike_collection.products %}
-                            <li class="scrollbar-item">
+                            <li class="scrollbar-item"> {% endcomment %}
                                 {% comment %} <div class="shop-card">
                                     <div class="card-banner img-holder" >
                                         <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" width="540" height="720" loading="lazy">
