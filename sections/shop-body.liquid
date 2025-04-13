@@ -1,4 +1,4 @@
- {% if section.blocks.size == 0 %}
+ {% comment %} {% if section.blocks.size == 0 %}
         
         <section class="section shop" id="shop" aria-label="shop">
             <div class="container">
@@ -64,7 +64,7 @@
                                 </div> {% endcomment %}
 
                               
-                              <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" width="300" height="300"loading="lazy">
+                              {% comment %} <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" width="300" height="300"loading="lazy">
                               <ul class="card-action-list">
               
                                 <li>
@@ -114,11 +114,11 @@
               
                           </div>
                         </li>
-                    {% endfor %} {% endcomment %}
+                    {% endfor %} {% endcomment %} 
                   
                     
               
-                     {% assign collection_handle = 'all' %}
+                     {% comment %} {% assign collection_handle = 'all' %}
                     {% for product in collections[collection_handle].products %}
                        <li class="decoration">
                          <div class="product-card">
@@ -154,13 +154,13 @@
                           {% comment %} <button class="card-action-btn" aria-label="view cart" title="view cart">
                           <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
                       </button> {% endcomment %}
-                    </li>
+                    {% comment %} </li>
                     <li>
                       <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
                         <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
                       </button>
                     </li>
-                  </ul>
+                  </ul> {% endcomment %}
                   {% comment %} {% if product.compare_at_price > product.price %} {% endcomment %}
                   {% comment %} <ul class="badge-list">
                     <li>
@@ -173,7 +173,7 @@
                     </li>
                   </ul> {% endcomment %}
               
-                  <ul class="badge-list">
+                  {% comment %} <ul class="badge-list">
                 {% if product.available %}
                   {% if product.compare_at_price > product.price %}
                     <li>
@@ -191,10 +191,10 @@
                     <div class="badge1 gray">Out of Stock</div>
                   </li>
                 {% endif %}
-              </ul>
+              </ul> {% endcomment %}
               
                   {% comment %} {% endif %} {% endcomment %}
-                </a>
+                {% comment %} </a>
                      <div class="card-content">
                         <h3 class="h3">
                           <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
@@ -220,9 +220,9 @@
                     {% endif %}
                 </ul>
             </div>
-        </section>
+        </section>  {% endcomment %} 
 
-        <section class="section shop" id="shop" aria-label="shop">
+        {% comment %} <section class="section shop" id="shop" aria-label="shop">
             <div class="container">
                 <div class="title-wrapper">
                     <h2 class="h2 section-title">{{ collections['adidas'].title }}</h2>
@@ -434,10 +434,10 @@
                 {% endif %}
             </ul>
         </div>
-        </section>
+        </section> {% endcomment %}
 
 
-        <section class="section shop" id="shop" aria-label="shop">
+        {% comment %} <section class="section shop" id="shop" aria-label="shop">
             <div class="container">
                 <div class="title-wrapper">
                     <h2 class="h2 section-title">{{ collections['puma'].title }}</h2>
@@ -506,10 +506,10 @@
                     {% endif %}
                 </ul>
             </div>
-        </section>
+        </section> {% endcomment %}
 
 
-        <section class="section shop" id="shop" aria-label="shop">
+        {% comment %} <section class="section shop" id="shop" aria-label="shop">
             <div class="container">
                 <div class="title-wrapper">
                     <h2 class="h2 section-title">{{ collections['converse'].title }}</h2>
@@ -578,8 +578,8 @@
                     {% endif %}
                 </ul>
             </div>
-        </section>
-  {% else %}
+        </section> {% endcomment %}
+  {% comment %} {% else %}
         {% for block in section.blocks %}
             <section class="section shop" id="shop" aria-label="shop">
                 <div class="container">
@@ -652,7 +652,7 @@
                 </div>
                 </section>
         {%  endfor %}   
-   {% endif %} 
+   {% endif %}  {% endcomment %}
 
 
 
