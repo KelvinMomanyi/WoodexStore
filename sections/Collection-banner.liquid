@@ -28,7 +28,7 @@
             </figure>
 
             <button class="play-btn" aria-label="play video">
-              <p style="padding:0 10px; font-size:large">Scents that Speak, Luxury You Can Wear.</p>
+              <p class="scents">Scents that Speak, Luxury You Can Wear.</p>
             </button>
           </div>
 
@@ -65,12 +65,18 @@
     font-weight: var(--fs-600);
     margin-block-end: auto;
   }
+
+  .scents{
+    font-size: large;
+  }
       /*
   responsive for larger than 575px screen
   */
   @media screen and (min-width: 575px) {
     
-    
+    .scents{
+    font-size: medium;
+  }
     }
     
     
@@ -89,6 +95,10 @@
       */
       .collection-card{ min-height:450px;}
       
+      }
+
+      .scents{
+        font-size: large;
       }
     
     
@@ -110,6 +120,10 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
       }
+
+      .scents{
+        font-size: larger;
+      }
     
     }
     
@@ -121,6 +135,7 @@
      .scrollbar-item {min-width: calc(20% - 24px);}
     
      .flex-item {max-width: calc(33.33% - 20px);}
+     
     }
  </style>
 
