@@ -265,18 +265,19 @@
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     const isScrollingDown = currentScroll > lastScrollTop;
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 
-    // Target the element(s) you want to blur
     document.querySelectorAll('.autoBLur').forEach(el => {
       if (isScrollingDown) {
-        el.classList.add('blurred');
+        el.classList.add('blurred');   // Blur when scrolling down
       } else {
-        el.classList.remove('blurred');
+        el.classList.remove('blurred'); // Unblur when scrolling up
       }
     });
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative values
   });
 </script>
+
 
 
 {% schema %}
