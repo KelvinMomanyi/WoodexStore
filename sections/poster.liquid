@@ -245,14 +245,37 @@
         }
     }
     
-    @media screen and (max-width: 767px) {
-  .autoBLur {
-    animation: autoBLurAnimation 3s ease-in-out infinite;
-  }
-}
+    .autoBLur {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .autoBLur.animate {
+        animation: autoBLurAnimation 3s ease-in-out forwards;
+        opacity: 1;
+      }
+      
 
+
+   
+      
 </style>    
-
+<script>
+   // JavaScript
+ const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate");
+      }
+    });
+  }, {
+    threshold: 0.3 // Adjust how much of the element must be visible
+  });
+  
+  document.querySelectorAll(".autoBLur").forEach(el => {
+    observer.observe(el);
+  });
+  
+</script>
 {% schema %}
 {
   "name": "poster",
