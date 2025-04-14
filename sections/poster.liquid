@@ -138,7 +138,7 @@
         grid-column: 5 / 7;
     }
 
-   /* .autoRotate{
+    .autoRotate{
         animation: autoRotateAnimation;
         animation-timeline: view();
     }
@@ -179,7 +179,7 @@
             filter: blur(40px);
         }
     }
-    */
+    
     @media screen and (max-width: 1023px){
         header img{
             height: 2em;
@@ -233,7 +233,7 @@
             margin-bottom: 100px;
         }
 
- /*       .grid-3 .autoShow{
+        .grid-3 .autoShow{
             animation: autoShowAnimation both;
             animation-timeline: view(70% 5%);
         
@@ -242,24 +242,24 @@
         .autoBLur{
             animation: autoBLurAnimation linear both;
             animation-timeline: view();
-        } */
+        } 
     }
     
-    .autoBLur {
+   /* .autoBLur {
        transition: filter 0.4s ease;
         filter: blur(0px);
      }
 
     .autoBLur.blurred {
        filter: blur(40px);
-    }
+    }*/
 
 
 
    
       
 </style>    
-<script>
+{% comment %} <script>
   let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
   window.addEventListener('scroll', () => {
@@ -276,7 +276,7 @@
 
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative values
   });
-</script>
+</script> {% endcomment %}
 
 
 
