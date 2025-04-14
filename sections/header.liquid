@@ -232,7 +232,7 @@
           {% endcase %}
           
             {% if currency == cart.currency %}
-            <div class="select" id="curr-selector" style="color: {{section.settings.text_color }};">
+            <div class="select" id="currency-selector" style="color: {{section.settings.text_color }};">
               <span class="selected">
                 <div class="flag-icon" style="background-image: url('https://flagcdn.com/16x12/{{ country_code }}.png');" aria-label="{{ currency }} flag"></div>
               </span>
@@ -769,15 +769,15 @@
         
 
 
-       //CURRENCY SELECTOR
-       //Currency  Selector
-       function currencyFormSubmit(event) {
+    //CURRENCY SELECTOR
+       
+    function currencyFormSubmit(event) {
         event.target.form.submit();
-      }
+    }
     
-      document.querySelectorAll('.shopify-currency-form select').forEach(function(element) {
+    document.querySelectorAll('.shopify-currency-form select').forEach(function(element) {
         element.addEventListener('change', currencyFormSubmit);
-      }); 
+    }); 
 
   </script> 
      
