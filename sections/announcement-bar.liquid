@@ -43,20 +43,7 @@
                 {% for currency in shop.enabled_currencies %}
                   {% assign country_code = '' %}
                   {% assign country_name = '' %}
-                 {% comment %} {% case currency.iso_code %}
-                  {% when 'USD' %} {% assign country_code = 'us' %}
-                  {% when 'CAD' %} {% assign country_code = 'ca' %}
-                  {% when 'EUR' %} {% assign country_code = 'eu' %}
-                  {% when 'GBP' %} {% assign country_code = 'gb' %}
-                  {% when 'AUD' %} {% assign country_code = 'au' %}
-                  {% when 'JPY' %} {% assign country_code = 'jp' %}
-                  {% when 'INR' %} {% assign country_code = 'in' %}
-                  {% when 'KES' %} {% assign country_code = 'ke' %}
-                  <!-- Add more cases as needed -->
-                {% endcase %} {% endcomment %}
                 {% case currency.iso_code %}
-              
-
                     {% when 'USD' %} {% assign country_code = 'us' %} {% assign country_name = 'United States' %}
                     {% when 'CAD' %} {% assign country_code = 'ca' %} {% assign country_name = 'Canada' %}
                     {% when 'EUR' %} {% assign country_code = 'eu' %} {% assign country_name = 'Eurozone' %}
@@ -414,7 +401,6 @@
 .newmenu{
     list-style-type: none;
     padding: 0.1em 0.2em;
-    background: #323741;
     color:#9fa5b5;
     position:fixed; 
     top: 3em;
