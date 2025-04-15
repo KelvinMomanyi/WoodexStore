@@ -4,13 +4,14 @@
         <div class="flexBox">
           <div id="phone-container">
             <!-- Phone Icon -->
-                <ion-icon name="logo-facebook" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>
+
+                {% if section.settings.show_facebook_icon %}<ion-icon name="logo-facebook" id="phone-icon"  style="color: {{section.settings.text_color }}; "></ion-icon>{% endif %}
  
-                <ion-icon name="logo-instagram" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>
+                {% if section.settings.show_instagram_icon %}<ion-icon name="logo-instagram" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
 
-                <ion-icon name="logo-tiktok" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>
+                {% if section.settings.show_tiktok_icon %}<ion-icon name="logo-tiktok" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
 
-                <ion-icon name="logo-tumblr" id="phone-icon"   style="color: {{section.settings.text_color }};"></ion-icon>
+                {% if section.settings.show_tumblr_icon %}<ion-icon name="logo-X" id="phone-icon"   style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
 
             {% comment %} <ion-icon name="call-outline" id="phone-icon" style="color: {{section.settings.text_color }};"></ion-icon>
             <!-- Phone Number -->
@@ -659,7 +660,31 @@ dropdowns.forEach(dropdown => {
       "id": "text_color",
       "label": "Text",
       "default": "#F4F4F4"
-     }
+     },
+     {
+      "type": "checkbox",
+      "id": "show_facebook_icon",
+      "label": "Show Facebook Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_instagram_icon",
+      "label": "Show Instagram Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tiktok_icon",
+      "label": "Show Tiktok Icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_X_icon",
+      "label": "Show X Icon",
+      "default": true
+    },
   ],
   "blocks": [],
   "presets": [
