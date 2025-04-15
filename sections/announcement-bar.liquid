@@ -11,7 +11,7 @@
 
                 {% if section.settings.show_tiktok_icon %}<ion-icon name="logo-tiktok" id="phone-icon"  style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
 
-                {% if section.settings.show_tumblr_icon %}<ion-icon name="logo-X" id="phone-icon"   style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
+                {% if section.settings.show_tumblr_icon %}<ion-icon name="logo-tumblr" id="phone-icon"   style="color: {{section.settings.text_color }};"></ion-icon>{% endif %}
 
             {% comment %} <ion-icon name="call-outline" id="phone-icon" style="color: {{section.settings.text_color }};"></ion-icon>
             <!-- Phone Number -->
@@ -681,8 +681,8 @@ dropdowns.forEach(dropdown => {
     },
     {
       "type": "checkbox",
-      "id": "show_X_icon",
-      "label": "Show X Icon",
+      "id": "show_tumblr_icon",
+      "label": "Show Tumblr Icon",
       "default": true
     },
   ],
