@@ -248,7 +248,7 @@
 
         
       
-         <select name="currency" class="curr-selector" style="color: {{section.settings.text_color }};" id="currencySelect">
+         <select name="currency" class="currency-selector" style="color: {{section.settings.text_color }};" id="currencySelect">
           {% for currency in shop.enabled_currencies %}
             {% assign country_name = currency.iso_code %}
             {% assign country_code = currency.iso_code | slice: 0, 2 | downcase %}
