@@ -14,7 +14,7 @@
                     {% else %}
                      role="link" aria-disabled="true"
                      {% endif %}
-                    class="btn btn-primary">{{section.settings.btn_label2}}</a>
+                    class="btn btn-primary" style="cursor:pointer;">{{section.settings.btn_label2}}</a>
                     {% if section.settings.image2 != blank %}
                       <div class="has-bg-image" style="background-image: url('{{ section.settings.image2 | image_url}}');">
                       </div>   
@@ -33,7 +33,7 @@
                   {% else %}
                    role="link" aria-disabled="true"
                    {% endif %}
-                  class="btn btn-primary">{{section.settings.btn_label1}}</a>
+                  class="btn btn-primary" style="cursor:pointer;">{{section.settings.btn_label1}}</a>
                   {% if section.settings.image1 != blank %}
                    <div class="has-bg-image" style="background-image: url('{{ section.settings.image1 | image_url}}');">
                    </div>   
