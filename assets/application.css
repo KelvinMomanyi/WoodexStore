@@ -233,7 +233,7 @@ body.active { overflow: hidden; }
   color: var(--white);
 }
 
-.btn-primary:is(:hover, :focus){background-color: var( --manatee);}
+.btn-primary:is(:hover, :focus){background-color: var(--tan-crayola);}
 
 .btn-secondary{
   background-color: var(--white);
