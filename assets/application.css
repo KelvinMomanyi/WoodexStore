@@ -233,7 +233,7 @@ body.active { overflow: hidden; }
   color: var(--white);
 }
 
-.btn-primary:is(:hover, :focus){background-color: var(--hoockers-green);}
+.btn-primary:is(:hover, :focus){background-color: var( --manatee);}
 
 .btn-secondary{
   background-color: var(--white);
