@@ -719,7 +719,7 @@ body.active { overflow: hidden; }
     #OFFER
   \*-----------------------------------*/
   .offer{
-    padding: auto;
+    padding-top: 20px;
   }
   .offer-banner{
     display: grid;
