@@ -336,7 +336,7 @@ body.active { overflow: hidden; }
 
 .header-action {
   display: flex;
-  gap: 10px;
+  gap: 5px;
 }
 
 .header-action-btn {
