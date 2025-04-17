@@ -1058,7 +1058,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    */
 
 
-   .header-action-btn {
+   .header-action-btn img {
 
     font-size: 16px;
 
