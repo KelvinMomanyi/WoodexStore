@@ -718,9 +718,6 @@ body.active { overflow: hidden; }
 /*-----------------------------------*\
     #OFFER
   \*-----------------------------------*/
-  .offer{
-    padding-top: -40px;
-  }
   .offer-banner{
     display: grid;
     grid-template-columns:0.7fr 1fr;
@@ -968,6 +965,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
 .footer-bottom{
   display: flex;
+  width:100%;
   flex-direction: column;
   justify-content: space-between;
 }
