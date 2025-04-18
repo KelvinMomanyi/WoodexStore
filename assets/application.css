@@ -970,6 +970,11 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   border-top:1px solid black;
 }
 
+.footer__column--info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 .footer__column--info .footer__payment .list {
   display: flex;
