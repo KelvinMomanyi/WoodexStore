@@ -1133,12 +1133,12 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
 
 
-.footer-bottom{
+/*.footer-bottom{
   display: flex;
   flex-direction: column;
   width:100%;
 
-}
+}*/
 
 /**
  * responsive for large than 768px screen
