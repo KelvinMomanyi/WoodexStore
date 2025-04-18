@@ -962,11 +962,10 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   margin-block-start: 20px;
 }
 
-
 .footer-bottom{
   display: flex;
   width:100%;
-  justify-content: space-between;
+  flex-direction: column;
   border-top:1px solid black;
 }
 
