@@ -1137,8 +1137,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   display: flex;
   flex-direction: column;
   width:100%;
-  justify-content: space-between;
-  border-top:1px solid black;
+
 }
 
 /**
@@ -1297,6 +1296,12 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
   .footer-top {
     grid-template-columns: 1fr 0.75fr 0.6fr 1fr;
     padding-block-end: 60px;
+  }
+
+  .footer-bottom{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
   }
 
 
