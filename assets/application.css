@@ -1352,5 +1352,14 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    */
 
   .product-list { grid-template-columns: repeat(4, 1fr); }
+   
+
+  .footer-bottom{
+    display: flex;
+    width:100%;
+    justify-content: space-between;
+    border-top:1px solid black;
+  }
+
 
 }
