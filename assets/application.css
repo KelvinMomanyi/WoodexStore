@@ -1089,7 +1089,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .sidebar .input-field:focus { border-block-end-color: var(--tan-crayola); }
 
-  .header-action .input-wrapper ion-icon {
+  .header-action .input-wrapper img {
     position: absolute;
     top: 50%;
     right: 0;
