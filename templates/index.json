@@ -91,6 +91,10 @@
       "type": "offer",
       "settings": {}
     },
+    "gallery": {
+      "type" : "gallery",
+      "settings" : {}
+    },
     "blog": {
       "type": "blog",
       "settings": {
