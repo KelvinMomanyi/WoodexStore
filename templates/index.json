@@ -87,6 +87,10 @@
       "type":"poster",
       "settings":{}
     },
+    "services": {
+      "type" : "services",
+      "settings" : {}
+    },
     "gallery": {
       "type" : "gallery",
       "settings" : {}
@@ -118,6 +122,7 @@
     "banner",
     "brands",
     "poster",
+    "services",
     "gallery",
     "offer",
     "blog",
