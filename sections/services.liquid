@@ -141,6 +141,27 @@
 
 .service-card .btn-icon svg { width: 25px; }
 
+
+
+
+.btn-icon {
+  background-color: var(--bg-color, var(--white));
+  border-radius: var(--border-radius, var(--radius-circle));
+  display: grid;
+  place-content: center;
+  transition: var(--transition-2);
+}
+
+.btn-icon path { transition: var(--transition-2); }
+
+.btn-icon:is(:hover, :focus-visible) {
+  background-color: var(--hover-bg-color, var(--white));
+}
+
+.btn-icon:is(:hover, :focus-visible) path {
+  stroke: var(--hover-text-color, var(--black));
+}
+
 @media (min-width: 768px){
  /**
    * SERVICE
