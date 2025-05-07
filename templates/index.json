@@ -87,13 +87,13 @@
       "type":"poster",
       "settings":{}
     },
-    "offer": {
-      "type": "offer",
-      "settings": {}
-    },
     "gallery": {
       "type" : "gallery",
       "settings" : {}
+    },
+    "offer": {
+      "type": "offer",
+      "settings": {}
     },
     "blog": {
       "type": "blog",
@@ -118,8 +118,8 @@
     "banner",
     "brands",
     "poster",
-    "offer",
     "gallery",
+    "offer",
     "blog",
     "newsletter",
     "newsletter-popup"
