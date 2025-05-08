@@ -8,7 +8,7 @@
     </div>
   
     <!-- Our Story Section -->
-    <section class="our-story section-padding">
+    {% comment %} <section class="our-story section-padding">
       <div class="container">
         <div class="mini-container">
             <div class="our-story-text">
@@ -24,8 +24,56 @@
             </div>
         </div>    
       </div>
+    </section> {% endcomment %}
+    <section class="section about" id="about" aria-label="about me">
+      <div class="container">
+
+        <div class="about-content">
+
+          <h2 class="h2 section-title" data-reveal="right">
+            Hi. I’m <br>
+            Richard Ryan
+          </h2>
+
+          <div class="wrapper has-before" data-reveal="right">
+
+            <p class="section-text">
+              A passionate
+              <em class="em">photograher</em>
+              who are working in this field for
+              <em class="em">last 10 years.</em>
+              I’m ready to give you my best.
+            </p>
+
+            <img src="{{ 'Our-Story3.jpg' | asset_url }}" width="151" height="92" loading="lazy" alt="signature"
+              class="img">
+
+          </div>
+
+        </div>
+
+        <figure class="about-banner" data-reveal="left">
+
+          <div class="img-holder has-before" style="--width: 512; --height: 684;">
+            <img src="./assets/images/about-banner.jpg" width="512" height="684" loading="lazy" alt="Riachard Ryan"
+              class="img-cover">
+          </div>
+
+          <img src="./assets/images/about-shape-1.png" width="178" height="178" loading="lazy" alt=""
+            class="shape shape-1">
+
+          <img src="./assets/images/about-shape-2.svg" width="659" height="653" loading="lazy" alt=""
+            class="shape shape-2">
+
+        </figure>
+
+        <img src="./assets/images/about-shape-3.svg" width="239" height="232" loading="lazy" alt=""
+          class="shape shape-3">
+
+      </div>
     </section>
-  
+
+
     <!-- Why Choose Us Section -->
     <section class="why-choose-us section-padding">
       <div class="container">
@@ -238,6 +286,58 @@
         color: #fff;
         border: 2px solid #fff;
       }
+
+
+
+
+      .about .container {
+        display: grid;
+        gap: 45px;
+      }
+      
+      .about .wrapper,
+      .about-banner { padding-inline-start: 45px; }
+      
+      .about .section-title { margin-block-end: 35px; }
+      
+      .about .section-text {
+        font-size: var(--fs-6);
+        color: var(--white_a70);
+        font-weight: var(--fw-300);
+        line-height: 1.7;
+        margin-block-end: 35px;
+      }
+      
+      .about .wrapper::before {
+        top: 10px;
+        left: 0;
+        background-image: url("../images/about-quote.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+      }
+      
+      .about .section-text .em {
+        color: var(--white);
+        font-weight: var(--fw-400);
+        text-decoration: underline;
+      }
+      
+      .about-banner { position: relative; }
+      
+      .about .shape-1 {
+        display: block;
+        position: absolute;
+        bottom: 10%;
+        left: 0;
+        z-index: 1;
+        width: 100px;
+      }
+      
+      
+      
+      
       
       @media (max-width: 768px) {
         .features-grid {
