@@ -720,7 +720,7 @@ body.active { overflow: hidden; }
   \*-----------------------------------*/
   .offer-banner{
     display: grid;
-    grid-template-columns:0.7fr 1fr;
+    grid-template-columns:1fr 0.7fr ;
     align-items: center;
     gap: 30px;
     margin-block-end: 60px;
