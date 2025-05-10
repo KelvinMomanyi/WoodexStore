@@ -22,11 +22,11 @@
          </h1>
          <div class="pricing">
             <h4 class="price">{{ product.price | money }}</h4>
-        </div>
-        <p class="description">
+         </div>
+         <p class="description">
           {{ product.description }}
-        </p>
-        <div class="options">
+         </p>
+         <div class="options">
                {% comment %} <h4>Size</h4>
               <ul class="sizes">
                 <li class="size-active">37</li>
@@ -67,7 +67,40 @@
 
               </div>
          </div>
-       
+
+
+         <div class="accordion-container">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>EXTRA INFORMATION</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="accordion-content">
+              <p>Here is some extra product information.</p>
+            </div>
+          </div>
+        
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>SHIPPING & RETURNS</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="accordion-content">
+              <p>Shipping is free. Returns accepted within 30 days.</p>
+            </div>
+          </div>
+        
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span>MATERIALS</span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="accordion-content">
+              <p>Made with 100% organic cotton and recycled rubber.</p>
+            </div>
+          </div>
+        </div>
+        
 
         </div>
 
@@ -276,6 +309,40 @@
 .cart button:hover{
     background: #000;
 }
+
+
+.accordion-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px 0;
+  color: #555;
+}
+
 
 /*Increase title size on larger screens*/
 
@@ -498,7 +565,22 @@ let shoe =1
 
 
 
-
+  document.querySelectorAll('.accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const content = header.nextElementSibling;
+      const btn = header.querySelector('.toggle-btn');
+      const isOpen = content.style.display === 'block';
+  
+      document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+      document.querySelectorAll('.toggle-btn').forEach(b => b.textContent = '+');
+  
+      if (!isOpen) {
+        content.style.display = 'block';
+        btn.textContent = '−';
+      }
+    });
+  });
+  
 
 
 
