@@ -1285,6 +1285,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     grid-template-columns: 1fr 0.7fr;
     align-items: center;
     gap: 30px;
+    height: auto;
   }
   
   .offer-banner {margin-block-end: 0;}
