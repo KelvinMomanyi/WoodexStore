@@ -16,15 +16,13 @@
                </div>
             </div> {% endcomment %}
             <div class="title-wrapper">
-                <div>
                   <h2 class="h2 section-title">
                     {% if section.settings.selected_collection != blank %}
                         {{ collections[section.settings.selected_collection].title }}
                     {% else %}
                         {{ collection.title }}
                     {% endif %}
-                  </h2> 
-                </div>
+                  </h2>
                 <div style='display:flex; z-index:5;'> 
                     <a href="#" class="btn-link">
                         {% render 'sorting-filter' %}

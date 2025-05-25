@@ -1165,7 +1165,11 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .header-action .input-wrapper { width: 200px; }
 
+  .header-action-btn img {
 
+    font-size: 28px;
+
+  }
 
   /**
    * HERO
