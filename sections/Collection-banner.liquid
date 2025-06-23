@@ -5,14 +5,10 @@
       <section class="section about" id="about" aria-label="about" data-aos="fade-up">
         <div class="container"> 
 
-          <h2 class="section-title">Unveil Your Essence</h2>
+          <h2 class="section-title">{{ section.settings.title}}</h2>
 
           <p class="section-text">
-            When you start with a portrait and search for a pure form, a clear volume, through successive eliminations,
-            you arrive
-            inevitably at the egg. Likewise, starting with the egg and following the same process in reverse, one
-            finishes with the
-            portrait.
+            {{ section.settings.info}}
           </p>
         </div>
           <div class="about-card">
@@ -175,15 +171,15 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       "type": "text",
-      "id": "title1",
-      "label": "Title 1",
-      "default": "Nike Collection"
+      "id": "title",
+      "label": "Title",
+      "default": "Unveil Your Essence"
     },
     {
       "type": "text",
-      "id": "subtitle1",
-      "label": "Subtitle 1",
-      "default": "Starting at $19.99"
+      "id": "info",
+      "label": "Info",
+      "default": "When you start with a portrait and search for a pure form, a clear volume, through successive eliminations, you arrive inevitably at the egg. Likewise, starting with the egg and following the same process in reverse, one finishes with the portrait."
     },
     {
       "type": "url",
