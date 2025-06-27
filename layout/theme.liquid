@@ -1,12 +1,18 @@
 <!doctype html>
 <head>
-  <title>{{ page_title }}</title>
+  <title>
+    {{ page_title -}}
+    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+    {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+  </title>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="{{ page_description | escape }}">
-  <link rel="canonical" href="{{ canonical_url }}">
-{% comment %} 
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"> {% endcomment %}
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
       <!-- Open Graph Tags for Facebook and other platforms -->
@@ -21,7 +27,7 @@
   <meta name="twitter:title" content="{{ shop.name }}">
   <meta name="twitter:description" content="{{ shop.meta_description }}">
   <meta name="twitter:image" content="{{ shop.logo | image_url }}">
-  <title>Shoehive</title>
+  
 
   <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./assets/css/style.css">
@@ -67,8 +73,6 @@
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
-
-
    <!-- Slick Slider CSS -->
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
@@ -82,8 +86,6 @@
   <main role="main">
   
     {{ content_for_layout }}
-    {% comment %} Include CSS once, if needed {% endcomment %}
-    {{ 'application.css' | asset_url | stylesheet_tag }}
    
   </main>
   {% comment %} {% sections 'cookie-group' %} {% endcomment %}
@@ -93,13 +95,6 @@
   <script src="{{ 'application.js' | asset_url }}" defer></script> 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-  
 
-   <!-- feather-icons -->
-
-   <script src="../assets/feather.min.js"></script>
-   <script>
-  feather.replace();
-</script>
 </body>
 </html>
