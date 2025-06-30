@@ -189,60 +189,97 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function initSlowMotionEffect() {
+    const boxElement = document.querySelector('.box');
     const spans = document.querySelectorAll('.box span');
     
-    if (spans.length === 0) return;
+    if (!boxElement || spans.length === 0) return;
     
-    function updateAnimation() {
-        const scrollY = window.pageYOffset;
-        const windowHeight = window.innerHeight;
-        const scrollProgress = scrollY / (document.body.scrollHeight - windowHeight);
-        
-        spans.forEach((span, index) => {
-            // Stagger the animation for each span
-            const delay = index * 0.1;
-            const progress = Math.max(0, Math.min(1, (scrollProgress - delay) * 2));
+    // Set initial state - elements are invisible/transformed when not in view
+    spans.forEach((span, index) => {
+        span.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        span.style.transform = `translateY(-100px) scale(0.5) rotate(${index % 2 === 0 ? -15 : 15}deg)`;
+        span.style.opacity = '0';
+        span.style.filter = 'blur(8px)';
+    });
+    
+    // Create intersection observer for the box
+    const boxObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const isIntersecting = entry.isIntersecting;
+            const intersectionRatio = entry.intersectionRatio;
             
-            if (progress > 0) {
-                // Calculate animation values
-                const translateX = progress * (index % 2 === 0 ? -300 : 300);
-                const scale = 1 + (progress * 2.5);
-                const blur = progress * 12;
-                const opacity = 1 - progress;
+            spans.forEach((span, index) => {
+                const delay = index * 100; // Stagger animation
                 
-                // Apply transforms
-                span.style.transform = `translateX(${translateX}px) scale(${scale})`;
-                span.style.filter = `blur(${blur}px)`;
-                span.style.opacity = opacity;
-            } else {
-                // Reset to initial state
-                span.style.transform = 'translateX(0px) scale(1)';
-                span.style.filter = 'blur(0px)';
-                span.style.opacity = '1';
-            }
-        });
-    }
-    
-    // Use requestAnimationFrame for smooth animation
-    let ticking = false;
-    
-    function onScroll() {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                updateAnimation();
-                ticking = false;
+                setTimeout(() => {
+                    if (isIntersecting) {
+                        // Coming into view - animate to normal state
+                        span.style.transform = 'translateY(0px) scale(1) rotate(0deg)';
+                        span.style.opacity = '1';
+                        span.style.filter = 'blur(0px)';
+                    } else {
+                        // Going out of view - animate to opposite exit state
+                        const exitTranslateY = entry.boundingClientRect.top < 0 ? '100px' : '-100px';
+                        const exitRotation = index % 2 === 0 ? '15deg' : '-15deg';
+                        
+                        span.style.transform = `translateY(${exitTranslateY}) scale(0.3) rotate(${exitRotation})`;
+                        span.style.opacity = '0';
+                        span.style.filter = 'blur(12px)';
+                    }
+                }, delay);
             });
-            ticking = true;
+        });
+    }, {
+        threshold: [0, 0.1, 0.5, 0.9, 1],
+        rootMargin: '50px 0px -50px 0px' // Trigger animation earlier
+    });
+    
+    boxObserver.observe(boxElement);
+    
+    // Enhanced scroll-based fine-tuning for smooth effects
+    function updateScrollEffect() {
+        const rect = boxElement.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculate visibility percentage
+        const elementTop = rect.top;
+        const elementBottom = rect.bottom;
+        
+        let visibilityRatio = 0;
+        
+        if (elementTop <= windowHeight && elementBottom >= 0) {
+            // Element is in viewport
+            const visibleHeight = Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
+            const elementHeight = rect.height;
+            visibilityRatio = Math.max(0, Math.min(1, visibleHeight / elementHeight));
+        }
+        
+        // Apply subtle effects when fully in view (minimal animation)
+        if (visibilityRatio > 0.8) {
+            spans.forEach((span, index) => {
+                const subtleFloat = Math.sin(Date.now() * 0.001 + index) * 2;
+                span.style.transform = `translateY(${subtleFloat}px) scale(1) rotate(0deg)`;
+            });
         }
     }
     
-    window.addEventListener('scroll', onScroll);
-    updateAnimation(); // Initial call
+    // Smooth scroll listener with throttling
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) return;
+        
+        scrollTimeout = setTimeout(() => {
+            updateScrollEffect();
+            scrollTimeout = null;
+        }, 16); // ~60fps
+    });
+    
+    // Initial call
+    updateScrollEffect();
 }
 
 // Initialize the effect
 initSlowMotionEffect();
-
  </script>
 
  {% schema %}
