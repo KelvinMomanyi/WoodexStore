@@ -1,0 +1,106 @@
+<section class="order-page">
+  <div class="order-header">
+    <h1>Order #{{ order.name }}</h1>
+    <p class="order-date">Placed on {{ order.created_at | date: "%B %d, %Y" }}</p>
+    <p class="order-total">Total: {{ order.total_price | money }}</p>
+  </div>
+
+  <hr />
+
+  <div class="order-items">
+    <h2>Items</h2>
+    <ul>
+      {% for line_item in order.line_items %}
+        <li class="order-item">
+          <div class="item-title">{{ line_item.quantity }} × {{ line_item.title }}</div>
+          <div class="item-price">{{ line_item.line_price | money }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <hr />
+
+  <div class="order-addresses">
+    <div class="order-shipping">
+      <h3>Shipping Address</h3>
+      <p>{{ order.shipping_address.name }}</p>
+      <p>{{ order.shipping_address.address1 }}</p>
+      <p>{{ order.shipping_address.city }}, {{ order.shipping_address.province_code }} {{ order.shipping_address.zip }}</p>
+      <p>{{ order.shipping_address.country }}</p>
+    </div>
+
+    <div class="order-billing">
+      <h3>Billing Address</h3>
+      <p>{{ order.billing_address.name }}</p>
+      <p>{{ order.billing_address.address1 }}</p>
+      <p>{{ order.billing_address.city }}, {{ order.billing_address.province_code }} {{ order.billing_address.zip }}</p>
+      <p>{{ order.billing_address.country }}</p>
+    </div>
+  </div>
+</section>
+<script>
+.order-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: inherit;
+}
+
+.order-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.order-date,
+.order-total {
+  color: #555;
+  margin: 0.25rem 0;
+}
+
+.order-items h2 {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.order-addresses {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.order-addresses > div {
+  flex: 1;
+  min-width: 280px;
+}
+
+.order-addresses h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.order-addresses p {
+  margin: 0.25rem 0;
+}
+
+</script>
+{% schema %}
+{
+  "sections": {
+    "main": {
+      "type": "main-order"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
+{% endschema %}
