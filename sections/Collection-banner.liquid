@@ -188,40 +188,61 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// Enhanced ScrollMoo configuration for smooth slow-motion effect
 let obj = {};
-let start = -300;
-let end = 300;
-let steps = 7;
-let stepSize = (end - start) / (steps - 1);
+let spans = 7; // Number of spans (including spaces)
+let baseDelay = 10; // Base delay between animations
+let animationDuration = 80; // Duration of each animation
 
-for (let i = 1; i <= steps; i++) {
+for (let i = 1; i <= spans; i++) {
+    let startTrigger = (i - 1) * baseDelay;
+    let endTrigger = startTrigger + animationDuration;
+    
     obj[".box span:nth-child(" + i + ")"] = {
-        triggerStart: (i - 1) * 5,
-        triggerEnd: (i - 20) * 5,
-        sync: 0.5,
+        triggerStart: startTrigger + "%",
+        triggerEnd: endTrigger + "%",
+        sync: 0.3, // Slower sync for smoother animation
         triggerStartElement: "body",
         triggerEndElement: "body",
         keyframes: {
             transform: {
                 translateX: {
-                    100: start + stepSize * i + "%"
+                    0: "0%",
+                    50: (i % 2 === 0 ? "20%" : "-20%"), // Alternate direction for variety
+                    100: (i % 2 === 0 ? "-150%" : "150%")
                 },
                 scale: {
-                    100: 3
+                    0: 1,
+                    30: 1.2, // Slight scale up
+                    70: 2.5, // Peak scale
+                    100: 3.5 // Final scale
+                },
+                rotateZ: {
+                    0: "0deg",
+                    50: (i % 2 === 0 ? "5deg" : "-5deg"), // Subtle rotation
+                    100: (i % 2 === 0 ? "-10deg" : "10deg")
                 }
             },
             filter: {
                 blur: {
-                    100: "10px"
+                    0: "0px",
+                    40: "2px", // Gradual blur start
+                    80: "8px", // Heavy blur
+                    100: "15px" // Maximum blur
                 }
             },
             opacity: {
-                100: 0
+                0: 1,
+                20: 0.9, // Stay visible longer
+                60: 0.6, // Gradual fade
+                90: 0.2, // Almost invisible
+                100: 0 // Completely invisible
             }
         }
     };
 }
 
+// Initialize ScrollMoo with the configuration
 ScrollMoo(obj);
 
  </script>
