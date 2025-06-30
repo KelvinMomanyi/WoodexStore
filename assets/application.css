@@ -456,7 +456,6 @@ body.active { overflow: hidden; }
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: var(--black_70);
   z-index: 4;
   opacity: 0;
   pointer-events: none;
