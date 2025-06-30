@@ -189,10 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 let obj = {};
-let start = 100;
-let end = -100;
+let start = -100;
+let end = 100;
 let steps = 10;
-let stepSize = (end + start) / (steps - 1);
+let stepSize = (end - start) / (steps - 1);
 
 for (let i = 1; i <= 9; i++) {
     obj[".box span:nth-child(" + i + ")"] = {
