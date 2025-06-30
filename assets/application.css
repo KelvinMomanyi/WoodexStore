@@ -1069,7 +1069,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
    .header-action-btn ion-icon {
 
-    font-size: 24px;
+    font-size: 20px;
 
   }
   /*.header .container { gap: 35px; }*/
@@ -1169,7 +1169,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
 
   .header-action-btn ion-icon {
 
-    font-size: 24px;
+    font-size: 20px;
 
   }
 
