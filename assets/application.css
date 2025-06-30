@@ -1067,7 +1067,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    */
 
 
-   .header-action-btn img {
+   .header-action-btn ion-icom {
 
     font-size: 24px;
 
@@ -1096,7 +1096,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     top: 50%;
     right: 0;
     transform: translateY(-50%);
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .header-action { gap: 25px; }
