@@ -336,7 +336,7 @@ body.active { overflow: hidden; }
 
 .header-action {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
 .header-action-btn {
@@ -1099,7 +1099,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
     font-size: 20px;
   }
 
-  .header-action { gap: 25px; }
+  .header-action { gap: 15px; }
 
   /**
    * OFFER
@@ -1163,7 +1163,7 @@ a.card-meta-text:is(:hover, :focus) { color: var(--tan-crayola); }
    * HEADER
    */
 
-  .header-action { gap: 30px; }
+  .header-action { gap: 20px; }
 
   .header-action .input-wrapper { width: 200px; }
 
