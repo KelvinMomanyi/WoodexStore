@@ -194,88 +194,117 @@ function initSlowMotionEffect() {
     
     if (!boxElement || spans.length === 0) return;
     
-    // Set initial state - elements are invisible/transformed when not in view
+    // Original effect parameters
+    let start = -300;
+    let end = 300;
+    let steps = spans.length;
+    let stepSize = (end - start) / (steps - 1);
+    
+    // Set initial state (normal/visible when in view)
     spans.forEach((span, index) => {
-        span.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        span.style.transform = `translateY(-100px) scale(0.5) rotate(${index % 2 === 0 ? -15 : 15}deg)`;
-        span.style.opacity = '0';
-        span.style.filter = 'blur(8px)';
+        span.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        span.style.transform = 'translateX(0%) scale(1)';
+        span.style.filter = 'blur(0px)';
+        span.style.opacity = '1';
     });
     
     // Create intersection observer for the box
     const boxObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const isIntersecting = entry.isIntersecting;
-            const intersectionRatio = entry.intersectionRatio;
+            const rect = entry.boundingClientRect;
+            const isComingFromTop = rect.top > 0; // Coming from below viewport
+            const isLeavingToTop = rect.bottom < window.innerHeight && !isIntersecting; // Going above viewport
             
             spans.forEach((span, index) => {
-                const delay = index * 100; // Stagger animation
+                const delay = index * 50; // Stagger effect
                 
                 setTimeout(() => {
                     if (isIntersecting) {
-                        // Coming into view - animate to normal state
-                        span.style.transform = 'translateY(0px) scale(1) rotate(0deg)';
-                        span.style.opacity = '1';
+                        // Coming into view - animate TO normal state FROM the effect
+                        span.style.transform = 'translateX(0%) scale(1)';
                         span.style.filter = 'blur(0px)';
+                        span.style.opacity = '1';
                     } else {
-                        // Going out of view - animate to opposite exit state
-                        const exitTranslateY = entry.boundingClientRect.top < 0 ? '100px' : '-100px';
-                        const exitRotation = index % 2 === 0 ? '15deg' : '-15deg';
+                        // Going out of view - apply the original effect
+                        const translateX = start + stepSize * index;
                         
-                        span.style.transform = `translateY(${exitTranslateY}) scale(0.3) rotate(${exitRotation})`;
+                        // Opposite directions based on scroll direction
+                        let finalTranslateX;
+                        if (isComingFromTop) {
+                            // Going out bottom - use original direction
+                            finalTranslateX = translateX;
+                        } else {
+                            // Going out top - use opposite direction
+                            finalTranslateX = -translateX;
+                        }
+                        
+                        span.style.transform = `translateX(${finalTranslateX}%) scale(3)`;
+                        span.style.filter = 'blur(10px)';
                         span.style.opacity = '0';
-                        span.style.filter = 'blur(12px)';
                     }
                 }, delay);
             });
         });
     }, {
-        threshold: [0, 0.1, 0.5, 0.9, 1],
-        rootMargin: '50px 0px -50px 0px' // Trigger animation earlier
+        threshold: [0, 0.1, 0.3, 0.7, 1],
+        rootMargin: '100px 0px 100px 0px' // Larger margin for smoother transitions
     });
     
     boxObserver.observe(boxElement);
     
-    // Enhanced scroll-based fine-tuning for smooth effects
-    function updateScrollEffect() {
+    // Fine-tuned scroll-based animation for when in view
+    function updateInViewEffect() {
         const rect = boxElement.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         
-        // Calculate visibility percentage
-        const elementTop = rect.top;
-        const elementBottom = rect.bottom;
-        
-        let visibilityRatio = 0;
-        
-        if (elementTop <= windowHeight && elementBottom >= 0) {
-            // Element is in viewport
-            const visibleHeight = Math.min(elementBottom, windowHeight) - Math.max(elementTop, 0);
-            const elementHeight = rect.height;
-            visibilityRatio = Math.max(0, Math.min(1, visibleHeight / elementHeight));
-        }
-        
-        // Apply subtle effects when fully in view (minimal animation)
-        if (visibilityRatio > 0.8) {
+        // Check if element is in viewport
+        if (rect.top <= windowHeight && rect.bottom >= 0) {
+            // Calculate how centered the element is
+            const elementCenter = rect.top + rect.height / 2;
+            const viewportCenter = windowHeight / 2;
+            const distanceFromCenter = Math.abs(elementCenter - viewportCenter);
+            const maxDistance = windowHeight / 2;
+            const centerRatio = 1 - Math.min(distanceFromCenter / maxDistance, 1);
+            
+            // When perfectly centered, effects are minimal
+            // When entering/leaving, effects are stronger
+            const effectStrength = 1 - centerRatio;
+            
             spans.forEach((span, index) => {
-                const subtleFloat = Math.sin(Date.now() * 0.001 + index) * 2;
-                span.style.transform = `translateY(${subtleFloat}px) scale(1) rotate(0deg)`;
+                if (centerRatio > 0.7) {
+                    // Very close to center - minimal effect
+                    span.style.transform = 'translateX(0%) scale(1)';
+                    span.style.filter = 'blur(0px)';
+                    span.style.opacity = '1';
+                } else if (centerRatio > 0.3) {
+                    // Transitioning - slight effect
+                    const translateX = (start + stepSize * index) * effectStrength * 0.3;
+                    const scale = 1 + (effectStrength * 0.5);
+                    const blur = effectStrength * 3;
+                    const opacity = 1 - (effectStrength * 0.3);
+                    
+                    span.style.transform = `translateX(${translateX}%) scale(${scale})`;
+                    span.style.filter = `blur(${blur}px)`;
+                    span.style.opacity = opacity;
+                }
             });
         }
     }
     
-    // Smooth scroll listener with throttling
+    // Throttled scroll listener
     let scrollTimeout;
     window.addEventListener('scroll', () => {
         if (scrollTimeout) return;
         
         scrollTimeout = setTimeout(() => {
-            updateScrollEffect();
+            updateInViewEffect();
             scrollTimeout = null;
         }, 16); // ~60fps
     });
     
     // Initial call
-    updateScrollEffect();
+    updateInViewEffect();
 }
 
 // Initialize the effect
