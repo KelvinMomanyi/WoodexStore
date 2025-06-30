@@ -191,10 +191,10 @@ document.addEventListener("DOMContentLoaded", function () {
 let obj = {};
 let start = -300;
 let end = 300;
-let steps = 10;
+let steps = 7;
 let stepSize = (end - start) / (steps - 1);
 
-for (let i = 1; i <= 9; i++) {
+for (let i = 1; i <= steps; i++) {
     obj[".box span:nth-child(" + i + ")"] = {
         triggerStart: (i - 1) * 5,
         triggerEnd: (i - 20) * 5,
