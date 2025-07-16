@@ -91,7 +91,7 @@
                 <button type="button" class="qty-btn1 plus1">+</button>
               </div>
                
-              <div class="colors">
+              <div class="addBuyButtons">
                
                   <form action="/cart/add" method="post" style='margin-top:1em;' enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
@@ -318,6 +318,12 @@ margin-top: 20%;
 .options ul li:nth-child(1){
     margin-left: 0;
 }
+
+.addBuyButtons{
+  display: flex;
+}
+
+
 .colors{
  margin-top:1rem;
 }
