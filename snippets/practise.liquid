@@ -1,0 +1,287 @@
+query fetchProducts {
+  collection(handle: "your-collection-handle") {
+    title
+    products(first: 5) {
+      edges {
+        node {
+          title
+          handle
+          availableForSale
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+const crypto = require('crypto')
+
+function verifyWebhook(rawBody, shopifyHMAC, secret){
+    const generatedHMAC = crypto
+    .createHMAC('sha256', secret)
+    .update(rawBody, 'utf8')
+    .digest('base64');
+
+    return crypto.timingSafeEqual(
+        Buffer.from(generatedHmac, 'utf8'),
+        Buffer.from(shopifyHmac, 'utf8')
+    )
+}
+
+
+
+
+{% for product in collection["featured-products"].products %}
+  <h3>{{product.title}}</h3>
+  <p>{{product.price | money_without_currency}}</p>
+  <img src="{{product.featured_image.url}}" alt="{{product.featured_image.alt}}">
+  <a href="{{product.url}}"></a>
+{%endfor%}  
+
+
+
+function addToCart(variantId, quantity=1){
+  fetch('/cart/add.js',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    }
+    body:JSON.stringify({
+      id:variantId,
+      quantity:quantity
+    })
+  })
+
+  .then(response => response.json())
+  .then(data=> {
+    return fetch('/cart.js')
+    })
+  .then(response => response.json())
+  .then(cart=> {
+    document.getElementById('cart-count').textContent = cart.item_count
+  })  
+  .catch(error => {
+    console.log(error)
+  })
+}
+
+
+{% for product in collection.products %}
+  <img 
+    loading="lazy" 
+    src="{{product.featured_image.url | image_url: width: 400 }}" 
+    srcset="{{product.geatured_image.url | image_url: width: 400}} 400w,
+            {{product.featured_image.url | image_url: width: 800}} 800w,
+            {{product.featured_image.url | image_url: width : 1200}} 1200w,
+          "
+    sizes="(max-width:768px) 400px, (max-width:1024px) 800px, 1200px"      
+    alt="{{product.featured_image.alt}}"/>
+{%endfor%}
+
+
+
+
+query fetchProducts{
+  products(first:50){
+    edges{
+      node{
+        title
+        description
+        handle
+        tags
+        metafield(namespace:'custom', key:'ingredients'){
+          value
+        }
+        variants(first:50){
+          edges{
+            node{
+              availableForSale
+              price{
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+function fetchAllProducts(fetchedProducts){
+  fetch('https://your-shopify.com/admin/api/2025-04/graphql.json',{
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json',
+        'X-Shopify-Access-Token':'your access token'
+      },
+      body:JSON.stringify({
+        query:fetchedProducts
+      })
+      .then(response => response.json())
+      .then(data=> console.log(data, 'data'))
+      .catch(error=>{
+        console.log(error, 'error')
+      })
+  })
+}
+
+
+
+//Node js Webhook Verification
+
+const crypto = require('crypto')
+
+
+app.post('webhooks/orders_create', express.raw({ type:'application/json'}), (req, res)=>{
+    const hmacHeader = req.get('X-Shopify-Hmac-Sha256')
+    const secret = process.env.SHOPIFY_API_SECRET
+
+    const generatedHmac = crypto
+      .createdHmac('sha256', secret)
+      .update(req.body, 'utf8')
+      .digest('base64')
+
+    const verified = crypto.timingSafeEqual(
+      Buffer.from(generatedHmac, 'utf8')
+      Buffer.from(hmacHeader, 'utf8')
+    )
+
+    if(verified){
+      console.log('webhook verified')
+      const data = JSON.parse(req.body.toString('utf8'))
+      console.log(data);
+      res.status(200).send('OK')
+    }else{
+      console.warn("Webhook verification failed")
+      res.status(403).send("Forbidden")
+    }
+
+})
+
+
+
+This is one of the hardest ones: Create a Liquid snippet that displays a dynamic pricing table for B2B customers. The logic should:
+
+Show regular price for non-logged-in users
+Show tiered pricing for logged-in B2B customers based on customer tags
+Display quantity breaks (1-9: full price, 10-49: 10% off, 50+: 20% off)
+Handle products with multiple variants
+Only show pricing if product is in stock
+
+
+
+
+{% for product in collection.products %}
+  {% if product.available %}
+    <div class="product-pricing">
+      <h3>{{ product.title }}</h3>
+      
+      {% if customer %}
+        {% assign is_b2b = false %}
+        {% for tag in customer.tags %}
+          {% if tag contains 'b2b' or tag contains 'wholesale' %}
+            {% assign is_b2b = true %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if is_b2b %}
+          <!-- B2B Tiered Pricing -->
+          {% for variant in product.variants %}
+            {% if variant.available %}
+              <div class="variant-pricing">
+                <p><strong>{{ variant.title }}</strong></p>
+                {% assign base_price = variant.price %}
+                
+                <table class="pricing-tiers">
+                  <tr>
+                    <td>1-9 units:</td>
+                    <td>{{ base_price | money }}</td>
+                  </tr>
+                  <tr>
+                    <td>10-49 units:</td>
+                    <td>{{ base_price | times: 0.9 | money }} <span class="discount">(10% off)</span></td>
+                  </tr>
+                  <tr>
+                    <td>50+ units:</td>
+                    <td>{{ base_price | times: 0.8 | money }} <span class="discount">(20% off)</span></td>
+                  </tr>
+                </table>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <!-- Regular logged-in customer -->
+          <p>Price: {{ product.price | money }}</p>
+        {% endif %}
+      {% else %}
+        <!-- Non-logged-in users -->
+        <p>Price: {{ product.price | money }}</p>
+        <p><em>Login for wholesale pricing</em></p>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endfor %}
+
+
+
+
+
+{% comment %} Safe collection check {% endcomment %}
+{% assign target_collection = collections['summer-sale'] %}
+{% if target_collection and target_collection != empty %}
+
+  {% for product in target_collection.products %}
+    {% comment %} Safe image handling {% endcomment %}
+    {% if product.featured_image %}
+      <img src="{{ product.featured_image | image_url: width: 300 }}" 
+           alt="{{ product.featured_image.alt | default: product.title }}" />
+    {% else %}
+      <div class="no-image">No image available</div>
+    {% endif %}
+
+    <h3>{{ product.title }}</h3>
+
+    {% comment %} Advanced price logic {% endcomment %}
+    {% assign regular_price = product.compare_at_price %}
+    {% assign sale_price = product.price %}
+    
+    {% if regular_price and regular_price > sale_price %}
+      <p class="sale-price">
+        <span class="was">Was: {{ regular_price | money }}</span>
+        <span class="now">Now: {{ sale_price | money }}</span>
+      </p>
+    {% else %}
+      <p class="regular-price">{{ sale_price | money }}</p>
+    {% endif %}
+
+    {% comment %} Complex stock status logic {% endcomment %}
+    {% case product.available %}
+      {% when true %}
+        <p class="in-stock">In Stock</p>
+      {% when false %}
+        {% if product.tags contains 'discontinued' %}
+          <p class="discontinued">Sold Out</p>
+        {% else %}
+          <p class="coming-soon">Coming Soon</p>
+        {% endif %}
+    {% endcase %}
+  {% endfor %}
+
+{% else %}
+  {% comment %} Graceful fallback {% endcomment %}
+  <p>Collection not found or empty</p>
+{% endif %}
