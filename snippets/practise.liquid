@@ -285,3 +285,290 @@ Only show pricing if product is in stock
   {% comment %} Graceful fallback {% endcomment %}
   <p>Collection not found or empty</p>
 {% endif %}
+
+
+
+
+
+
+
+Now let's work on your JavaScript. Create a function that handles bulk cart operations with proper error handling:
+Write JavaScript that:
+
+Adds multiple products to cart in one operation
+Updates cart drawer/counter after successful adds
+Handles partial failures (some products added, some failed)
+Implements retry logic for failed requests
+Shows user-friendly error messages
+Uses modern async/await syntax
+
+
+
+
+<script>
+
+async function bulkAddToCart(items) {
+  const results = [];
+  const failures = [];
+  
+  try {
+    // Process each item individually (Shopify doesn't support true bulk add)
+    for (const item of items) {
+      try {
+        const response = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: item.id,
+            quantity: item.quantity
+          })
+        });
+        
+        if (!response.ok) throw new Error(`Failed to add item ${item.id}`);
+        
+        const data = await response.json();
+        results.push(data);
+        
+      } catch (error) {
+        // Retry logic
+        const retried = await retryAddToCart(item, 2);
+        if (retried) {
+          results.push(retried);
+        } else {
+          failures.push({item, error: error.message});
+        }
+      }
+    }
+    
+    // Update cart counter
+    await updateCartCounter();
+    
+    // Handle partial failures
+    if (failures.length > 0) {
+      showUserMessage(`${results.length} items added, ${failures.length} failed`);
+    } else {
+      showUserMessage(`All ${results.length} items added successfully!`);
+    }
+    
+    return {success: results, failures};
+    
+  } catch (error) {
+    showUserMessage('Cart update failed: ' + error.message);
+    throw error;
+  }
+}
+
+async function retryAddToCart(item, retries) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
+      const response = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      });
+      if (response.ok) return await response.json();
+    } catch (e) {
+      continue;
+    }
+  }
+  return null;
+}
+
+async function updateCartCounter() {
+  const cartResponse = await fetch('/cart.js');
+  const cart = await cartResponse.json();
+  document.getElementById('cart-count').textContent = cart.item_count;
+}
+
+function showUserMessage(message) {
+  alert(message); // In real app, use toast/notification system
+}
+
+</script>
+
+
+
+
+
+
+
+{% for product in collection.products %}
+  <img
+  loading="lazy" 
+  src="{{ product.featured_image | image_url: width: 400 }}"
+  srcset="{{ product.featured_image | image_url: width: 400 }} 400w,
+          {{ product.featured_image | image_url: width: 800 }} 800w,
+          {{ product.featured_image | image_url: width: 1200 }} 1200w"
+  sizes="(max-width: 768px) 400px, (max-width: 1024px) 800px, 1200px"
+  alt="{{ product.featured_image.alt }}" />
+{% endfor %}  1
+
+
+function infiniteScroll() {
+  let currentPage = 1;
+  let isLoading = false;
+  
+  // Create intersection observer
+  const observer = new IntersectionObserver((entries) => {
+    // What should happen when the bottom element is visible?
+    // Fill this in...
+  });
+  
+  // What element should we observe?
+  // Fill this in...
+  
+  async function loadMoreProducts() {
+    if (isLoading) return;
+    isLoading = true;
+    
+    try {
+      // Make API call to get next page of products
+      // Fill this in...
+      
+      // Append new products to DOM
+      // Fill this in...
+      
+    } catch (error) {
+      console.error('Failed to load products:', error);
+    } finally {
+      isLoading = false;
+    }
+  }
+}
+
+
+
+
+
+function infiniteScroll() {
+  let currentPage = 1;
+  let isLoading = false;
+  let hasMoreProducts = true;
+  
+  // 1. Create the "watcher" that detects when user reaches bottom
+  const observer = new IntersectionObserver((entries) => {
+    const lastProduct = entries[0];
+    
+    // If the last product is visible AND we're not already loading
+    if (lastProduct.isIntersecting && !isLoading && hasMoreProducts) {
+      loadMoreProducts();
+    }
+  }, {
+    // Trigger when element is 100px from being visible
+    rootMargin: '100px'
+  });
+  
+  // 2. Start watching the last product on the page
+  function observeLastProduct() {
+    const lastProduct = document.querySelector('.product-item:last-child');
+    if (lastProduct) {
+      observer.observe(lastProduct);
+    }
+  }
+  
+  // 3. Load more products from server
+  async function loadMoreProducts() {
+    isLoading = true;
+    currentPage++;
+    
+    // Show loading spinner
+    showLoadingSpinner();
+    
+    try {
+      // Fetch next page of products
+      const response = await fetch(`/collections/all?page=${currentPage}&view=ajax`);
+      const html = await response.text();
+      
+      // Convert HTML string to DOM elements
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = html;
+      const newProducts = tempDiv.querySelectorAll('.product-item');
+      
+      if (newProducts.length === 0) {
+        // No more products to load
+        hasMoreProducts = false;
+        showEndMessage();
+        return;
+      }
+      
+      // 4. Add new products to the page
+      const productGrid = document.querySelector('.product-grid');
+      newProducts.forEach(product => {
+        productGrid.appendChild(product);
+      });
+      
+      // Stop watching old last product, watch new last product
+      observer.disconnect();
+      observeLastProduct();
+      
+    } catch (error) {
+      console.error('Failed to load products:', error);
+      showErrorMessage();
+    } finally {
+      isLoading = false;
+      hideLoadingSpinner();
+    }
+  }
+  
+  // 5. Helper functions for user feedback
+  function showLoadingSpinner() {
+    document.querySelector('.loading-spinner').style.display = 'block';
+  }
+  
+  function hideLoadingSpinner() {
+    document.querySelector('.loading-spinner').style.display = 'none';
+  }
+  
+  function showEndMessage() {
+    document.querySelector('.end-message').style.display = 'block';
+  }
+  
+  function showErrorMessage() {
+    alert('Failed to load more products. Please try again.');
+  }
+  
+  // Start the infinite scroll
+  observeLastProduct();
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', infiniteScroll);
+
+
+
+
+
+
+{% for product in collection.products %}
+  <div class="product">
+    <h3>{{ product.title }}</h3>
+    <img src="{{ product.featured_image | img_url: '300x300' }}" alt="{{ product.title }}">
+    
+    {% for variant in product.variants %}
+      <div class="variant">
+        <span>{{ variant.title }}</span>
+        <span class="price">{{ variant.price | money }}</span>
+        {% if variant.compare_at_price > variant.price %}
+          <span class="compare-price">{{ variant.compare_at_price | money }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+
+
+
+Ways to speed shopify sites 
+ -Remove unused Shopify apps and their code
+ -Optimize liquid loops (avoid nested loops, use limit parameter)
+ -Use Shopify's responsive_image tag instead of manual img_url
+ -Preload critical resources like fonts and hero images
+ -Optimize theme.liquid structure
+
+Lazy loading images - excellent technique
+✅ Minifying JS/CSS - important optimization
+✅ Defer/async scripts - shows understanding of loading priorities
+✅ Code splitting - advanced technique
