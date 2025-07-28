@@ -122,30 +122,6 @@
     },
     "1753673917186ce1e1": {
       "type": "apps",
-      "blocks": {
-        "carousel_slider_slider_EjhLCy": {
-          "type": "shopify://apps/carousel-slider/blocks/slider/fbbe315f-3658-4f01-a003-060ca46c0a49",
-          "settings": {
-            "selected_collection": "",
-            "text_color": "#ffffff",
-            "font_size": 20,
-            "font_weight": 400,
-            "text_color2": "#ffffff",
-            "font_size1": 20,
-            "font_weight1": 400,
-            "icon_color": "#ffffff",
-            "icon_thickness": 1.2,
-            "icon_size": 30,
-            "addToCart_size": 20,
-            "addToCart_color": "#ffffff",
-            "gradient_color_start": "#000000",
-            "gradient_color_end": "#000000"
-          }
-        }
-      },
-      "block_order": [
-        "carousel_slider_slider_EjhLCy"
-      ],
       "settings": {}
     }
   },
