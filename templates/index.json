@@ -133,8 +133,15 @@
       "blocks": {
         "carousel_slider_slider_GR8cyh": {
           "type": "shopify://apps/carousel-slider/blocks/slider/fbbe315f-3658-4f01-a003-060ca46c0a49",
+          "disabled": true,
           "settings": {
             "selected_collection": "",
+            "aspect_ratio_large": "16/9",
+            "image_fit_large": "cover",
+            "aspect_ratio_medium": "4/3",
+            "image_fit_medium": "cover",
+            "aspect_ratio_small": "3/4",
+            "image_fit_small": "cover",
             "text_color": "#ffffff",
             "font_size": 20,
             "font_weight": 400,
@@ -146,6 +153,9 @@
             "icon_size": 30,
             "addToCart_size": 20,
             "addToCart_color": "#ffffff",
+            "enable_gradient_background": true,
+            "gradient_shape": "rectangle",
+            "gradient_border_radius": 0,
             "gradient_color_start": "#000000",
             "gradient_color_end": "#000000"
           }
@@ -169,10 +179,10 @@
             "modal_title_fontSize": 16,
             "modal_price_color": "#333333",
             "modal_price_fontSize": 14,
-            "modal_text_color": "#555",
+            "modal_text_color": "#555555",
             "modal_text_fontSize": 16,
-            "modal_button_color": "#000",
-            "modal_Button_text_color": "#FFF"
+            "modal_button_color": "#000000",
+            "modal_Button_text_color": "#ffffff"
           }
         }
       },
