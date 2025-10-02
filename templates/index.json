@@ -112,26 +112,6 @@
       "type": "newsletter-popup",
       "settings": {}
     },
-    "175362814113196c48": {
-      "type": "apps",
-      "settings": {}
-    },
-    "1753629666940cda3a": {
-      "type": "apps",
-      "settings": {}
-    },
-    "1753673917186ce1e1": {
-      "type": "apps",
-      "settings": {}
-    },
-    "1754509280de2cd536": {
-      "type": "apps",
-      "settings": {}
-    },
-    "1754545602264ea5e1": {
-      "type": "apps",
-      "settings": {}
-    },
     "175551709675a5d6d4": {
       "type": "apps",
       "settings": {}
@@ -150,11 +130,6 @@
     "blog",
     "newsletter",
     "newsletter-popup",
-    "175362814113196c48",
-    "1753629666940cda3a",
-    "1753673917186ce1e1",
-    "1754509280de2cd536",
-    "1754545602264ea5e1",
     "175551709675a5d6d4"
   ]
 }
