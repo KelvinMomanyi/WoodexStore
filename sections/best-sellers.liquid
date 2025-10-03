@@ -1,0 +1,140 @@
+<section class="section product" id="product" aria-label="product">
+    <div class="container">
+
+      <div class="title-wrapper">
+        <h2 class="h2 section-title">Best Sellers</h2>
+
+        <ul class="filter-btn-list">
+
+          <li class="filter-btn-item">
+            <button class="filter-btn" data-filter-btn="all">All</button>
+          </li>
+
+          <li class="filter-btn-item">
+            <button class="filter-btn" data-filter-btn="men">Men</button>
+          </li>
+
+          <li class="filter-btn-item">
+            <button class="filter-btn" data-filter-btn="women">Women</button>
+          </li>
+
+        </ul>
+      </div>
+
+      <ul class="grid-list product-list" data-filter="all">
+    
+       {% assign collection_handle = 'best-sellers' %}
+      {% for product in collections[collection_handle].products limit: 12 %}
+         <li class="decoration {% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% endif %}">
+           <div class="product-card">
+             <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+               {% if product.featured_image %}
+                 <img src="{{ product.featured_image | img_url: 'large' }}" 
+                   alt="{{ product.featured_image.alt | escape }}" 
+                   class="img-cover" 
+                   width="300" 
+                   height="300" 
+                   loading="lazy">
+               {% else %}
+                <img src="{{ 'default-image.jpg' | asset_url }}" 
+                   alt="No image available" 
+                   class="img-cover" 
+                    width="300" 
+                    height="300" 
+                    loading="lazy">
+               {% endif %}
+            <ul class="card-action-list">
+             <li>
+              <button class="card-action-btn" aria-label="Quick add" title="Quick add">
+                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+              </button>
+            </li>
+            <li>
+              <form action="/cart/add" method="post" enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button type="submit" class="card-action-btn" aria-label="Add to cart">
+                  <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                </button>
+              </form>
+            </li>
+      <li>
+        <button class="card-action-btn" aria-label="Add to wishlist" title="Add to wishlist">
+          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+        </button>
+      </li>
+    </ul>
+
+    <ul class="badge-list">
+  {% if product.available %}
+    {% if product.compare_at_price > product.price %}
+      <li>
+        <div class="badge orange">Sale</div>
+      </li>
+    {% endif %}
+    {% assign discount = 100.0 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round: 0 %}
+    {% if discount > 0 %}
+      <li>
+        <div class="badge cyan">{{ discount }}%</div>
+      </li>
+    {% endif %}
+  {% else %}
+    <li>
+      <div class="badge gray">Out of Stock</div>
+    </li>
+  {% endif %}
+</ul>
+
+  </a>
+       <div class="card-content">
+          <h3 class="h3">
+            <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+          </h3>
+           <div class="card-price">
+            {% if product.compare_at_price > product.price %}
+              <del class="del">{{ product.compare_at_price | money }}</del>
+           {% endif %}
+              <data class="price" value="{{ product.price | divided_by: 100.0 }}">{{ product.price | money }}</data>
+            </div>
+           </div>
+          </div>
+         </li>
+       {% else %}
+         <li class="decoration">
+           <div class="product-card empty-state">
+             <p>No best sellers available at the moment.</p>
+           </div>
+         </li>
+       {% endfor %}
+
+      </ul>
+
+    </div>
+  </section>
+   
+
+  
+{% schema %}
+    {
+    "name": "best-sellers",
+    "settings": [],
+    "blocks": [
+        {
+        "type": "collection_section",
+        "name": "Collection Section",
+        "settings": [
+            {
+            "type": "collection",
+            "id": "specific_collection",
+            "label": "Select Best Sellers Collection",
+            "info": "Override the default 'best-sellers' collection here."
+            }
+        ]
+        }
+    ],
+    "presets": [
+        {
+        "name": "Best Sellers"
+        }
+    ]
+    }
+{% endschema %}

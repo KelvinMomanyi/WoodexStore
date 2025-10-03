@@ -1,0 +1,11 @@
+{
+    "sections": {
+      "best-seller": {
+        "type": "best-seller",
+        "settings": {}
+      }
+    },
+    "order": [
+      "best-seller"
+    ]
+  }
