@@ -1,4 +1,4 @@
-<!--
+<!-- 
   - #BLOG
 -->
 
@@ -18,8 +18,8 @@
     <ul class="grid-list">
       {% assign selected_blog_handle = section.settings.blog_type %}
 
-      {% if selected_blog_handle and blogs[selected_blog_handle].articles.size > 0 %}
-        <!-- Fetch the selected blog and its articles -->
+      {% if selected_blog_handle != blank and blogs[selected_blog_handle].articles.size > 0 %}
+        <!-- Display articles from selected blog -->
         {% for article in blogs[selected_blog_handle].articles limit: 3 %}
           <li class="flex-item">
             <div class="blog-card">
@@ -39,6 +39,7 @@
           </li>
         {% endfor %}
       {% else %}
+        <!-- Display default blog cards -->
         <li>
           <div class="blog-card">
 
@@ -166,6 +167,7 @@
 
   </div>
 </section>
+
 {% schema %}
 {
   "name": "blog",
@@ -179,9 +181,8 @@
      {
       "type": "blog",
       "id": "blog_type",
-      "label": "Select Blog Category",
-      "default": "news"
-    }
+      "label": "Select Blog Category"
+     }
   ],
   "blocks": [],
   "presets": [
