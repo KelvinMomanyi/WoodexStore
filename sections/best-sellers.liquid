@@ -3,113 +3,384 @@
 
       <div class="title-wrapper">
         <h2 class="h2 section-title">Best Sellers</h2>
+        <p class="section-subtitle">Discover our top-rated fragrances loved by customers</p>
 
-        <ul class="filter-btn-list">
-
+        <ul class="filter-btn-list" role="tablist">
           <li class="filter-btn-item">
-            <button class="filter-btn" data-filter-btn="all">All</button>
+            <button class="filter-btn active" data-filter-btn="all" role="tab" aria-selected="true" aria-controls="all-products">All</button>
           </li>
-
           <li class="filter-btn-item">
-            <button class="filter-btn" data-filter-btn="men">Men</button>
+            <button class="filter-btn" data-filter-btn="men" role="tab" aria-selected="false" aria-controls="men-products">Men</button>
           </li>
-
           <li class="filter-btn-item">
-            <button class="filter-btn" data-filter-btn="women">Women</button>
+            <button class="filter-btn" data-filter-btn="women" role="tab" aria-selected="false" aria-controls="women-products">Women</button>
           </li>
-
         </ul>
       </div>
 
-      <ul class="grid-list product-list" data-filter="all">
-    
-       {% assign collection_handle = 'best-sellers' %}
-      {% for product in collections[collection_handle].products limit: 12 %}
-         <li class="decoration {% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% endif %}">
-           <div class="product-card">
-             <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-               {% if product.featured_image %}
-                 <img src="{{ product.featured_image | img_url: 'large' }}" 
-                   alt="{{ product.featured_image.alt | escape }}" 
-                   class="img-cover" 
-                   width="300" 
-                   height="300" 
-                   loading="lazy">
-               {% else %}
-                <img src="{{ 'default-image.jpg' | asset_url }}" 
-                   alt="No image available" 
-                   class="img-cover" 
-                    width="300" 
-                    height="300" 
-                    loading="lazy">
-               {% endif %}
-            <ul class="card-action-list">
-             <li>
-              <button class="card-action-btn" aria-label="Quick add" title="Quick add">
-                <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-              </button>
+      <div class="products-container">
+        <ul class="grid-list product-list" data-filter="all" id="all-products" role="tabpanel">
+          {% assign collection_handle = 'best-sellers' %}
+          {% for product in collections[collection_handle].products limit: 12 %}
+            <li class="decoration product-item {% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% endif %}" data-category="{% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% else %}all{% endif %}">
+              <div class="product-card">
+                <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;" aria-label="{{ product.title }}">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: 'large' }}" 
+                      alt="{{ product.featured_image.alt | escape }}" 
+                      class="img-cover" 
+                      width="300" 
+                      height="300" 
+                      loading="lazy">
+                  {% else %}
+                    <img src="{{ 'default-image.jpg' | asset_url }}" 
+                      alt="No image available" 
+                      class="img-cover" 
+                      width="300" 
+                      height="300" 
+                      loading="lazy">
+                  {% endif %}
+                  <div class="overlay" aria-hidden="true"></div>
+                </a>
+                <ul class="card-action-list">
+                  <li>
+                    <button class="card-action-btn quick-add" aria-label="Quick view {{ product.title }}" title="Quick view">
+                      <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                  </li>
+                  <li>
+                    <form action="/cart/add" method="post" enctype="multipart/form-data" class="add-to-cart-form" onsubmit="submitAddToCartForm(this); return false;">
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      <button type="submit" class="card-action-btn add-to-cart" aria-label="Add {{ product.title }} to cart" {% unless product.available %}disabled{% endunless %}>
+                        <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+                        {% if product.available == false %}<span class="visually-hidden">Out of stock</span>{% endif %}
+                      </button>
+                    </form>
+                  </li>
+                  <li>
+                    <button class="card-action-btn wishlist" aria-label="Add {{ product.title }} to wishlist" title="Add to wishlist">
+                      <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+                    </button>
+                  </li>
+                </ul>
+
+                <ul class="badge-list">
+                  {% if product.available %}
+                    {% if product.compare_at_price > product.price %}
+                      <li>
+                        <div class="badge orange">Sale</div>
+                      </li>
+                    {% endif %}
+                    {% assign discount = 100.0 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round: 0 %}
+                    {% if discount > 0 %}
+                      <li>
+                        <div class="badge cyan">-{{ discount }}%</div>
+                      </li>
+                    {% endif %}
+                  {% else %}
+                    <li>
+                      <div class="badge gray">Out of Stock</div>
+                    </li>
+                  {% endif %}
+                </ul>
+
+                <div class="card-content">
+                  <h3 class="h3">
+                    <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+                  </h3>
+                  <div class="card-price">
+                    {% if product.compare_at_price > product.price %}
+                      <del class="del">{{ product.compare_at_price | money }}</del>
+                    {% endif %}
+                    <data class="price" value="{{ product.price | divided_by: 100.0 }}">{{ product.price | money }}</data>
+                    {% unless product.available %}<span class="stock-status">Out of stock</span>{% endunless %}
+                  </div>
+                  {% if product.available %}
+                    <div class="rating" aria-label="Average rating {{ product.metafields.custom.rating | default: 4.5 }}/5">
+                      <span class="stars" style="--rating: {{ product.metafields.custom.rating | default: 4.5 }};">★★★★★</span>
+                      <span class="review-count">({{ product.metafields.custom.reviews_count | default: 23 }} reviews)</span>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
             </li>
-            <li>
-              <form action="/cart/add" method="post" enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                <button type="submit" class="card-action-btn" aria-label="Add to cart">
-                  <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                </button>
-              </form>
+          {% endfor %}
+          {% unless collections[collection_handle].products.size > 0 %}
+            <li class="decoration empty-state">
+              <div class="product-card">
+                <div class="empty-content">
+                  <ion-icon name="flame-outline" class="empty-icon"></ion-icon>
+                  <p>No best sellers available at the moment. Check back soon!</p>
+                  <a href="/collections/all" class="btn-link">Browse All Products</a>
+                </div>
+              </div>
             </li>
-      <li>
-        <button class="card-action-btn" aria-label="Add to wishlist" title="Add to wishlist">
-          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-        </button>
-      </li>
-    </ul>
+          {% endunless %}
+        </ul>
+      </div>
 
-    <ul class="badge-list">
-  {% if product.available %}
-    {% if product.compare_at_price > product.price %}
-      <li>
-        <div class="badge orange">Sale</div>
-      </li>
-    {% endif %}
-    {% assign discount = 100.0 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round: 0 %}
-    {% if discount > 0 %}
-      <li>
-        <div class="badge cyan">{{ discount }}%</div>
-      </li>
-    {% endif %}
-  {% else %}
-    <li>
-      <div class="badge gray">Out of Stock</div>
-    </li>
-  {% endif %}
-</ul>
-
-  </a>
-       <div class="card-content">
-          <h3 class="h3">
-            <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-          </h3>
-           <div class="card-price">
-            {% if product.compare_at_price > product.price %}
-              <del class="del">{{ product.compare_at_price | money }}</del>
-           {% endif %}
-              <data class="price" value="{{ product.price | divided_by: 100.0 }}">{{ product.price | money }}</data>
-            </div>
-           </div>
-          </div>
-         </li>
-       {% else %}
-         <li class="decoration">
-           <div class="product-card empty-state">
-             <p>No best sellers available at the moment.</p>
-           </div>
-         </li>
-       {% endfor %}
-
-      </ul>
+      {% if collections[collection_handle].products.size > 6 %}
+        <div class="load-more-wrapper">
+          <button class="btn load-more" id="load-more-btn">Load More</button>
+        </div>
+      {% endif %}
 
     </div>
   </section>
+
+  <style>
+    .section-subtitle {
+      color: var(--gray-600);
+      font-size: var(--fs-7);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .filter-btn.active {
+      background-color: var(--primary-600);
+      color: white;
+    }
+
+    .filter-btn:focus-visible,
+    .filter-btn:hover {
+      background-color: var(--primary-500);
+    }
+
+    .products-container {
+      position: relative;
+    }
+
+    .product-item {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .product-item.hidden {
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+    }
+
+    .card-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card-banner:hover .overlay {
+      opacity: 1;
+    }
+
+    .card-action-list {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .product-card:hover .card-action-list {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-action-btn {
+      background: white;
+      border-radius: 50%;
+      box-shadow: var(--shadow-1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-action-btn:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-2);
+    }
+
+    .card-action-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .badge {
+      font-size: var(--fs-9);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .badge.gray {
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    .stock-status {
+      color: var(--gray-600);
+      font-size: var(--fs-9);
+      margin-left: 0.5rem;
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .stars {
+      display: inline-block;
+      background: linear-gradient(90deg, #ffc107 var(--rating, 0%), #e0e0e0 0%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: var(--fs-9);
+    }
+
+    .review-count {
+      font-size: var(--fs-9);
+      color: var(--gray-600);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      color: var(--gray-400);
+      margin-bottom: 1rem;
+    }
+
+    .empty-content p {
+      color: var(--gray-600);
+      margin-bottom: 1rem;
+    }
+
+    .btn-link {
+      color: var(--primary-600);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    .load-more-wrapper {
+      text-align: center;
+      margin-top: 3rem;
+    }
+
+    .load-more {
+      background: var(--primary-600);
+      color: white;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .load-more:hover {
+      background: var(--primary-700);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 768px) {
+      .filter-btn-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      .grid-list {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+  </style>
+
+  <script>
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('[data-filter-btn]');
+    const productItems = document.querySelectorAll('.product-item');
+    const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filterValue = btn.getAttribute('data-filter-btn');
+
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Update ARIA
+        filterBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
+        btn.setAttribute('aria-selected', 'true');
+
+        // Hide all tab panels except current
+        tabPanels.forEach(panel => panel.style.display = 'none');
+        document.getElementById(`${filterValue}-products`).style.display = 'block';
+
+        // Filter products
+        productItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filterValue === 'all' || category === filterValue) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // Quick view modal (placeholder - integrate with actual modal)
+    document.querySelectorAll('.quick-add').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const productTitle = btn.closest('.product-card').querySelector('.card-title').textContent;
+        alert(`Quick view for ${productTitle} - Modal would open here`);
+      });
+    });
+
+    // Wishlist toggle
+    document.querySelectorAll('.wishlist').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.querySelector('ion-icon').setAttribute('name', btn.querySelector('ion-icon').getAttribute('name') === 'heart-outline' ? 'heart' : 'heart-outline');
+      });
+    });
+
+    // Load more (placeholder for infinite scroll or pagination)
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        // Simulate loading more products
+        alert('Loading more best sellers...');
+      });
+    }
+
+    // Add to cart feedback
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        const btn = form.querySelector('button');
+        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon><span class="visually-hidden">Added to cart</span>';
+        setTimeout(() => {
+          btn.innerHTML = '<ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>';
+        }, 2000);
+      });
+    });
+  </script>
    
 
   
@@ -133,7 +404,7 @@
     ],
     "presets": [
         {
-        "name": "best-sellers"
+        "name": "Best Sellers"
         }
     ]
     }
