@@ -1,433 +1,370 @@
+<!-- 
+  - #FEATURED POST
+-->
 
+<section class="section featured" aria-label="featured post">
+  <div class="container">
 
+    <p class="section-subtitle">
+     {{ section.settings.mainBlog_text }}
+    </p>
 
+    <ul class="has-scrollbar">
+    {% assign selected_blog_handle = section.settings.blog_type %}
+    {% if selected_blog_handle != blank and blogs[selected_blog_handle].articles.size > 0 %}
+      {% for article in blogs[selected_blog_handle].articles  %}
+        <li class="scrollbar-item">
+          <div class="blog-card">
 
+             <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
+                <img src="{{ article.image | img_url: 'large' }}" width="500" height="600" loading="lazy"
+               alt="{{ article.title }}" class="img-cover"/>
+             </figure>
 
+             <div class="card-content">
 
-  <!-- 
-    - #FEATURED POST
-  -->
+             <ul class="card-meta-list">
+               {% for tag in article.tags %}
+               <li>
+                 <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="card-tag">{{ tag }}</a>
+               </li>
+                {% endfor %}
+             </ul>
 
-  <section class="section featured" aria-label="featured post">
-    <div class="container">
+             <h3 class="h4">
+               <a href="{{ article.url }}" class="card-title hover:underline">
+                 {{ article.title }}
+               </a>
+             </h3>
 
-      <p class="section-subtitle">
-       {{ section.settings.mainBlog_text }}
-      </p>
+             <p class="card-text">
+               {{ article.excerpt_or_content | strip_html | truncatewords: 30 }}
+             </p>
 
-      <ul class="has-scrollbar">
-      {% assign selected_blog_handle = section.settings.blog_type %}
-      {% if selected_blog_handle %}
-        {% for article in blogs[selected_blog_handle].articles  %}
-          <li class="scrollbar-item">
-            <div class="blog-card">
- 
-               <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
-                  <img src="{{ article.image | img_url: 'large' }}" width="500" height="600" loading="lazy"
-                 alt="New technology is not good or evil in and of itself" class="img-cover"/>
-               </figure>
- 
-               <div class="card-content">
- 
-               <ul class="card-meta-list">
-                 {% for article in article.tags %}
-                 <li>
-                   <a href="#" class="card-tag"> {{ article}}</a>
-                 </li>
-                  {% endfor %}
-               </ul>
- 
-               <h3 class="h4">
-                 <a href="{{article.url }}" class="card-title hover:underline">
-                   {{ article.title }}
-                 </a>
-               </h3>
- 
-               <p class="card-text">
-                 {{article.content}}
-               </p>
- 
-               </div>
- 
+             </div>
+
+          </div>
+        </li>
+      {% endfor %}  
+    {% else %}  
+      {% for article in blogs['news'].articles %}
+       <li class="scrollbar-item">
+         <div class="blog-card">
+
+            <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
+               <img src="{{ article.image | img_url : 'large'}}" width="500" height="600" loading="lazy"
+              alt="{{ article.title }}" class="img-cover"/>
+            </figure>
+
+            <div class="card-content">
+
+            <ul class="card-meta-list">
+              {% for tag in article.tags %}
+              <li>
+                <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="card-tag">{{ tag }}</a>
+              </li>
+               {% endfor %}
+            </ul>
+
+            <h3 class="h4">
+              <a href="{{ article.url }}" class="card-title hover:underline">
+                {{ article.title }}
+              </a>
+            </h3>
+
+            <p class="card-text">
+              {{ article.excerpt_or_content | strip_html | truncatewords: 30 }}
+            </p>
+
             </div>
-          </li>
-        {% endfor %}  
-      {% else %}  
-        {% for article in blogs['news'].articles %}
-         <li class="scrollbar-item">
-           <div class="blog-card">
 
-              <figure class="card-banner img-holder" style="--width: 500; --height: 600;">
-                 <img src="{{ article.image | img_url : 'large'}}" width="500" height="600" loading="lazy"
-                alt="New technology is not good or evil in and of itself" class="img-cover"/>
-              </figure>
+         </div>
+       </li>
+      {% endfor %}
+    {% endif %}  
+    </ul>
 
-              <div class="card-content">
+  </div>
+</section>
 
-              <ul class="card-meta-list">
-                {% for article in article.tags %}
-                <li>
-                  <a href="#" class="card-tag"> {{ article}}</a>
-                </li>
-                 {% endfor %}
-              </ul>
+<style>  
 
-              <h3 class="h4">
-                <a href="{{article.url }}" class="card-title hover:underline">
-                  {{ article.title }}
-                </a>
-              </h3>
+/*-----------------------------------*\
+  #FEATURED POST SECTION
+\*-----------------------------------*/
 
-              <p class="card-text">
-                {{article.content}}
-              </p>
+.section.featured {
+  padding-block-start: 100px; /* Add space from navbar */
+  padding-block-end: 60px;
+  margin-block-start: 0;
+}
 
-              </div>
+.section-subtitle {
+  font-size: var(--fs-3, 2.4rem);
+  font-weight: var(--fw-700, 700);
+  text-align: center;
+  margin-block-end: 40px;
+  color: var(--eerie-black, #1a1a1a);
+}
 
-           </div>
-         </li>
-        {% endfor %}
-      {% endif %}  
-      </ul>
+.has-scrollbar {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-block-end: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hoockers-green, #4CAF50) var(--cultured, #f5f5f5);
+}
 
-    </div>
-  </section>
-  <!-- 
-    - #RECOMMENDED POST
-  -->
+.has-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
 
-  
+.has-scrollbar::-webkit-scrollbar-track {
+  background: var(--cultured, #f5f5f5);
+  border-radius: 10px;
+}
 
- <style>  
+.has-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--hoockers-green, #4CAF50);
+  border-radius: 10px;
+}
 
+.scrollbar-item {
+  min-width: 100%;
+  scroll-snap-align: start;
+  list-style: none;
+}
 
-  .blog-card .card-banner img { transition: var(--transition-2);}
-  
-  .blog-card:is(:hover, :focus-within) .card-banner img {transform: scale(1.2);}
-  
-  .blog-card .card-title{
-    text-align: center;
-    margin-block: 30px 20px;
-    transition: var(--transition-1);
-  }
-  
-  .blog-card .card-title:is(:hover, :focus){color: var(--hoockers-green);}
-  
-  
-  .blog-card .btn-link{
-    justify-content: center;
-  }
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--white, #fff);
+  border-radius: var(--radius-16, 16px);
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-/*FEATURED POST*/
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
 .blog-card .card-banner {
   position: relative;
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-16, 16px);
+  overflow: hidden;
   margin-block-end: 15px;
 }
 
-.blog-card .card-title {
-  margin-block: 8px 12px;
-  /*text-decoration-thickness: 2px;*/
+.blog-card .card-banner img { 
+  transition: transform 0.5s ease;
+  object-fit: cover;
 }
 
-.blog-card .card-text {
-  font-size: var(--fs-9);
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  padding-inline-end: 20px;
+.blog-card:is(:hover, :focus-within) .card-banner img {
+  transform: scale(1.1);
+}
+
+.blog-card .card-content {
+  padding: 20px;
+  flex-grow: 1;
 }
 
 .card-meta-list {
   display: flex;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-end: 15px;
+  list-style: none;
+  padding: 0;
 }
-@media (min-width: 992px) {
-  
-    .hero1 .wrapper1 {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-      }
-  
-      .hero1 .newsletter-text {
-        display: block;
-        max-width: 400px;
-        color: var(--eerie-black_80);
-        line-height: 1.3;
-      }
-      .blog-card .card-title { padding-inline-end: 15px; }
 
-       .blog-card .card-text { font-size: unset; }
-  
+.card-tag {
+  background-color: var(--cultured, #f5f5f5);
+  font-size: var(--fs-9, 1.2rem);
+  font-weight: var(--fw-500, 500);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill, 50px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.card-tag:is(:hover, :focus) { 
+  background-color: var(--hoockers-green, #4CAF50);
+  color: var(--white, #fff);
+}
+
+.blog-card .card-title {
+  margin-block: 15px 12px;
+  font-size: var(--fs-4, 2rem);
+  line-height: 1.4;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.blog-card .card-title:is(:hover, :focus) {
+  color: var(--hoockers-green, #4CAF50);
+  text-decoration: underline;
+}
+
+.blog-card .card-text {
+  font-size: var(--fs-8, 1.4rem);
+  line-height: 1.6;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+
+@media (min-width: 575px) {
+  .section.featured {
+    padding-block-start: 120px;
   }
 
-
-  
-  .blog-card .card-banner {
-    position: relative;
-    border-radius: var(--radius-16);
-    margin-block-end: 15px;
-  }
-  
- 
-  
-  .card-meta-list {
-    display: flex;
-    gap: 5px;
-  }
-  
-  .card-tag {
-    background-color: var(--cultured);
-    font-size: var(--fs-9);
-    font-weight: var(--fw-500);
-    padding: 2px 8px;
-    border-radius: var(--radius-pill);
-    transition: var(--transition-1);
-  }
-  
-  .card-tag:is(:hover, :focus) { background-color: var(--gainsboro); }
-  
-  .blog-card .card-title {
-    margin-block: 8px 12px;
-    text-decoration-thickness: 2px;
-  }
-  
-  .blog-card .card-text {
-    font-size: var(--fs-8);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    padding-inline-end: 20px;
-  }
-  
-
-  
-  
-  
-  /*-----------------------------------*\
-    #SEARCH BAR
-  \*-----------------------------------*/
-  
-  .search-bar {
-    background-color: var(--white);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 15px;
-    transform: translateY(calc(-100% - 2px));
-    z-index: 4;
-    transition: var(--transition-1);
-    visibility: hidden;
-  }
-  
-  .search-bar.active {
-    visibility: visible;
-    transform: translateY(0);
-  }
-  
-  .search-bar .input-field {
-    font-size: var(--fs-1);
-    font-weight: var(--fw-700);
-    line-height: 1.3;
-    padding-inline-end: 60px; 
-  }
-  
-  .search-bar .input-field::placeholder { color: var(--eerie-black); }
-  
-  .search-bar .input-field::-webkit-search-cancel-button { display: none; }
-  
-  .search-close-btn {
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    font-size: 45px;
-  }
-  
-  .search-close-btn ion-icon { --ionicon-stroke-width: 20px; }
-  
-  .search-bar-text {
-    font-size: 1.4rem;
-    color: var(--eerie-black_80);
-    margin-block-start: 5px;
-  }
-  
-  .overlay {
-    position: fixed;
-    inset: 0;
-   /* background-color: var(--eerie-black_80);*/
-    transition: var(--transition-1);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 3;
-  }
-  
-  .overlay.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  
-  
-  
-  
-  
-  /*-----------------------------------*\
-    #HERO
-  \*-----------------------------------*/
-
-  
-  
-  
-  /*-----------------------------------*\
-    #RECENT POST
-  \*-----------------------------------*/
-  
-  .top-author { display: none; }
-  
-  .recent { padding-block-start: 15px; }
-  
-  .recent .section-title .strong { display: block; }
-  
-  .recent .section-title { margin-block-end: 20px; }
-  
-  .recent .btn {
-    margin-inline: auto;
-    margin-block: 50px 30px;
-  }
-  
-  
-  
-  
-  
-  /*-----------------------------------*\
-    #RECOMMENDED POST
-  \*-----------------------------------*/
-  
-  .section.recommended { border-block-end: none; }
-  
-  .recommended .grid-list {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  
-  .recommended .blog-card { margin-block-end: 5px; }
-  
-  
-  
-  @media (min-width: 575px) {
-
-  .section { margin-inline: 30px; }
-  
-   
-  .grid-list {
-      grid-template-columns: 1fr 1fr;
-      column-gap: 10px;
-  }
-  
-
-  
-  .search-bar .input-field { --fs-1: 3.6rem; }
-  
-  
-  .recommended .grid-list,
-     { grid-template-columns: repeat(3, 1fr); }
-  
-  }
-  
-  
-
-  
-  @media (min-width: 768px) {
-
-  .grid-list { gap: 40px 15px; }
-  
-  
-  .search-bar { padding: 25px; }
-  
-  .search-bar .input-field { --fs-1: 4.6rem; }
-  
-  
-  .top-author {
-      display: block;
-      text-align: right;
-  }
-  
-  .recent .title-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-block-end: 10px;
-  }
-  
-  .top-author .avatar-item:not(:first-child) { margin-inline-end: -25px; }
-  
-  .top-author .span {
-    color: var(--eerie-black_80);
-    font-size: var(--fs-8);
-    margin-block-start: 10px;
-  }
-  
-  .avatar.large {
-    border: 6px solid var(--white);
-    width: 70px;
-  }
-  
-  .avatar.large:is(:hover, :focus) { transform: translateY(-3px); }
-  
-  
-  
-    /**
-     * RECOMMENDED POST
-     */
-  
-  .recommended .grid-list {
-      grid-template-columns: repeat(4, 1fr);
-      column-gap: 15px;
+  .scrollbar-item {
+    min-width: calc(50% - 15px);
   }
 }
-  
-  
-  
-  
-  
+
+@media (min-width: 768px) {
+  .section.featured {
+    padding-block-start: 140px;
+  }
+
+  .scrollbar-item {
+    min-width: calc(33.333% - 20px);
+  }
+
+  .blog-card .card-title { 
+    padding-inline-end: 15px;
+    font-size: var(--fs-3, 2.4rem);
+  }
+
+  .blog-card .card-text { 
+    font-size: var(--fs-7, 1.6rem);
+  }
+}
 
 @media (min-width: 992px) {
-  
-  .blog-card .card-title { padding-inline-end: 15px; }
-  
-  .blog-card .card-text { font-size: unset; }
-  
-  .grid-list { grid-template-columns: repeat(3, 1fr); }
-  
-  
-  .top-author .avatar { width: 85px; }
-  
+  .section.featured {
+    padding-block-start: 150px;
+    padding-block-end: 80px;
+  }
 
-  
-  .recommended .grid-list { grid-template-columns: repeat(6, 1fr); }
-  
-}  
+  .scrollbar-item {
+    min-width: calc(25% - 22.5px);
+  }
+
+  .blog-card .card-content {
+    padding: 25px;
+  }
+}
+
 @media (min-width: 1200px) {
-   
-   .card-tag {
-      --fs-9: 1.4rem;
-      padding: 4px 10px;
-    }
-  
-    .grid-list { row-gap: 50px; }
-  
-  
-    .top-author .avatar { width: 100px; }
-  
-    .recent .btn { margin-block-start: 70px; }
-  
-  
-  } 
+  .section.featured {
+    padding-block-start: 160px;
+    padding-block-end: 100px;
+  }
 
- </style>  
+  .card-tag {
+    font-size: 1.4rem;
+    padding: 6px 14px;
+  }
+
+  .has-scrollbar {
+    gap: 40px;
+  }
+}
+
+/*-----------------------------------*\
+  #SEARCH BAR
+\*-----------------------------------*/
+
+.search-bar {
+  background-color: var(--white, #fff);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  transform: translateY(calc(-100% - 2px));
+  z-index: 4;
+  transition: transform 0.3s ease;
+  visibility: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar.active {
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-bar .input-field {
+  font-size: var(--fs-1, 3rem);
+  font-weight: var(--fw-700, 700);
+  line-height: 1.3;
+  padding-inline-end: 60px;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.search-bar .input-field::placeholder { color: var(--eerie-black, #1a1a1a); }
+
+.search-bar .input-field::-webkit-search-cancel-button { display: none; }
+
+.search-close-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 45px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.search-close-btn ion-icon { --ionicon-stroke-width: 20px; }
+
+.search-bar-text {
+  font-size: 1.4rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  margin-block-start: 5px;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+@media (min-width: 575px) {
+  .search-bar .input-field { font-size: 3.6rem; }
+}
+
+@media (min-width: 768px) {
+  .search-bar { padding: 25px; }
+  .search-bar .input-field { font-size: 4.6rem; }
+}
+
+</style>
 
 {% schema %}
 {
@@ -437,13 +374,13 @@
       "type":"text",
       "id":"mainBlog_text",
       "label":"Main Blog Heading",
-      "default":" Get started with our best story"
+      "default":"Get started with our best stories"
      },
      {
       "type": "blog",
       "id": "blog_type",
-      "label": "Select Blog Category",
-    }
+      "label": "Select Blog Category"
+     }
   ],
   "blocks": [],
   "presets": [
