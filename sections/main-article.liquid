@@ -1,159 +1,492 @@
-
-
 <div class="content-wrapper container">
   <div class="article-container">
-  <article class="article-content">
-      <div>
-          <h1 class="article-title">{{article.title }}</h1>
-          <p class="article-subtitle">By {{article.author }} - {{article.created_at }}</p>
+    <article class="article-content">
+      <div class="article-header">
+        <h1 class="article-title">{{ article.title }}</h1>
+        
+        <div class="article-meta">
+          <span class="meta-author">By {{ article.author }}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-date">{{ article.created_at | date: "%B %d, %Y" }}</span>
+          <span class="meta-divider">•</span>
+          <span class="meta-reading-time">5 min read</span>
+        </div>
+
+        {% if article.tags.size > 0 %}
+        <div class="article-tags">
+          {% for tag in article.tags %}
+          <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="article-tag">{{ tag }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
 
-      <figure>
-          <img src="{{article.image | img_url : 'large' }}" alt="Web Development" class="article-image"> 
-          <figcaption>The rapid evolution of web technologies.</figcaption>
+      <figure class="article-featured-image">
+        <img src="{{ article.image | img_url: 'large' }}" alt="{{ article.title }}" class="featured-img">
+        <figcaption>{{ article.excerpt | strip_html | truncatewords: 15 }}</figcaption>
       </figure>
 
       <section class="article-body">
-          {{ article.content }}
+        {{ article.content }}
       </section>
 
       <footer class="article-footer">
-          <p>Written by Jane Doe. If you enjoyed this article, check out more on our <a href="#">blog</a>.</p>
+        <div class="author-bio">
+          <div class="author-info">
+            <h3>About the Author</h3>
+            <p><strong>{{ article.author }}</strong></p>
+            <p>Passionate writer and contributor. Follow for more insights and stories.</p>
+          </div>
+        </div>
+
+        <div class="article-actions">
+          <p>If you enjoyed this article, check out more on our <a href="{{ blog.url }}">blog</a>.</p>
+        </div>
       </footer>
-  </article>
+    </article>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h2 class="sidebar-title">Related Articles</h2>
+      <ul class="related-articles-list">
+        {% for related_article in blog.articles limit: 5 %}
+          {% if related_article.id != article.id %}
+          <li class="related-article-item">
+            <a href="{{ related_article.url }}" class="related-article-link">
+              {% if related_article.image %}
+              <div class="related-article-thumb">
+                <img src="{{ related_article.image | img_url: 'small' }}" alt="{{ related_article.title }}">
+              </div>
+              {% endif %}
+              <div class="related-article-content">
+                <h4 class="related-article-title">{{ related_article.title }}</h4>
+                <span class="related-article-date">{{ related_article.created_at | date: "%b %d, %Y" }}</span>
+              </div>
+            </a>
+          </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h2 class="sidebar-title">Popular Tags</h2>
+      <div class="tag-cloud">
+        {% for tag in blog.all_tags %}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="tag-cloud-item">{{ tag }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </aside>
 </div>
-
-   <aside class="sidebar">
-  <h2>Related Articles</h2>
-  
-  <ul class="article-list">
-   
-      {% for article in blog.articles %}
-        <li><a href="{{ article.url }}">{{ article.title }}</a></li>
-      {% endfor %}
-
-  </ul>
-  
-   </aside>
-</div>
-
 
 <style>
+/*-----------------------------------*\
+  #ARTICLE PAGE
+\*-----------------------------------*/
 
-/* Content Wrapper */
- .content-wrapper {
-  display: flex;
-  gap: 30px;
-  margin: 20px 0;
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Main Article Section */
 .article-container {
-  flex: 3;
-  background-color: #fff;
-  padding: 20px;
-} 
-
- .article-title {
-  font-size: 2.8rem;
-  margin-bottom: 10px;
-  color: #333;
+  background: var(--white, #fff);
+  border-radius: var(--radius-16, 16px);
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.article-subtitle {
-  font-size: 1.1rem;
-  color: #555;
-  margin-bottom: 30px;
+.article-content {
+  padding: 0;
 }
 
-.article-image {
+.article-header {
+  padding: 40px 30px 30px;
+  border-bottom: 1px solid var(--cultured, #f5f5f5);
+}
+
+.article-title {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: var(--fw-700, 700);
+  line-height: 1.2;
+  color: var(--eerie-black, #1a1a1a);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 1.4rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  margin-bottom: 20px;
+}
+
+.meta-author {
+  font-weight: var(--fw-500, 500);
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.meta-divider {
+  color: var(--cultured, #f5f5f5);
+}
+
+.meta-date,
+.meta-reading-time {
+  font-size: 1.3rem;
+}
+
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.article-tag {
+  background-color: var(--cultured, #f5f5f5);
+  font-size: 1.2rem;
+  font-weight: var(--fw-500, 500);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill, 50px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.article-tag:hover {
+  background-color: var(--hoockers-green, #4CAF50);
+  color: var(--white, #fff);
+  transform: translateY(-2px);
+}
+
+.article-featured-image {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-img {
   width: 100%;
   height: auto;
-  margin-bottom: 15px;
-  border-radius: 5px;
+  max-height: 600px;
+  object-fit: cover;
+  display: block;
 }
 
-figcaption {
-  font-size: 0.9rem;
-  color: #666;
+.article-featured-image figcaption {
+  font-size: 1.3rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  font-style: italic;
+  padding: 15px 30px;
+  background: var(--cultured, #f5f5f5);
   text-align: center;
-  margin-bottom: 30px;
+}
+
+.article-body {
+  padding: 40px 30px;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  color: var(--eerie-black, #1a1a1a);
 }
 
 .article-body p {
-  margin-bottom: 20px;
-  font-size: 1.15rem;
-  color: #444;
+  margin-bottom: 24px;
 }
 
 .article-body h2 {
-  font-size: 1.8rem;
-  margin: 20px 0;
-  color: #111;
+  font-size: 2.4rem;
+  font-weight: var(--fw-700, 700);
+  margin: 40px 0 20px;
+  color: var(--eerie-black, #1a1a1a);
+  line-height: 1.3;
 }
 
-blockquote {
-  background: #f9f9f9;
-  border-left: 10px solid #ccc;
-  margin: 20px 0;
-  padding: 15px;
+.article-body h3 {
+  font-size: 2rem;
+  font-weight: var(--fw-600, 600);
+  margin: 30px 0 15px;
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.article-body a {
+  color: var(--hoockers-green, #4CAF50);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.article-body a:hover {
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.article-body blockquote {
+  background: var(--cultured, #f5f5f5);
+  border-left: 4px solid var(--hoockers-green, #4CAF50);
+  margin: 30px 0;
+  padding: 20px 25px;
   font-style: italic;
-  font-size: 1.1rem;
-  color: #555;
+  font-size: 1.7rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  border-radius: 0 8px 8px 0;
 }
 
-/* Article Footer */
+.article-body ul,
+.article-body ol {
+  margin: 20px 0 20px 20px;
+}
+
+.article-body li {
+  margin-bottom: 10px;
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-16, 16px);
+  margin: 30px 0;
+}
+
 .article-footer {
-  margin-top: 30px;
-  padding-top: 20px;
-  border-top: 1px solid #e0e0e0;
-  font-size: 1rem;
-  color: #777;
+  padding: 30px;
+  border-top: 1px solid var(--cultured, #f5f5f5);
+  background: rgba(76, 175, 80, 0.03);
 }
 
-/* Sidebar 
-.sidebar {
-  {% comment %} flex: 1; {% endcomment %}
-  background-color: #fff;
-  padding: 20px;
-  z-index:-1;
+.author-bio {
+  padding: 25px;
+  background: var(--white, #fff);
+  border-radius: var(--radius-16, 16px);
+  margin-bottom: 25px;
+  border: 1px solid var(--cultured, #f5f5f5);
 }
 
-.sidebar h2 {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  color: #333;
-}*/
-
-.article-list {
-  list-style: none;
+.author-info h3 {
+  font-size: 1.6rem;
+  font-weight: var(--fw-600, 600);
+  margin-bottom: 12px;
+  color: var(--eerie-black, #1a1a1a);
 }
 
-.article-list li {
-  margin-bottom: 15px;
+.author-info p {
+  font-size: 1.4rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  line-height: 1.6;
+  margin-bottom: 8px;
 }
 
-.article-list a {
+.author-info p:last-child {
+  margin-bottom: 0;
+}
+
+.article-actions {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+}
+
+.article-actions a {
+  color: var(--hoockers-green, #4CAF50);
   text-decoration: none;
-  font-size: 1.5rem;
-  color: #007bff;
+  font-weight: var(--fw-600, 600);
+  transition: color 0.3s ease;
 }
 
-.article-list a:hover {
+.article-actions a:hover {
+  color: var(--eerie-black, #1a1a1a);
   text-decoration: underline;
 }
 
-/* Site Footer */
-.site-footer {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #333;
-  color: #fff;
-  margin-top: 40px;
+/* Sidebar */
+.sidebar {
+  display: none;
 }
 
-.site-footer p {
-  margin: 0;
-} 
+.sidebar-section {
+  background: var(--white, #fff);
+  padding: 25px;
+  border-radius: var(--radius-16, 16px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+}
 
-</style>  
+.sidebar-title {
+  font-size: 1.8rem;
+  font-weight: var(--fw-700, 700);
+  margin-bottom: 20px;
+  color: var(--eerie-black, #1a1a1a);
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--hoockers-green, #4CAF50);
+}
+
+.related-articles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-article-item {
+  margin-bottom: 20px;
+}
+
+.related-article-item:last-child {
+  margin-bottom: 0;
+}
+
+.related-article-link {
+  display: flex;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.related-article-link:hover {
+  transform: translateX(5px);
+}
+
+.related-article-thumb {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-16, 16px);
+  overflow: hidden;
+}
+
+.related-article-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.related-article-link:hover .related-article-thumb img {
+  transform: scale(1.1);
+}
+
+.related-article-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.related-article-title {
+  font-size: 1.4rem;
+  font-weight: var(--fw-600, 600);
+  line-height: 1.4;
+  color: var(--eerie-black, #1a1a1a);
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.related-article-link:hover .related-article-title {
+  color: var(--hoockers-green, #4CAF50);
+}
+
+.related-article-date {
+  font-size: 1.2rem;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+}
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-cloud-item {
+  background-color: var(--cultured, #f5f5f5);
+  font-size: 1.2rem;
+  font-weight: var(--fw-500, 500);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill, 50px);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--eerie-black, #1a1a1a);
+}
+
+.tag-cloud-item:hover {
+  background-color: var(--hoockers-green, #4CAF50);
+  color: var(--white, #fff);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+
+@media (min-width: 768px) {
+  .content-wrapper {
+    padding: 60px 30px;
+  }
+
+  .article-header {
+    padding: 50px 50px 40px;
+  }
+
+  .article-body {
+    padding: 50px 50px;
+  }
+
+  .article-footer {
+    padding: 40px 50px;
+  }
+
+  .article-featured-image figcaption {
+    padding: 20px 50px;
+  }
+
+  .article-body {
+    font-size: 1.7rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .content-wrapper {
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    padding: 80px 40px;
+  }
+
+  .sidebar {
+    display: block;
+  }
+
+  .article-header {
+    padding: 60px 70px 50px;
+  }
+
+  .article-body {
+    padding: 60px 70px;
+    font-size: 1.8rem;
+  }
+
+  .article-footer {
+    padding: 50px 70px;
+  }
+
+  .article-featured-image figcaption {
+    padding: 25px 70px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .content-wrapper {
+    gap: 60px;
+    padding: 100px 60px;
+  }
+
+  .article-body {
+    font-size: 1.9rem;
+  }
+}
+</style>
