@@ -2,19 +2,6 @@
      <section class="section shop" id="shop" aria-label="shop">
           <div class="container">
             
-            {% comment %} <div class="title-wrapper">
-                <h2 class="h2 section-title">{{ collection.title }}</h2>
-                <div style='display:flex; z-index:5;'> 
-                    <a href="#" class="btn-link">
-                        {% render 'sorting-filter' %}
-                        <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
-                    </a>
-                    <a href="#" class="btn-link">
-                        {% render 'collection-filter' %}
-                        <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
-                    </a>
-               </div>
-            </div> {% endcomment %}
             <div class="title-wrapper">
                   <h2 class="h2 section-title">
                     {% if section.settings.selected_collection != blank %}
@@ -23,14 +10,14 @@
                         {{ collection.title }}
                     {% endif %}
                   </h2>
-                <div style='display:flex; z-index:5;'> 
-                    <a href="#" class="btn-link">
+                <div class="filter-controls"> 
+                    <a href="#" class="btn-link filter-btn">
                         {% render 'sorting-filter' %}
-                        <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
+                        <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
                     </a>
-                    <a href="#" class="btn-link">
+                    <a href="#" class="btn-link filter-btn">
                         {% render 'collection-filter' %}
-                        <ion-icon class="arrow-forward" aria-hidden="true"></ion-icon>
+                        <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
                     </a>
                 </div>
             </div>
@@ -180,16 +167,12 @@
     }
     
     .collection-container {
-        
         box-sizing: border-box;
-      
     }
 
-    
     .collection {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        {% comment %} grid-template-columns: repeat(4, 1fr); {% endcomment %}
         gap: 20px;
     }
 
@@ -199,14 +182,12 @@
         }
     }
     
-    /* For medium screens, display 3 cards */
     @media (min-width: 900px) and (max-width: 1199px) {
         .collection {
             grid-template-columns: repeat(4, 1fr);
         }
     }
     
-    /* For smaller screens, display 2 cards */
     @media (min-width: 750px) and (max-width: 899px) {
         .collection {
             grid-template-columns: repeat(3, 1fr);
@@ -218,7 +199,6 @@
             grid-template-columns: repeat(2, 1fr);
         }
     }
-
 
     .card {
         background-color: #fff;
@@ -252,9 +232,76 @@
         margin: 0;
         color: #666;
     }
-         
-      
 
+    /* New Styles for Title Wrapper and Filter Controls */
+    .title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 5;
+    }
+
+    .filter-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        background-color: #f8f8f8;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        font-size: 0.95rem;
+    }
+
+    .filter-btn:hover {
+        background-color: #e8e8e8;
+        border-color: #d0d0d0;
+        transform: translateY(-2px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .filter-btn ion-icon {
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        .title-wrapper {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .filter-controls {
+            width: 100%;
+            justify-content: flex-start;
+        }
+
+        .filter-btn {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .filter-controls {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .filter-btn {
+            width: 100%;
+        }
+    }
 </style>     
 <script>
     function fetchCart() {
@@ -266,11 +313,10 @@
         .catch(error => console.error('Error-fetching cart:', error));
     }
 
-
     const currencySymbol = "{{ shop.currency | escape }}"; 
     function updateCartUI(cart) {
       var cartContent = document.getElementById('cart-content');
-      cartContent.innerHTML = ''; // Clear existing content
+      cartContent.innerHTML = '';
       
       if (cart.item_count > 0) {
         var cartHTML = `
@@ -279,7 +325,7 @@
           <form action="/cart" method="post" novalidate>`;
         let subtotal = 0;
         cart.items.forEach(function(item, index) {
-          const itemPrice = item.price / 100;  // Convert cents to dollars
+          const itemPrice = item.price / 100;
           const initialTotalPrice = itemPrice * item.quantity;
           subtotal += initialTotalPrice;
           const safeItemId = `item_${item.key.replace(/[^a-zA-Z0-9_-]/g, '')}`;
@@ -328,14 +374,12 @@
             <p id="subtotal">Subtotal: ${currencySymbol}${subtotal.toFixed(2)}</p>
             <button type="submit" name="update">Update</button>
             <button type="submit" name="checkout" class="btn btn-primary">Checkout</button>
-            {% comment %} <p>Sub total: ${Shopify.formatMoney(cart.total_price)}</p> {% endcomment %}
           </div>
         </form>
       </div>`; 
 
       cartContent.innerHTML = cartHTML;
 
-    // Add event listeners for increment and decrement buttons
     cart.items.forEach(function(item, index) {
       const decrementButton = document.getElementById(`decrement_${item.key}`);
       const incrementButton = document.getElementById(`increment_${item.key}`);
@@ -345,19 +389,15 @@
       const subtotalDisplay = document.getElementById('subtotal');
       const safeItemId = `item_${item.key.replace(/[^a-zA-Z0-9_-]/g, '')}`;
 
-
-
       function updatePriceAndQuantity(newQuantity) {
         const newLinePrice = (item.price * newQuantity) / 100;
         quantityDisplay.textContent = newQuantity;
         quantityInput.value = newQuantity;
         linePriceDisplay.textContent = `Total: ${currencySymbol}${newLinePrice.toFixed(2)}`;
 
-        // Update the subtotal
         subtotal = subtotal - (item.price * item.quantity) / 100 + newLinePrice;
         subtotalDisplay.textContent = `Subtotal: ${currencySymbol}${subtotal.toFixed(2)}`;
 
-        // Update item quantity to the new quantity
         item.quantity = newQuantity;
       }
 
@@ -375,9 +415,6 @@
         updatePriceAndQuantity(currentQuantity);
       });
 
-
-
-  //REMOVING
       const removeButton = document.querySelector(`.remove-item[data-key="${item.key}"]`);
       
       removeButton.addEventListener('click', function(e) {
@@ -385,14 +422,11 @@
         removeCartItem(safeItemId, index +1);
       });
     });
-        {% comment %} cartContent.innerHTML = cartHTML; {% endcomment %}
       } else {
         cartContent.innerHTML = '<h2>Cart</h2><p>Cart is empty</p>';
       }
 
-
       function removeCartItem(safeItemId, line) {
-        
           console.log(`Attempting to remove item with ID: ${safeItemId}`);
           const itemElement = document.getElementById(safeItemId);
           if (itemElement) {
@@ -418,15 +452,8 @@
           } else {
             console.error(`Element with ID ${safeItemId} not found.`);
           }
-      
       }
-    
-    
       
-      
-
-      
-      // Function to update the subtotal
       function updateSubtotal(updatedCart) {
         let subtotal = 0;
         updatedCart.items.forEach(item => {
@@ -435,14 +462,6 @@
         document.getElementById('subtotal').textContent = `Subtotal: ${currencySymbol}${subtotal.toFixed(2)}`;
       }
     }
-    
-
-    
-
-
-
-
-
 
     function submitAddToCartForm(formElement) {
       let formData = new FormData(formElement);
@@ -450,15 +469,9 @@
       var loader = myModal2.querySelector('#loader');
       var cartContent = myModal2.querySelector('#cart-content');
     
-      // Show the modal
       myModal2.style.display = 'block';
-    
-      // Show the loader and hide the cart content initially
       loader.style.display = 'block';
       cartContent.style.display = 'none';
-    
-      // Simulate data fetching (or actual AJAX request)
-    // Adjust this timeout based on actual data fetching time
     
       fetch(window.Shopify.routes.root + 'cart/add.js', {
         method: 'POST',
@@ -469,19 +482,16 @@
         openCart(); 
         fetchCart();
         setTimeout(function() {
-          // Hide the loader and show the cart content
           loader.style.display = 'none';
           cartContent.style.display = 'block';
         }, 100); 
-  
       })
       .catch((error) => {
         console.error('Error:', error);
       });
     
-      return false; // Prevent the default form submission
+      return false;
     }
-
 </script>
       
  {% schema %}
