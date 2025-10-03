@@ -1,7 +1,7 @@
 {
     "sections": {
-      "best-seller": {
-        "type": "best-seller",
+      "best-sellers": {
+        "type": "best-sellers",
         "settings": {}
       }
     },
