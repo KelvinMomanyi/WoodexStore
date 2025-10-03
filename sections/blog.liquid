@@ -18,7 +18,7 @@
     <ul class="grid-list">
       {% assign selected_blog_handle = section.settings.blog_type %}
 
-      {% if selected_blog_handle %}
+      {% if selected_blog_handle and blogs[selected_blog_handle].articles.size > 0 %}
         <!-- Fetch the selected blog and its articles -->
         {% for article in blogs[selected_blog_handle].articles limit: 3 %}
           <li class="flex-item">
