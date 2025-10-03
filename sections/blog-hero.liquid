@@ -53,21 +53,31 @@
 .newsletter-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
   width: 100%;
   max-width: 600px;
 }
 
 .newsletter-form .email-field {
-  padding: 15px 20px;
+  padding: 16px 24px;
   width: 100%;
   border: 1px solid #000;
+  border-radius: 4px;
   outline: none;
+  font-size: 1.5rem;
+  transition: border-color 0.2s ease;
+}
+
+.newsletter-form .email-field:focus {
+  border-color: #333;
 }
 
 .newsletter-form .btn {
-  padding: 15px 30px;
+  padding: 16px 32px;
   width: 100%;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .newsletter-text {
@@ -96,14 +106,19 @@
 
   .newsletter-form {
     flex-direction: row;
+    gap: 8px;
+    align-items: stretch;
   }
 
   .newsletter-form .email-field {
     flex: 1;
+    border-radius: 4px 0 0 4px;
   }
 
   .newsletter-form .btn {
     width: auto;
+    min-width: 140px;
+    border-radius: 0 4px 4px 0;
   }
 }
 
