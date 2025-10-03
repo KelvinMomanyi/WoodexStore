@@ -31,663 +31,635 @@
   </script>
 {% endif %}
 
-  <section class="section offer">
-     <div class="container">
+<section class="section offer">
+  <div class="container">
+    <div class="product-layout">
+      <div class="product-images-section">
+        <div class="product-banner"> 
+          <div class="card-banner img-holder" id="imgContainer">
+            <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="img-cover" loading="lazy">
+          </div>
+        </div>
+        <div class="thumbs">
+          {% for image in product.images %}
+            <img src="{{ image | image_url }}" alt="{{ image.alt }}" class="{% if forloop.first %}thumb-active{% endif %}">
+          {% endfor %}
+        </div>
+      </div>
 
-       <div class="product-banner"> 
-           
-          <div class="card-banner img-holder">
-             <img src="{{product.featured_image | img_url : 'large'}}" alt="{{product.featured_image.alt | escape }}" class="img-cover"  loading="lazy">
+      <div class="offer-content">
+        <h1 class="title">
+          <span class="titleText">{{ product.title }}</span>
+          <span class="titleOverlay"></span>
+        </h1>
+
+        <div class="card-rating">
+          <div class="rating-wrapper" aria-label="5 star rating">
+            <ion-icon name="star" aria-hidden="true"></ion-icon>
+            <ion-icon name="star" aria-hidden="true"></ion-icon>
+            <ion-icon name="star" aria-hidden="true"></ion-icon>
+            <ion-icon name="star" aria-hidden="true"></ion-icon>
+            <ion-icon name="star" aria-hidden="true"></ion-icon>
           </div>
-          <div class="thumbs">
-            {% for image in product.images %}
-                <img src="{{ image | image_url}}"  alt="{{ image.alt }}" class="{% if forloop.first %}thumb-active{% endif %}">
-              {% endfor %}
-          </div>
-       </div>
-       <div class="offer-content">
-          <h1 class="title">
-            <span class="titleText">
-                {{ product.title }}
-            </span>
-            <span class="titleOverlay"></span>
-          </h1>
-          <div class="pricing">
-            <h4 class="price">{{ product.price | money }}</h4>
-          </div>
-          <p class="description">
+          <span class="review-count">(0 reviews)</span>
+        </div>
+
+        <div class="pricing">
+          <h2 class="price">{{ product.price | money }}</h2>
+          {% if product.compare_at_price > product.price %}
+            <del class="compare-price">{{ product.compare_at_price | money }}</del>
+          {% endif %}
+        </div>
+
+        <div class="description">
           {{ product.description }}
-          </p>
-          <div class="options">
-               {% comment %} <h4>Size</h4>
-              <ul class="sizes">
-                <li class="size-active">37</li>
-                <li>38</li>
-                <li>39</li>
-                <li>40</li>
-                <li>41</li>
-              </ul> {% endcomment %}
-              <div class="relative">
-                <h4>Reviews</h4>
-              </div>
-              <div class="card-rating">
-                <div class="rating-wrapper" aria-label="5 star rating" style="display:flex; ">
-                  <ion-icon name="star" aria-hidden="true"></ion-icon>
-                  <ion-icon name="star"  aria-hidden="true"></ion-icon>
-                  <ion-icon name="star"  aria-hidden="true"></ion-icon>
-                  <ion-icon name="star"  aria-hidden="true"></ion-icon>
-                  <ion-icon name="star"  aria-hidden="true"></ion-icon>
-                </div>
-              </div>
-              <div class="quantity-selector1">
-                <button type="button" class="qty-btn1 minus1">−</button>
-                <input
-                  type="number"
-                  name="quantity"
-                  min="1"
-                  value="1"
-                  class="qty-input1"
-                >
-                <button type="button" class="qty-btn1 plus1">+</button>
-              </div>
-               
-              <div class="addBuyButtons">
-               
-                  <form action="/cart/add" method="post" style='margin-top:1em;' enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <button type="submit" class="action-btn btn btn-primary" aria-label="add to cart">
-                    
-                      Add to Cart
-                    </button>
-                  </form>
-                  <form action="/cart/add" method="post" style="margin-top:1em;" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <input type="hidden" name="return_to" value="/checkout">
-                    <button type="submit" class="action-btn btn btn-secondary" aria-label="buy now">
-                      Buy It Now
-                   </button>
-                 </form>
-
-              </div>
-          </div>
-
-
-           <div class="accordion-container">
-              <div class="accordion-item">
-                <div class="accordion-header">
-                  <span style="display: flex; align-items: center; gap: 6px;"><ion-icon name="information-circle-outline"></ion-icon> EXTRA INFORMATION</span>
-                  <button class="toggle-btn">+</button>
-                </div>
-                <div class="accordion-content">
-                  <p>Here is some extra product information.</p>
-                </div>
-              </div>
-            
-              <div class="accordion-item">
-                <div class="accordion-header">
-                  <span style="display: flex; align-items: center; gap: 6px;"><ion-icon name="bicycle-outline"></ion-icon>SHIPPING & RETURNS</span>
-                  <button class="toggle-btn">+</button>
-                </div>
-                <div class="accordion-content">
-                  <p>Shipping is free. Returns accepted within 30 days.</p>
-                </div>
-              </div>
-            
-              <div class="accordion-item">
-                <div class="accordion-header">
-                  <span style="display: flex; align-items: center; gap: 6px;"><ion-icon name="share-social-outline"></ion-icon>Share</span>
-                </div>
-              </div>
-           </div>
-        
-
-       </div>
-      
-     </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="info-flex-wrapper">
-        <!-- Review Section -->
-        <div class="review-section">
-          <p class="review-headline">Be the first to write a review</p>
-          <a href="#write-review" class="review-button">Write a review</a>
         </div>
 
-        <!-- Info Highlights -->
-        <div class="info-highlights">
-          <div class="info-item">
-            <strong>SUPPORT 24/7</strong>
-            <p>Contact us 24 hours a day, 7 days a week.</p>
+        <div class="options">
+          <div class="quantity-wrapper">
+            <label for="quantity">Quantity</label>
+            <div class="quantity-selector1">
+              <button type="button" class="qty-btn1 minus1">−</button>
+              <input type="number" name="quantity" id="quantity" min="1" value="1" class="qty-input1">
+              <button type="button" class="qty-btn1 plus1">+</button>
+            </div>
           </div>
-          <div class="info-item">
-            <strong>100% MONEY BACK</strong>
-            <p>All products come with a money back guarantee.</p>
-          </div>
-          <div class="info-item">
-            <strong>SECURE PAYMENTS</strong>
-            <p>Secure your transactions with our payment system.</p>
+
+          <div class="addBuyButtons">
+            <form action="/cart/add" method="post" enctype="multipart/form-data" onsubmit="submitAddToCartForm(this); return false;">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" id="cart-quantity" value="1">
+              <button type="submit" class="action-btn btn btn-primary" aria-label="add to cart">
+                <ion-icon name="cart-outline"></ion-icon>
+                Add to Cart
+              </button>
+            </form>
+            <form action="/cart/add" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <input type="hidden" name="quantity" id="buy-quantity" value="1">
+              <input type="hidden" name="return_to" value="/checkout">
+              <button type="submit" class="action-btn btn btn-secondary" aria-label="buy now">
+                <ion-icon name="flash-outline"></ion-icon>
+                Buy It Now
+              </button>
+            </form>
           </div>
         </div>
 
-          
-      </div>
-      <!-- Related Products -->
-      <div class="related-products">
-        <h3>Related Products</h3>
-        {% render 'related-products' %}
-      </div>
-        
-      </div>  
-  </section>
+        <div class="accordion-container">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">
+                <ion-icon name="information-circle-outline"></ion-icon> 
+                EXTRA INFORMATION
+              </span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="accordion-content">
+              <p>Here is some extra product information.</p>
+            </div>
+          </div>
 
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">
+                <ion-icon name="bicycle-outline"></ion-icon>
+                SHIPPING & RETURNS
+              </span>
+              <button class="toggle-btn">+</button>
+            </div>
+            <div class="accordion-content">
+              <p>Shipping is free. Returns accepted within 30 days.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <span class="accordion-title">
+                <ion-icon name="share-social-outline"></ion-icon>
+                SHARE
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-info-section">
+  <div class="container">
+    <div class="info-flex-wrapper">
+      <div class="review-section">
+        <p class="review-headline">Be the first to write a review</p>
+        <a href="#write-review" class="review-button">Write a review</a>
+      </div>
+
+      <div class="info-highlights">
+        <div class="info-item">
+          <ion-icon name="headset-outline"></ion-icon>
+          <strong>SUPPORT 24/7</strong>
+          <p>Contact us 24 hours a day, 7 days a week.</p>
+        </div>
+        <div class="info-item">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          <strong>100% MONEY BACK</strong>
+          <p>All products come with a money back guarantee.</p>
+        </div>
+        <div class="info-item">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <strong>SECURE PAYMENTS</strong>
+          <p>Secure your transactions with our payment system.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="related-products">
+      <h3>Related Products</h3>
+      {% render 'related-products' %}
+    </div>
+  </div>
+</section>
 
 <style>
-  
+  .product-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-bottom: 60px;
+  }
+
+  .product-images-section {
+    position: sticky;
+    top: 100px;
+  }
 
   .product-banner {
+    margin-bottom: 20px;
+  }
+
+  .card-banner {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f8f8f8;
+  }
+
+  .img-holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .img-holder:hover img {
+    transform: scale(1.1);
+  }
+
+  .thumbs {
     display: flex;
-    justify-content: center; /* Center the children horizontally */
-    align-items: center; /* Center the children vertically */
-    gap: 30px; /* Set the desired gap between the children */
-    margin-block-end: 20px; /* Maintain bottom margin */
-}
+    gap: 12px;
+    flex-wrap: wrap;
+  }
 
-.offer-content{
-height: auto;
-margin-top: 20%;
-}
-
-.img-holder{
-
- overflow: hidden;
-}
-
-.img-holder img{
-  transition: transform 0.5s ease, transform-origin 0.5s ease;
-}
-
-.img-holder:hover img {
-  transform: scale(1.2); /* Zoom the image to 120% */
-}
-
-
-.title{
-    position: relative;
-}
-
-.title .titleOverlay{
-    display: block;
-    position:absolute;
-    top: 0;
-    left: 0;
-    background: #111;
-    z-index: -1;
-    transition: 0.3s ease;
-    width: 100%;
-    height: 100%;
-    transform: scaleX(0);
-    transform-origin: top left;
-}
-
-.titleText{
-    color: #111;
-}
-
-.thumbs{
-  display:'flex';
-
-}
-
-.thumbs img{
-    width: 3em;
-    height: 3em;
-    border-radius: 4px;
+  .thumbs img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
     cursor: pointer;
-}
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    object-fit: cover;
+  }
 
-.thumbs .thumb-active{
-    border: 3px #ccc solid;
-}
+  .thumbs img:hover {
+    border-color: #ddd;
+  }
 
-.showcase img{
+  .thumbs .thumb-active {
+    border-color: #111;
+  }
+
+  .offer-content {
+    padding-top: 10px;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .card-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .rating-wrapper {
+    display: flex;
+    gap: 4px;
+    color: #ffc107;
+  }
+
+  .rating-wrapper ion-icon {
+    font-size: 20px;
+  }
+
+  .review-count {
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .pricing {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+
+  .compare-price {
+    font-size: 1.5rem;
+    color: #999;
+  }
+
+  .description {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .options {
+    margin-bottom: 32px;
+  }
+
+  .quantity-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .quantity-wrapper label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
+
+  .quantity-selector1 {
+    display: flex;
+    align-items: center;
+    border: 2px solid #e0e0e0;
+    width: fit-content;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  .qty-btn1 {
+    background: #f8f8f8;
+    border: none;
+    padding: 14px 18px;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+  }
+
+  .qty-btn1:hover {
+    background: #e8e8e8;
+  }
+
+  .qty-input1 {
+    width: 60px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    outline: none;
+    padding: 12px 8px;
+  }
+
+  .addBuyButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .addBuyButtons form {
+    margin: 0;
+  }
+
+  .action-btn {
     width: 100%;
-    transform-origin: bottom;
-}
+    padding: 16px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 
-.showcase > div {
-    position: relative;
-    height: 100%;
-}
-
-
-
-.sizes li{
- width: 3.2em;
- height: 3.2em;
- border: 1px #111 solid;
- border-radius: 50%;
- text-align: center;
- line-height: 3.2em;
- font-size: 0.8em;
- transition: 0.3s;
-}
-.size-active{
+  .btn-primary {
     background: #111;
-    color:#fff
-}
+    color: #fff;
+  }
 
-.reviews .pricing{
+  .btn-primary:hover {
+    background: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-secondary {
+    background: #fff;
+    color: #111;
+    border: 2px solid #111;
+  }
+
+  .btn-secondary:hover {
+    background: #111;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .action-btn ion-icon {
+    font-size: 20px;
+  }
+
+  .accordion-container {
+    margin-top: 40px;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .accordion-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    cursor: pointer;
+    padding: 20px 0;
+    transition: color 0.3s ease;
+  }
 
-.pricing .price{
-    color: #111;
-}
+  .accordion-header:hover {
+    color: #666;
+  }
 
-.reviews h4, .pricing h4{
-    color: #ccc;
-}
-
-.reviews .stars li{
-    margin: 0;
-    cursor:default;
-}
-
-.options{
-    justify-self: start;
-    gap:2em;
-}
-
-.options ul li{
-   display: inline-block;
-   margin: 0 0.2em;
-   cursor: pointer; 
-}
-
-.options ul li:nth-child(1){
-    margin-left: 0;
-}
-
-.addBuyButtons{
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-
-.colors{
- margin-top:1rem;
-}
-
-.colors li{
-    width: 2em;
-    height: 2em;
-    background: red;
-    border-radius: 50%;
-    border: 3px #f6f6f6 solid;
-}
-
-.colors .color-active{
-    border-color: #111;
-}
-
-.bar-bottom{
-    background: #fff;
-    padding: 1.5em;
-}
-
-.bar-bottom div, .bar-bottom a{
+  .accordion-title {
     display: flex;
     align-items: center;
-}
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
 
-.bar-bottom span{
-    cursor: pointer;
-}
+  .accordion-title ion-icon {
+    font-size: 20px;
+  }
 
-.controls{
-    justify-content: space-evenly;
-}
-
-.arrows span{
-    font-size: 2.5em;
-}
-.pagination{
-    display: flex;
-    margin: 0 0.5em;
-}
-.pag{
-    background: #ccc;
-    width: 3em;
-    height: 0.2em;
-    margin: 0 7px;
-    transition: 0.3s;
-}
-
-.pag-active{
-    background: #111;
-}
-
-.arr-left {
-    transform: rotate(180deg);
-}
-
-.cart{
-    justify-self: center;
-}
-
-.cart button{
-    background: #111;
-    color: #fff;
+  .toggle-btn {
+    font-size: 24px;
+    background: none;
     border: none;
-    padding: 1.3em 2em;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    margin-right: 1.5em;
-    transition: 0.3s;
-}
+    cursor: pointer;
+    color: #111;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
 
-.cart button:hover{
-    background: #000;
-}
+  .accordion-content {
+    display: none;
+    padding: 0 0 20px 0;
+    color: #666;
+    line-height: 1.6;
+  }
 
+  .product-info-section {
+    background: #f9f9f9;
+    padding: 60px 0;
+  }
 
+  .info-flex-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
 
-/*Quantity Selector*/
-.quantity-selector1 {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  width: fit-content;
-  border-radius: 6px;
-  overflow: hidden;
-}
+  .review-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+  }
 
-.qty-btn1 {
-  background: #f5f5f5;
-  border: none;
-  padding: 10px 14px;
-  font-size: 18px;
-  cursor: pointer;
-  user-select: none;
-}
+  .review-headline {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #111;
+  }
 
-.qty-input1 {
-  width: 50px;
-  text-align: center;
-  border: none;
-  font-size: 16px;
-  outline: none;
-}
+  .review-button {
+    padding: 12px 32px;
+    background-color: #111;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
 
+  .review-button:hover {
+    background-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
+  .info-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
 
+  .info-item {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
 
+  .info-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
 
+  .info-item ion-icon {
+    font-size: 40px;
+    color: #111;
+    margin-bottom: 16px;
+  }
 
+  .info-item strong {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #111;
+  }
 
+  .info-item p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
 
-.accordion-container {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
+  .related-products {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+  }
 
-.accordion-item {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
-}
+  .related-products h3 {
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+    color: #111;
+  }
 
-.accordion-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
+  .fade-in {
+    animation: fadeIn 0.5s ease;
+  }
 
-.toggle-btn {
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.accordion-content {
-  display: none;
-  padding: 10px 0;
-  color: #555;
-}
-
-
-
-/*Info Wrapper*/
-.info-flex-wrapper {
-  display: flex;
-  width: 100%;
-  gap: 40px;
-  padding: 20px auto;
-  
-}
-
-.review-section {
-  text-align: center;
-
-}
-
-.review-headline {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.review-button {
-  padding: 8px 16px;
-  background-color: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-}
-
-.info-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.info-item {
-  flex: 1 1 200px;
-  min-width: 200px;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 6px;
-}
-
-.related-products {
-  margin-top: 20px;
-}
-
-.related-products h3 {
-  margin-bottom: 16px;
-}
-
-.product-cards {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-
-/*Increase title size on larger screens*/
-
-@media screen and(min-width:1250px){
-    .title{
-        font-size: 2.5em;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
     }
-}
+    to {
+      opacity: 1;
+    }
+  }
 
-/*Shoe Jump Animation*/
-@keyframes jump{
-    40%{
-        transform: translateY(-8em) rotate(10deg);
-    }
-    70%{
-       transform: translateY(-8em) rotate(0)
-    }
-    85%{
-        transform: translateY(0) rotate(0deg)
-    }
-    87%{
-        transform: scaleY(0.8);
-    }
-    100% {
-        transform: scaleY(1);
+  @media (max-width: 1024px) {
+    .product-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
     }
 
-}
+    .product-images-section {
+      position: relative;
+      top: 0;
+    }
 
+    .info-flex-wrapper {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
 
-/*Shadow Animation*/
-@keyframes shadow{
-    50%{
-        transform:translateX(-50%) scaleX(0.8)
+    .info-highlights {
+      grid-template-columns: 1fr;
     }
-    100% {
-        transform: translateX(-50%) scaleX(1)
-    }
-}
+  }
 
-@keyframes shadow2 {
-    50%{
-        width: 0;
-        transform: translateX(-50%);
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
     }
-    100%{
-        width: 100%;
-        transform: translateX(-50%);
-    }
-}
 
-/*Shoe fade animation*/
-@keyframes fade {
-    0%{
-        opacity: 0;
+    .price {
+      font-size: 1.5rem;
     }
-    100%{
-        opacity: 1;
-    }
-}
 
-/*Title Animation*/
-@keyframes title{
-    0%{
-        transform: scaleX(0);
-        transform-origin: top left;
+    .addBuyButtons {
+      grid-template-columns: 1fr;
     }
-    30%{
-        transform: scaleX(1);
-        transform-origin: top right;
-    }
-    60%{
-        transform: scaleX(1);
-        transform-origin:top right;
-    }
-    100%{
-        transform: scaleX(0);
-        transform-origin:top right;
-    }
-}
 
-/*Shoe Replace Animation*/
-@keyframes replace{
-    5%{
-        transform: scaleY(0.8);
+    .thumbs img {
+      width: 60px;
+      height: 60px;
     }
-    10%{
-        transform: scaleY(1);
-    }
-    40%{
-        transform: translateY(-100vh);
-    }
-    60%{
-        transform: translateY(-100vh);
-    }
-    85%{
-        transform: translateY(0);
-    }
-    90%{
-        transform: scaleY(0.8);
-    }
-    100%{
-        transform: scaleY(1);
-    }
-}
 
-@media screen and (max-width:1000px){
-  
-}
-</style>  
+    .product-info-section {
+      padding: 40px 0;
+    }
+
+    .review-section,
+    .related-products {
+      padding: 30px 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-banner {
+      border-radius: 8px;
+    }
+
+    .action-btn {
+      padding: 14px 20px;
+      font-size: 0.9rem;
+    }
+
+    .info-item {
+      padding: 24px;
+    }
+  }
+</style>
+
 <script>
-const thumb = document.querySelectorAll(".thumbs img")
-const img = document.querySelector(".card-banner img")
-const colorBtn = document.querySelectorAll(".color")
-
-//Id variables
-let id = 1;
-let colorType = 1;
-let shoe =1
-
-
- var product = {
-      images: [
-        {% for image in product.images %}
-          {
-            src: "{{ image | img_url: 'large'}}",
-            alt: "{{ image.alt }}"
-          }{% unless forloop.last %},{% endunless %}
-        {% endfor %}
-      ]
- };
+  var product = {
+    images: [
+      {% for image in product.images %}
+        {
+          src: "{{ image | image_url: 'large' }}",
+          alt: "{{ image.alt }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  };
 
   function getImage(id) {
-     // Ensure that the product object is defined
-     if (typeof product === 'undefined' || !product.images || !product.images[id]) {
-        console.error("Product or image not defined");
-        return null;
+    if (typeof product === 'undefined' || !product.images || !product.images[id]) {
+      console.error("Product or image not defined");
+      return null;
     }
-
-    // Return the image object
     return product.images[id];
   }
-  
-
 
   document.addEventListener("DOMContentLoaded", function() {
-    const thumb = document.querySelectorAll(".thumbs img")
-    const img = document.querySelector(".card-banner img")
-    const stars = document.querySelectorAll(".rating-wrapper ion-icon");
+    const thumbs = document.querySelectorAll(".thumbs img");
+    const mainImg = document.querySelector(".card-banner img");
+    const imgContainer = document.getElementById("imgContainer");
 
-    {% comment %} var thumb = document.querySelectorAll(".thumb"); // Assuming you have a class 'thumb' for thumbnails
-    var img = document.getElementById("mainImage"); // Assuming the main image has an id 'mainImage' {% endcomment %}
-    var imgContainer = document.getElementById("imgContainer"); // Container for the image if you have one
-    const sizes = document.querySelectorAll(".sizes > li");
-  
-    function getImage(id) {
-      // Check if the product object and its images array are defined
-      if (typeof product === 'undefined' || !product.images || !product.images[id]) {
-        console.error("Product or image not defined");
-        return "";
-      }
-  
-      // Return the image URL
-      return product.images[id].src;
-    }
-  
     function resetActive(elements, className, index) {
-      // Remove 'active' class from all elements
       elements.forEach((element, i) => {
         if (i === index) {
           element.classList.add(`${className}-active`);
@@ -696,87 +668,72 @@ let shoe =1
         }
       });
     }
-  
-    // Setup click event listeners
-    for (let i = 0; i < thumb.length; i++) {
-      thumb[i].addEventListener("click", (e) => {
-        // Set the main image to the clicked thumbnail image
-        img.src = getImage(i);
-  
-        // Add 'active' class to the clicked thumbnail
-        resetActive(thumb, "thumb", i);
-  
-        // Add fade-in animation
-        imgContainer.classList.add("fade-in");
-        setTimeout(() => {
-          imgContainer.classList.remove("fade-in");
-        }, 500); // Match with your fade duration
+
+    thumbs.forEach((thumb, i) => {
+      thumb.addEventListener("click", () => {
+        const imageData = getImage(i);
+        if (imageData) {
+          mainImg.src = imageData.src;
+          resetActive(thumbs, "thumb", i);
+          imgContainer.classList.add("fade-in");
+          setTimeout(() => {
+            imgContainer.classList.remove("fade-in");
+          }, 500);
+        }
       });
-    }
-
-    //Changing Shoe Size
-  for(let i=0; i < sizes.length; i++){
-     sizes[i].addEventListener('click',(e)=>{
-      resetActive(sizes, 'size', i)
     });
-  }
 
-  function resetStars(shoe){
-    for(let i=0; i< stars.length; i++){
-       stars[i].innerText = 'star_outline'
-    }
-  
-  //adding the ratings
-  for (let i = 0; i < stars[shoe]; i++){
-    stars[i].innerText = "star"
-   }
-  }
+    // Quantity selector
+    document.querySelectorAll('.quantity-selector1').forEach(selector => {
+      const input = selector.querySelector('.qty-input1');
+      const minusBtn = selector.querySelector('.minus1');
+      const plusBtn = selector.querySelector('.plus1');
 
-
-  //Setting up the initial state of the data
-  resetStars(shoe - 1);
-  });
-
-
-  document.querySelectorAll('.quantity-selector1').forEach(selector => {
-    const input = selector.querySelector('.qty-input1');
-    const minusBtn = selector.querySelector('.minus1');
-    const plusBtn = selector.querySelector('.plus1');
-  
-    minusBtn.addEventListener('click', () => {
-      let value = parseInt(input.value, 10);
-      if (value > 1) input.value = value - 1;
-    });
-  
-    plusBtn.addEventListener('click', () => {
-      let value = parseInt(input.value, 10);
-      input.value = value + 1;
-    });
-  });
-  
-
-
-
-  document.querySelectorAll('.accordion-header').forEach(header => {
-    header.addEventListener('click', () => {
-      const content = header.nextElementSibling;
-      const btn = header.querySelector('.toggle-btn');
-      const isOpen = content.style.display === 'block';
-  
-      document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
-      document.querySelectorAll('.toggle-btn').forEach(b => b.textContent = '+');
-  
-      if (!isOpen) {
-        content.style.display = 'block';
-        btn.textContent = '−';
+      function updateHiddenQuantities() {
+        const quantity = input.value;
+        const cartQty = document.getElementById('cart-quantity');
+        const buyQty = document.getElementById('buy-quantity');
+        if (cartQty) cartQty.value = quantity;
+        if (buyQty) buyQty.value = quantity;
       }
+
+      minusBtn.addEventListener('click', () => {
+        let value = parseInt(input.value, 10);
+        if (value > 1) {
+          input.value = value - 1;
+          updateHiddenQuantities();
+        }
+      });
+
+      plusBtn.addEventListener('click', () => {
+        let value = parseInt(input.value, 10);
+        input.value = value + 1;
+        updateHiddenQuantities();
+      });
+
+      input.addEventListener('change', updateHiddenQuantities);
+    });
+
+    // Accordion
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const btn = header.querySelector('.toggle-btn');
+        
+        if (!content) return;
+        
+        const isOpen = content.style.display === 'block';
+
+        document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+        document.querySelectorAll('.toggle-btn').forEach(b => b.textContent = '+');
+
+        if (!isOpen) {
+          content.style.display = 'block';
+          btn.textContent = '−';
+        }
+      });
     });
   });
-  
-
-
-
-
 </script>
 
 {% schema %}
@@ -791,128 +748,3 @@ let shoe =1
   ]
 }
 {% endschema %}
-
-{% comment %} {% schema %}
-{
-"name":"Pr oduct-main",
-"settings":[
-  {
-    "type": "color",
-    "id": "background",
-    "label": "Background",
-    "default": "#F4F4F4"
-  },
-  {
-    "type": "color",
-    "id": "text_color",
-    "label": "Text",
-    "default": "#000000"
-  }
-],
-"presets":[
-    {
-  "name": "product-main" 
-    }
-]
-}
-{% endschema %} {% endcomment %}
-    {% comment %} <nav>
-      <a href="index.html">
-        <img src="./assets/images/MainLogo.png.svg"  style="width:80px;;" />
-      </a>
-      <span>Todays Top Picks</span>
-      <a href="#">
-          <span class="material-icons-outlined">
-            shopping_bag
-          </span>
-      </a>
-    </nav>
-  <main>
-      <div>
-          <span>MENS-</span>
-          <h1 class="title">
-              <span class="titleText">
-                  Red Nike Jordan Max Aura 3
-              </span>
-              <span class="titleOverlay"></span>
-          </h1>
-           <p class="description">
-           Lorem ipsum dolor sit amet.
-           </p>
-           <div class="thumbs">
-             <img src="./assets/images/shoe1-1/img1.jpg" alt="" class="thumb-active">
-             <img src="./assets/images/shoe1-1/img2.jpg" alt="">
-             <img src="./assets/images/shoe1-1/img3.jpg" alt="">
-             <img src="./assets/images/shoe1-1/img4.jpg" alt="">
-           </div>
-      </div>
-      <div class="showcase">
-          <div>
-              <img src="./assets/images/showcase/shoe1-1/img1.png" alt="">
-              <div class="shadow"></div>
-          </div>
-      </div>
-      <div class="options">
-          <h4>Size</h4>
-          <ul class="sizes">
-              <li class="size-active">37</li>
-              <li>38</li>
-              <li>39</li>
-              <li>40</li>
-              <li>41</li>
-          </ul>
-          <div class="relative">
-             <h4>Reviews</h4>
-             <ul class="stars">
-               <li>
-                  <span class="material-icons-outlined">
-                     star
-                  </span>
-               </li>
-               <li>
-                  <span class="material-icons-outlined">
-                      star
-                  </span>
-               </li>
-               <li>
-                  <span class="material-icons-outlined">
-                      star
-                  </span>
-               </li>
-               <li>
-                  <span class="material-icons-outlined">
-                      star_outline
-                  </span>
-               </li>
-             </ul>
-          </div>
-          <div class="pricing">
-            <h4>Price</h4>
-            <h4 class="price">$150</h4>
-          </div>
-          <div class="colors">
-            <h4>Colors</h4>
-            <ul>
-              <li class="color color-active"></li>
-              <li class="color"></li>
-            </ul>
-          </div>
-      </div>
-  </main>
-  
- 
-  </div>
-
-  {% schema %}
-      {
-        "name": "main-product",
-        "settings": [],
-        "blocks": [],
-        "presets": [
-          {
-            "name": "main-product"
-          }
-        ]
-      }
-      {% endschema %}
- {% endcomment %}
