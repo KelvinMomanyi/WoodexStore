@@ -1,253 +1,442 @@
-<section class="section service" id="service" aria-labelledby="service-lable">
+<section class="section service" id="service" aria-labelledby="service-label">
 
-    <p class="section-subtitle container" id="service-lable">My Services</p>
-    <div class="container">
-        <ul class="service-list">
+  <div class="container">
+    <p class="section-subtitle" id="service-label">{{ section.settings.service_heading }}</p>
+    <h2 class="section-title">{{ section.settings.service_subheading }}</h2>
+  </div>
 
-            <li data-reveal>
-              <div class="service-card container">
-      
-                <img src="{{'r3.jpg' | asset_url}}" width="340" height="380" loading="lazy" alt="Wedding Photography"
-                  class="img">
-      
-                <div>
-                  <h3 class="h3 card-title">Wedding Photography</h3>
-      
-                  <p class="card-subtitle">
-                    Aut temporibus qui vero.
-                  </p>
-                </div>
-      
-                <a href="#" class="btn-icon" aria-label="See more">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="20" viewBox="0 0 43 20" fill="none">
-                    <path d="M0 10H41" stroke="black" stroke-width="2" />
-                    <path d="M33 1L41.9 10.2727L33 19" stroke="black" stroke-width="2" />
-                  </svg>
-                </a>
-      
-              </div>
-            </li>
-      
-            <li data-reveal>
-              <div class="service-card container">
-      
-                <img src="{{'r4.jpg' | asset_url}}" width="340" height="380" loading="lazy" alt="Event Organiser"
-                  class="img">
-      
-                <div>
-                  <h3 class="h3 card-title">Event Organiser</h3>
-      
-                  <p class="card-subtitle">
-                    Nobis, magni modi ipsa culpa.
-                  </p>
-                </div>
-      
-                <a href="#" class="btn-icon" aria-label="See more">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="20" viewBox="0 0 43 20" fill="none">
-                    <path d="M0 10H41" stroke="black" stroke-width="2" />
-                    <path d="M33 1L41.9 10.2727L33 19" stroke="black" stroke-width="2" />
-                  </svg>
-                </a>
-      
-              </div>
-            </li>
-      
-            <li data-reveal>
-              <div class="service-card container">
-      
-                <img src="{{'r6.jpg' | asset_url}}" width="340" height="380" loading="lazy" alt="Product Marketing"
-                  class="img">
-      
-                <div>
-                  <h3 class="h3 card-title">Product Marketing</h3>
-      
-                  <p class="card-subtitle">
-                    Tenetur porro repellendus!
-                  </p>
-                </div>
-      
-                <a href="#" class="btn-icon" aria-label="See more">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="20" viewBox="0 0 43 20" fill="none">
-                    <path d="M0 10H41" stroke="black" stroke-width="2" />
-                    <path d="M33 1L41.9 10.2727L33 19" stroke="black" stroke-width="2" />
-                  </svg>
-                </a>
-      
-              </div>
-            </li>
-      
-            <li data-reveal>
-              <div class="service-card container">
-      
-                <img src="{{'r6.jpg' | asset_url}}" width="50" height="65" loading="lazy" alt="Videography"
-                  class="img">
-      
-                <div>
-                  <h3 class="h3 card-title">Videography</h3>
-      
-                  <p class="card-subtitle">
-                    Amet consectetur adipisicing elit
-                  </p>
-                </div>
-      
-                <a href="#" class="btn-icon" aria-label="See more">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="20" viewBox="0 0 43 20" fill="none">
-                    <path d="M0 10H41" stroke="black" stroke-width="2" />
-                    <path d="M33 1L41.9 10.2727L33 19" stroke="black" stroke-width="2" />
-                  </svg>
-                </a>
-      
-              </div>
-            </li>
-      
-          </ul>
-      
-    </div>
-    
-  </section>
+  <div class="container">
+    <ul class="service-list">
 
-  <style>
-.service { padding-inline: 15px; }
+      {% for block in section.blocks %}
+        <li data-reveal>
+          <div class="service-card container">
 
-.service .section-subtitle {
-  padding-inline: 10px;
-  margin-block-end:35px;
+            {% if block.settings.service_image %}
+              <img src="{{ block.settings.service_image | img_url: 'medium' }}" 
+                   width="340" 
+                   height="380" 
+                   loading="lazy" 
+                   alt="{{ block.settings.service_title }}"
+                   class="img">
+            {% endif %}
+
+            <div class="service-content">
+              <div class="service-icon">
+                {{ block.settings.service_icon }}
+              </div>
+              <h3 class="h3 card-title">{{ block.settings.service_title }}</h3>
+              <p class="card-subtitle">{{ block.settings.service_description }}</p>
+            </div>
+
+            {% if block.settings.service_link != blank %}
+              <a href="{{ block.settings.service_link }}" class="btn-icon" aria-label="Learn more about {{ block.settings.service_title }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="43" height="20" viewBox="0 0 43 20" fill="none">
+                  <path d="M0 10H41" stroke="currentColor" stroke-width="2" />
+                  <path d="M33 1L41.9 10.2727L33 19" stroke="currentColor" stroke-width="2" />
+                </svg>
+              </a>
+            {% endif %}
+
+          </div>
+        </li>
+      {% endfor %}
+
+    </ul>
+  </div>
+  
+</section>
+
+<style>
+/*-----------------------------------*\
+  #FRAGRANCE SERVICES SECTION
+\*-----------------------------------*/
+
+.service { 
+  padding: 80px 15px;
+  background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
 }
 
-.service-card .img { display: none; }
+.service .container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
 
-.service-list > li:not(:last-child) { border-block-start: 1px solid black; }
+.service .section-subtitle {
+  text-align: center;
+  font-size: var(--fs-7, 1.4rem);
+  font-weight: var(--fw-600, 600);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--hoockers-green, #4CAF50);
+  margin-bottom: 15px;
+}
 
-.service-list > li:last-child { border-block: 1px solid black; }
+.service .section-title {
+  text-align: center;
+  font-size: var(--fs-2, 3.2rem);
+  font-weight: var(--fw-700, 700);
+  color: var(--eerie-black, #1a1a1a);
+  margin-bottom: 60px;
+  line-height: 1.3;
+}
 
-.service-card { padding: 30px 10px; }
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-list > li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: background-color 0.3s ease;
+}
+
+.service-list > li:first-child {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.service-list > li:hover {
+  background-color: rgba(76, 175, 80, 0.02);
+}
+
+.service-card { 
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  position: relative;
+}
+
+.service-card .img { 
+  display: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.service-content {
+  flex: 1;
+}
+
+.service-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--hoockers-green, #4CAF50), #45a049);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.service-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: white;
+  fill: none;
+}
+
+.card-title {
+  font-size: var(--fs-3, 2.4rem);
+  font-weight: var(--fw-700, 700);
+  color: var(--eerie-black, #1a1a1a);
+  margin-bottom: 15px;
+  line-height: 1.3;
+}
 
 .service-card .card-subtitle {
-  color:black;
-  font-size: var(--fs-7);
-  font-weight: var(--fw-300);
-  line-height: 1.5;
-  margin-block: 10px 25px;
+  color: var(--eerie-black_80, rgba(26, 26, 26, 0.8));
+  font-size: var(--fs-7, 1.6rem);
+  font-weight: var(--fw-400, 400);
+  line-height: 1.7;
+  margin-bottom: 0;
 }
 
 .service-card .btn-icon {
   width: 55px;
   height: 55px;
-  border: 1px solid black;
-  --bg-color: transparent;
-  --hover-bg-color: gray;
-  --hover-text-color: var(--black);
-}
-
-.service-card .btn-icon svg { width: 25px; }
-
-.img{
-    width: 300px;
-    height: 300px;
-}
-
-
-.btn-icon {
-  background-color: var(--bg-color, var(--white));
+  border: 2px solid var(--eerie-black, #1a1a1a);
+  background-color: transparent;
+  color: var(--eerie-black, #1a1a1a);
   border-radius: 50%;
-  display: grid;
-  place-content: center;
-  transition: var(--transition-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  flex-shrink: 0;
+  align-self: flex-start;
 }
 
-.btn-icon path { transition: var(--transition-2); }
-
-.btn-icon:is(:hover, :focus-visible) {
-  background-color: var(--hover-bg-color, var(--white));
+.service-card .btn-icon svg { 
+  width: 25px;
+  transition: transform 0.4s ease;
 }
 
-.btn-icon:is(:hover, :focus-visible) path {
-  stroke: var(--hover-text-color, var(--black));
+.service-card .btn-icon:hover {
+  background-color: var(--hoockers-green, #4CAF50);
+  border-color: var(--hoockers-green, #4CAF50);
+  color: white;
+  transform: translateX(10px);
 }
 
-@media (min-width: 768px){
- /**
-   * SERVICE
-   */
+.service-card .btn-icon:hover svg {
+  transform: translateX(5px);
+}
 
-   .service-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Responsive Design */
+
+@media (min-width: 768px) {
+  .service {
+    padding: 100px 30px;
   }
 
-  .service-card .card-subtitle { margin-block-end: 15px; }   
+  .service .section-title {
+    font-size: var(--fs-1, 4rem);
+    margin-bottom: 80px;
+  }
+
+  .service-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 30px;
+    gap: 40px;
+  }
+
+  .service-content {
+    max-width: 600px;
+  }
+
+  .service-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+  }
+
+  .service-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .card-title {
+    font-size: var(--fs-2, 2.8rem);
+  }
+
+  .service-card .card-subtitle {
+    font-size: var(--fs-6, 1.8rem);
+  }
+
+  .service-card .btn-icon {
+    width: 65px;
+    height: 65px;
+  }
 }
 
+@media (min-width: 992px) {
+  .service {
+    padding: 120px 40px;
+  }
 
+  .service-card { 
+    position: relative;
+    padding: 60px 40px;
+  }
 
-@media (min-width: 992px){
-/**
-   * SERVICE
-   */
+  .service-card .img {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 320px;
+    object-fit: cover;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    z-index: 1;
+    filter: brightness(0.95);
+  }
 
-   .service-card { position: relative; }
+  .service-card:hover .img {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
 
-   .service-card .img {
-     display: block;
-     position: absolute;
-     top: 50%;
-     left: 50%;
-     transform: translate(-50%, -50%);
-     width: 200px;
-     opacity: 0;
-     visibility: hidden;
-     transition: var(--transition-1);
-     z-index: -1;
-   }
- 
-   .service-card:is(:hover, :focus-within) .img {
-     opacity: 1;
-     visibility: visible;
-   }
-} 
+  .service-content,
+  .service-card .btn-icon {
+    position: relative;
+    z-index: 2;
+  }
 
-@media (min-width: 1200px){
-/**
-   * SERVICE
-   */
+  .service-list > li:hover .service-content {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
 
-   .service-card { padding-block: 50px; }
+  .service-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+  }
 
-   .service-card .card-subtitle { --fs-7: 2.4rem; }
- 
-   .service-card .img { width: max-content; }
- 
-   .service-card .btn-icon {
-     width: 95px;
-     height: 95px;
-   }
- 
-   .service-card .btn-icon svg { width: 40px; }
- 
+  .service-icon svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .service {
+    padding: 140px 60px;
+  }
+
+  .service-card { 
+    padding: 70px 50px;
+  }
+
+  .service-card .img {
+    width: 320px;
+    height: 360px;
+  }
+
+  .card-title {
+    font-size: var(--fs-1, 3.2rem);
+  }
+
+  .service-card .card-subtitle {
+    font-size: var(--fs-5, 2rem);
+  }
+
+  .service-card .btn-icon {
+    width: 75px;
+    height: 75px;
+  }
+
+  .service-card .btn-icon svg { 
+    width: 30px;
+  }
+
+  .service-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .service-icon svg {
+    width: 44px;
+    height: 44px;
+  }
 }
 
 @media (min-width: 1400px) {
-    
-  /**
-   * SERVICE
-   */
+  .service { 
+    padding: 160px 70px;
+  }
 
-  .service { padding-inline: 70px; }
+  .service-card { 
+    padding: 80px 60px;
+  }
 
-  .service-card { padding-block: 65px; }
+  .service-card .img {
+    width: 360px;
+    height: 400px;
+  }
 }
 </style>
 
 {% schema %}
+{
+  "name": "Fragrance Services",
+  "settings": [
     {
-      "name": "services",
-      "settings":[],
-      "blocks": [],
-      "presets": [
+      "type": "text",
+      "id": "service_heading",
+      "label": "Section Subtitle",
+      "default": "Our Services"
+    },
+    {
+      "type": "text",
+      "id": "service_subheading",
+      "label": "Section Title",
+      "default": "Experience Luxury Fragrance Services"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Service Item",
+      "settings": [
         {
-          "name": "services"
+          "type": "image_picker",
+          "id": "service_image",
+          "label": "Service Image"
+        },
+        {
+          "type": "html",
+          "id": "service_icon",
+          "label": "Service Icon (SVG)",
+          "default": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M12 2L2 7l10 5 10-5-10-5z'></path><path d='M2 17l10 5 10-5M2 12l10 5 10-5'></path></svg>",
+          "info": "Paste SVG code for the icon"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Personalized Fragrance Consultation"
+        },
+        {
+          "type": "textarea",
+          "id": "service_description",
+          "label": "Service Description",
+          "default": "Expert guidance to help you discover your signature scent from our curated collection of luxury fragrances."
+        },
+        {
+          "type": "url",
+          "id": "service_link",
+          "label": "Service Link"
         }
       ]
     }
-    {% endschema %}
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Services",
+      "blocks": [
+        {
+          "type": "service",
+          "settings": {
+            "service_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z'></path><line x1='7' y1='7' x2='7.01' y2='7'></line></svg>",
+            "service_title": "Personalized Fragrance Consultation",
+            "service_description": "Expert guidance to help you discover your signature scent from our curated collection of luxury fragrances tailored to your preferences."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'></path><polyline points='3.27 6.96 12 12.01 20.73 6.96'></polyline><line x1='12' y1='22.08' x2='12' y2='12'></line></svg>",
+            "service_title": "Gift Box Customization",
+            "service_description": "Create the perfect gift with our bespoke packaging service. Choose from elegant boxes and personalized notes for any occasion."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><circle cx='12' cy='12' r='10'></circle><polyline points='12 6 12 12 16 14'></polyline></svg>",
+            "service_title": "Fragrance Subscription",
+            "service_description": "Never run out of your favorite scent. Subscribe to receive monthly deliveries with exclusive discounts and early access to new launches."
+          }
+        },
+        {
+          "type": "service",
+          "settings": {
+            "service_icon": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'></path><circle cx='9' cy='7' r='4'></circle><path d='M23 21v-2a4 4 0 0 0-3-3.87'></path><path d='M16 3.13a4 4 0 0 1 0 7.75'></path></svg>",
+            "service_title": "VIP Loyalty Program",
+            "service_description": "Join our exclusive community to enjoy special perks, birthday gifts, priority customer service, and invitations to private fragrance events."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
