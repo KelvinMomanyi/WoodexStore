@@ -1,36 +1,90 @@
-<!-- Hero Section -->
-<section class="hero-section" aria-label="Best Sellers Hero">
-  <div class="hero-background">
-    <div class="hero-overlay"></div>
-    <div class="hero-pattern"></div>
-  </div>
-  
-  <div class="container hero-container">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <ion-icon name="flame"></ion-icon>
-        <span>Trending Now</span>
-      </div>
-      <h1 class="hero-title">Best Sellers</h1>
-      <p class="hero-subtitle">Discover our top-rated fragrances loved by customers worldwide</p>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">10K+</span>
-          <span class="stat-label">Happy Customers</span>
+<!-- Hero Section with Slider -->
+<section class="hero1 text-center" style="min-height: 50vh;" aria-label="home" id="home">
+  <ul class="hero1-slider" data-hero-slider>
+    {% if section.blocks.size == 0 %}
+      <li class="slider-item active" data-hero-slider-item style="padding-block-start: 70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r11.jpg' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Bleu De Chanel</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">50+</span>
-          <span class="stat-label">Premium Scents</span>
+      </li>
+      <li class="slider-item" data-hero-slider-item style="padding-block-start:70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r10.jpg' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Sun di Gioia</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <span class="stat-number">4.8★</span>
-          <span class="stat-label">Average Rating</span>
+      </li>
+      <li class="slider-item" data-hero-slider-item style="padding-block-start:70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r9.jpg' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Dior Sauvage</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </li>
+      <li class="slider-item" data-hero-slider-item style="padding-block-start:70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r12.jpg' | asset_url }}'); background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Dior</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
+        </div>
+      </li>
+      <li class="slider-item" data-hero-slider-item style="padding-block-start:70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r7.jpg' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Julliete has a gun</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
+        </div>
+      </li>
+      <li class="slider-item" data-hero-slider-item style="padding-block-start:70px;">
+        <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ 'r6.jpg' | asset_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+        <div class="card-content">
+          <h1 class="h1 hero1-title slider-reveal">Valentino</h1>
+          <p class="price slider-reveal">Starting at $17.99</p>
+          <div style="display: flex; justify-content: flex-start;">
+            <a href="#product" class="btn btn-primary slider-reveal">Shop Now</a>
+          </div>
+        </div>
+      </li>
+    {% else %}
+      {% for block in section.blocks %}
+        <li class="slider-item {% if forloop.first %}active{% endif %}" data-hero-slider-item style="padding-block-start: 70px;">
+          <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ block.settings.hero_image | image_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+          <div class="card-content">
+            <h1 class="h1 hero1-title slider-reveal">{{ block.settings.brand_name }}</h1>
+            <p class="price slider-reveal">Starting at {{ block.settings.starting_price }}</p>
+            <div style="display: flex; justify-content: flex-start;">
+              <a href="{{ block.settings.shop_now_link }}" class="btn btn-primary slider-reveal">{{ block.settings.shop_now_text }}</a>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+
+  <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
+    <ion-icon name="chevron-back"></ion-icon>
+  </button>
+
+  <button class="slider-btn next" aria-label="slide to next" data-next-btn>
+    <ion-icon name="chevron-forward"></ion-icon>
+  </button>
 </section>
 
 <!-- Products Section -->
@@ -165,117 +219,125 @@
 </section>
 
 <style>
-  /* Hero Section Styles */
-  .hero-section {
+  /* Hero Slider Styles */
+  .hero1 .slider-btn { display: none; }
+
+  .hero1 {
     position: relative;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-block: 120px;
+    min-height: 85vh;
     overflow: hidden;
-    margin-bottom: 4rem;
+    z-index: 1;
   }
 
-  .hero-background {
+  .hero1 .slider-item {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-800) 100%);
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.2) 0%, transparent 50%);
-  }
-
-  .hero-pattern {
-    position: absolute;
-    inset: 0;
-    background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.03) 35px, rgba(255, 255, 255, 0.03) 70px);
-    opacity: 0.5;
-  }
-
-  .hero-container {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 4rem 1.5rem;
-  }
-
-  .hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .hero-badge {
-    display: inline-flex;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 0.5rem 1.25rem;
-    border-radius: 50px;
+    justify-content: start;
+    padding-inline-start: 130px;
+    padding-block-end: 50px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-3);
+    z-index: 1;
+  }
+
+  .hero1 .slider-item.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hero1 .slider-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.15);
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+  }
+
+  .hero1 .slider-item.active .slider-bg {
+    animation: smoothScale 7s linear forwards;
+  }
+
+  @keyframes smoothScale {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+  }
+
+  .hero1 .slider-item .card-content {
     color: white;
-    font-size: var(--fs-8);
-    font-weight: 500;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
-  .hero-badge ion-icon {
-    font-size: 1.2rem;
+  .slider-reveal {
+    transform: translateY(30px);
+    opacity: 0;
   }
 
-  .hero-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: white;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    line-height: 1.2;
+  .hero1 .slider-item.active .slider-reveal {
+    animation: sliderReveal 1s ease forwards;
   }
 
-  .hero-subtitle {
-    font-size: var(--fs-5);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 3rem;
-    line-height: 1.6;
+  @keyframes sliderReveal {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
-  .hero-stats {
+  .hero1 .slider-item.active .hero1-title { animation-delay: 300ms; }
+  .hero1 .slider-item.active .price { animation-delay: 600ms; }
+  .hero1 .slider-item.active .btn { animation-delay: 900ms; }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary-600);
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
   }
 
-  .stat-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
+  .slider-btn:hover {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  .stat-number {
-    font-size: var(--fs-3);
-    font-weight: 700;
-    color: white;
+  .slider-btn.prev {
+    left: 20px;
   }
 
-  .stat-label {
-    font-size: var(--fs-8);
-    color: rgba(255, 255, 255, 0.8);
+  .slider-btn.next {
+    right: 20px;
   }
 
-  .stat-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.3);
+  .slider-btn ion-icon {
+    font-size: 1.5rem;
   }
 
-  /* Products Section Improvements */
+  /* Products Section - Keep Original Styles */
   .section-subtitle {
     color: var(--gray-600);
     font-size: var(--fs-7);
@@ -297,14 +359,6 @@
     position: relative;
   }
 
-  /* Enhanced Grid Layout */
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-
   .product-item {
     opacity: 1;
     transform: translateY(0);
@@ -315,29 +369,6 @@
     opacity: 0;
     transform: translateY(20px);
     pointer-events: none;
-    position: absolute;
-    visibility: hidden;
-  }
-
-  .product-card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow-1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-2);
-  }
-
-  .card-banner {
-    position: relative;
-    flex-shrink: 0;
   }
 
   .card-banner .overlay {
@@ -353,12 +384,6 @@
   }
 
   .card-action-list {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.3s ease, transform 0.3s ease;
@@ -374,13 +399,6 @@
     border-radius: 50%;
     box-shadow: var(--shadow-1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
   }
 
   .card-action-btn:hover {
@@ -393,43 +411,15 @@
     cursor: not-allowed;
   }
 
-  .badge-list {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .badge {
     font-size: var(--fs-9);
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
-    font-weight: 600;
   }
 
   .badge.gray {
     background: var(--gray-200);
     color: var(--gray-600);
-  }
-
-  .card-content {
-    padding: 1.25rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-title {
-    margin-bottom: 0.75rem;
-  }
-
-  .card-price {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
   }
 
   .stock-status {
@@ -442,7 +432,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    margin-top: auto;
+    margin-top: 0.5rem;
   }
 
   .stars {
@@ -518,59 +508,103 @@
   }
 
   /* Responsive Design */
-  @media (max-width: 1200px) {
-    .product-list {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
+  @media screen and (max-width: 575px) {
+    .hero1 .slider-item {
+      padding-inline-start: 35px;
+    }
+
+    .slider-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .slider-btn.prev {
+      left: 10px;
+    }
+
+    .slider-btn.next {
+      right: 10px;
     }
   }
 
   @media (max-width: 768px) {
-    .hero-section {
-      min-height: 50vh;
-    }
-
-    .hero-stats {
-      gap: 1.5rem;
-    }
-
-    .stat-divider {
-      display: none;
-    }
-
     .filter-btn-list {
       flex-wrap: wrap;
       justify-content: center;
       gap: 0.5rem;
     }
 
-    .product-list {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-
-    .card-action-list {
-      opacity: 1;
-      transform: translateY(0);
+    .grid-list {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
   }
 
-  @media (max-width: 480px) {
-    .product-list {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-title {
-      font-size: 2rem;
-    }
-
-    .hero-subtitle {
-      font-size: var(--fs-6);
+  @media (min-width: 1200px) {
+    .hero1 {
+      height: 420px;
     }
   }
 </style>
 
 <script>
+  const addEventOnElements = function(elements, eventType, callback) {
+    for (let i = 0, len = elements.length; i < len; i++) {
+      elements[i].addEventListener(eventType, callback);
+    }
+  }
+
+  // Hero Slider
+  const heroSlider = document.querySelector('[data-hero-slider]');
+  const heroSliderItems = document.querySelectorAll("[data-hero-slider-item]");
+  const heroSliderPrevBtn = document.querySelector("[data-prev-btn]");
+  const heroSliderNextBtn = document.querySelector("[data-next-btn]");
+
+  let currentSlidePos = 0;
+  let lastActiveSliderItem = heroSliderItems[0];
+
+  const updateSliderPos = function() {
+    lastActiveSliderItem.classList.remove('active');
+    heroSliderItems[currentSlidePos].classList.add('active');
+    lastActiveSliderItem = heroSliderItems[currentSlidePos];
+  }
+
+  const slideNext = function() {
+    if (currentSlidePos >= heroSliderItems.length - 1) {
+      currentSlidePos = 0;
+    } else {
+      currentSlidePos++;
+    }
+    updateSliderPos();
+  }
+
+  const slidePrev = function() {
+    if (currentSlidePos < 1) {
+      currentSlidePos = heroSliderItems.length - 1;
+    } else {
+      currentSlidePos--;
+    }
+    updateSliderPos();
+  }
+
+  heroSliderPrevBtn.addEventListener("click", slidePrev);
+  heroSliderNextBtn.addEventListener("click", slideNext);
+
+  let autoSlideInterval;
+
+  const autoSlide = function() {
+    autoSlideInterval = setInterval(function() {
+      slideNext();
+    }, 5000);
+  }
+
+  addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], 'mouseover', function() {
+    clearInterval(autoSlideInterval);
+  });
+
+  addEventOnElements([heroSliderNextBtn, heroSliderPrevBtn], 'mouseout', autoSlide);
+
+  window.addEventListener("load", autoSlide);
+
   // Filter functionality
   const filterBtns = document.querySelectorAll('[data-filter-btn]');
   const productItems = document.querySelectorAll('.product-item');
@@ -605,7 +639,7 @@
     });
   });
 
-  // Quick view modal (placeholder - integrate with actual modal)
+  // Quick view modal
   document.querySelectorAll('.quick-add').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -621,11 +655,10 @@
     });
   });
 
-  // Load more (placeholder for infinite scroll or pagination)
+  // Load more
   const loadMoreBtn = document.getElementById('load-more-btn');
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', () => {
-      // Simulate loading more products
       alert('Loading more best sellers...');
     });
   }
@@ -645,21 +678,43 @@
 {% schema %}
 {
   "name": "best-sellers",
-  "settings": [
-    {
-      "type": "text",
-      "id": "hero_title",
-      "label": "Hero Title",
-      "default": "Best Sellers"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_subtitle",
-      "label": "Hero Subtitle",
-      "default": "Discover our top-rated fragrances loved by customers worldwide"
-    }
-  ],
+  "settings": [],
   "blocks": [
+    {
+      "type": "hero_section",
+      "name": "Hero Section",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "hero_image",
+          "label": "Hero Image"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Name",
+          "default": "Brand Name"
+        },
+        {
+          "type": "text",
+          "id": "starting_price",
+          "label": "Starting Price",
+          "default": "$17.99"
+        },
+        {
+          "type": "url",
+          "id": "shop_now_link",
+          "label": "Shop Now Button Link",
+          "default": "#product"
+        },
+        {
+          "type": "text",
+          "id": "shop_now_text",
+          "label": "Shop Now Button Text",
+          "default": "Shop Now"
+        }
+      ]
+    },
     {
       "type": "collection_section",
       "name": "Collection Section",
