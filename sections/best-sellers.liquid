@@ -93,85 +93,190 @@
 <!-- Best Sellers Section -->
  
 <div class="collection-container">
-  <div class="collection">
-      {% comment %} Smart Collection Selection with Fallback {% endcomment %}
-      {% if section.settings.best_sellers_collection != blank %}
-          {% assign selected_collection = collections[section.settings.best_sellers_collection] %}
-      {% elsif collections['best-sellers'] %}
-          {% assign selected_collection = collections['best-sellers'] %}
-      {% else %}
-          {% assign selected_collection = collections.all %}
-      {% endif %}
-      
-      {% if selected_collection and selected_collection.products.size > 0 %}
-          {% for product in selected_collection.products %}
-            <li class="decoration">
-              <div class="product-card">
-                <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-                  {% if product.featured_image %}
-                    <img src="{{ product.featured_image | img_url: 'large' }}" 
-                      alt="{{ product.featured_image.alt | escape }}" 
-                      class="img-cover" 
-                      width="300" 
-                      height="300" 
-                      loading="lazy">
-                  {% else %}
-                   <img src="{{ 'default-image.jpg' | asset_url }}" 
-                      alt="No image available" 
-                      class="img-cover" 
-                       width="300" 
-                       height="300" 
-                       loading="lazy">
-                  {% endif %}
-               <ul class="card-action-list">
-                <li>
-                 <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-                   <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                 </button>
-               </li>
-               <li>
-               <button class="card-action-btn" aria-label="view cart" title="view cart">
-               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-           </button>
-         </li>
-         <li>
-           <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
-             <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-           </button>
-         </li>
-       </ul>
-       {% if product.compare_at_price > product.price %}
-       <ul class="badge-list">
-         <li>
-           <div class="badge orange">Sale</div>
-         </li>
-         <li>
-           <div class="badge cyan">
-             10%
-           </div>
-         </li>
-       </ul>
-       {% endif %}
-     </a>
-          <div class="card-content">
-             <h3 class="h3">
-               <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-             </h3>
-              <div class="card-price">
-               {% if product.compare_at_price > product.price %}
-                 <del class="del">{{ product.compare_at_price | money }}</del>
-              {% endif %}
-                 <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
-               </div>
-              </div>
+  <div class="collection-main-wrapper">
+    <!-- Products Grid -->
+    <div class="collection">
+        {% comment %} Smart Collection Selection with Fallback {% endcomment %}
+        {% if section.settings.best_sellers_collection != blank %}
+            {% assign selected_collection = collections[section.settings.best_sellers_collection] %}
+        {% elsif collections['best-sellers'] %}
+            {% assign selected_collection = collections['best-sellers'] %}
+        {% else %}
+            {% assign selected_collection = collections.all %}
+        {% endif %}
+        
+        {% if selected_collection and selected_collection.products.size > 0 %}
+            {% for product in selected_collection.products %}
+              <li class="decoration">
+                <div class="product-card">
+                  <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                    {% if product.featured_image %}
+                      <img src="{{ product.featured_image | img_url: 'large' }}" 
+                        alt="{{ product.featured_image.alt | escape }}" 
+                        class="img-cover" 
+                        width="300" 
+                        height="300" 
+                        loading="lazy">
+                    {% else %}
+                     <img src="{{ 'default-image.jpg' | asset_url }}" 
+                        alt="No image available" 
+                        class="img-cover" 
+                         width="300" 
+                         height="300" 
+                         loading="lazy">
+                    {% endif %}
+                 <ul class="card-action-list">
+                  <li>
+                   <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                     <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                   </button>
+                 </li>
+                 <li>
+                 <button class="card-action-btn" aria-label="view cart" title="view cart">
+                 <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+             </button>
+           </li>
+           <li>
+             <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
+               <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+             </button>
+           </li>
+         </ul>
+         {% if product.compare_at_price > product.price %}
+         <ul class="badge-list">
+           <li>
+             <div class="badge orange">Sale</div>
+           </li>
+           <li>
+             <div class="badge cyan">
+               10%
              </div>
-            </li>
-          {% endfor %}
-      {% else %}
-          <div class="empty-collection-message">
-              <p style="text-align: center; padding: 2rem; color: var(--gray-600);">No products found in the selected collection. Please select a different collection or add products.</p>
+           </li>
+         </ul>
+         {% endif %}
+       </a>
+            <div class="card-content">
+               <h3 class="h3">
+                 <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+               </h3>
+                <div class="card-price">
+                 {% if product.compare_at_price > product.price %}
+                   <del class="del">{{ product.compare_at_price | money }}</del>
+                {% endif %}
+                   <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
+                 </div>
+                </div>
+               </div>
+              </li>
+            {% endfor %}
+        {% else %}
+            <div class="empty-collection-message">
+                <p style="text-align: center; padding: 2rem; color: var(--gray-600);">No products found in the selected collection. Please select a different collection or add products.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Sidebar Section -->
+    <aside class="bestsellers-sidebar">
+      <!-- Why Shop With Us -->
+      <div class="sidebar-card features-card">
+        <h3 class="sidebar-title">
+          <ion-icon name="star" class="title-icon"></ion-icon>
+          Why Our Best Sellers?
+        </h3>
+        <ul class="features-list">
+          <li class="feature-item">
+            <ion-icon name="checkmark-circle" class="feature-icon"></ion-icon>
+            <div class="feature-content">
+              <h4>Verified Quality</h4>
+              <p>Hand-picked products with verified customer reviews</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <ion-icon name="shield-checkmark" class="feature-icon"></ion-icon>
+            <div class="feature-content">
+              <h4>100% Authentic</h4>
+              <p>Guaranteed genuine products from trusted brands</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <ion-icon name="flash" class="feature-icon"></ion-icon>
+            <div class="feature-content">
+              <h4>Fast Shipping</h4>
+              <p>Express delivery on all best-selling items</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <ion-icon name="refresh" class="feature-icon"></ion-icon>
+            <div class="feature-content">
+              <h4>Easy Returns</h4>
+              <p>30-day hassle-free return policy</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Trending Now -->
+      <div class="sidebar-card trending-card">
+        <h3 class="sidebar-title">
+          <ion-icon name="flame" class="title-icon"></ion-icon>
+          Trending Now
+        </h3>
+        <div class="trending-tags">
+          <a href="#" class="trending-tag">#Summer2024</a>
+          <a href="#" class="trending-tag">#LuxuryFragrances</a>
+          <a href="#" class="trending-tag">#GiftIdeas</a>
+          <a href="#" class="trending-tag">#NewArrivals</a>
+          <a href="#" class="trending-tag">#Bestsellers</a>
+        </div>
+      </div>
+
+      <!-- Customer Reviews Summary -->
+      <div class="sidebar-card reviews-card">
+        <h3 class="sidebar-title">
+          <ion-icon name="people" class="title-icon"></ion-icon>
+          Customer Love
+        </h3>
+        <div class="reviews-summary">
+          <div class="rating-display">
+            <div class="stars-large">★★★★★</div>
+            <p class="rating-text">4.8 out of 5</p>
+            <p class="review-count-text">Based on 2,847 reviews</p>
           </div>
-      {% endif %}
+          <div class="review-highlight">
+            <p class="review-quote">"Amazing quality and fast delivery! These best sellers never disappoint."</p>
+            <p class="review-author">- Sarah M.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Special Offer Banner -->
+      <div class="sidebar-card offer-card">
+        <div class="offer-badge">Limited Time</div>
+        <h3 class="offer-title">Get 15% Off</h3>
+        <p class="offer-description">On your first purchase of any best seller</p>
+        <div class="offer-code">
+          <span class="code-label">Use code:</span>
+          <span class="code-value">BEST15</span>
+        </div>
+        <a href="#" class="offer-btn">Shop Now</a>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="sidebar-card newsletter-card">
+        <h3 class="sidebar-title">
+          <ion-icon name="mail" class="title-icon"></ion-icon>
+          Stay Updated
+        </h3>
+        <p class="newsletter-text">Get notified when new best sellers arrive</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" class="newsletter-input" required>
+          <button type="submit" class="newsletter-btn">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+        </form>
+      </div>
+    </aside>
   </div>
 </div>
 
@@ -472,16 +577,338 @@
     gap: 2rem;
     margin-top: 2rem;
     padding: 2rem;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .collection-main-wrapper {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    align-items: start;
   }
 
   .collection {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     list-style: none;
     padding: 0;
-    width: 100%;
-    max-width: 1400px;
+    flex: 1;
+  }
+
+  /* Sidebar Styles */
+  .bestsellers-sidebar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: sticky;
+    top: 100px;
+  }
+
+  .sidebar-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .sidebar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .sidebar-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .title-icon {
+    font-size: 1.3rem;
+    color: var(--primary-600);
+  }
+
+  /* Features Card */
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .feature-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+    color: var(--primary-600);
+    flex-shrink: 0;
+  }
+
+  .feature-content h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.4;
+  }
+
+  /* Trending Card */
+  .trending-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+  }
+
+  .trending-card .sidebar-title {
+    color: white;
+  }
+
+  .trending-card .title-icon {
+    color: #ffd700;
+  }
+
+  .trending-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .trending-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+
+  .trending-tag:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Reviews Card */
+  .reviews-summary {
+    text-align: center;
+  }
+
+  .rating-display {
+    padding: 1rem;
+    background: linear-gradient(135deg, #f6f8fb 0%, #f1f4f9 100%);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .stars-large {
+    font-size: 1.8rem;
+    color: #ffc107;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .rating-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .review-count-text {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+  }
+
+  .review-highlight {
+    border-left: 3px solid var(--primary-600);
+    padding-left: 1rem;
+    text-align: left;
+  }
+
+  .review-quote {
+    font-style: italic;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .review-author {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    font-weight: 600;
+  }
+
+  /* Offer Card */
+  .offer-card {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .offer-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .offer-description {
+    font-size: 0.9rem;
+    opacity: 0.95;
+    margin-bottom: 1rem;
+  }
+
+  .offer-code {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .code-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .code-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .offer-btn {
+    display: inline-block;
+    background: white;
+    color: #ff6b6b;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .offer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Newsletter Card */
+  .newsletter-card {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+  }
+
+  .newsletter-card .sidebar-title {
+    color: white;
+  }
+
+  .newsletter-card .title-icon {
+    color: white;
+  }
+
+  .newsletter-text {
+    font-size: 0.9rem;
+    opacity: 0.95;
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: 0.7rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .newsletter-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .newsletter-input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .newsletter-btn {
+    background: white;
+    color: #4facfe;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newsletter-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .newsletter-btn ion-icon {
+    font-size: 1.2rem;
   }
 
   .product-card {
@@ -505,6 +932,7 @@
   }
 
   .card-banner img {
+    border-radius: 12px 12px 0 0;
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -515,14 +943,14 @@
   }
 
   .card-content .h3 {
-    font-size: 1.6rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--gray-900);
     margin-bottom: 0.3rem;
   }
 
   .card-price {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -589,6 +1017,15 @@
       right: 10px;
     }
 
+    .collection-main-wrapper {
+      flex-direction: column;
+    }
+
+    .bestsellers-sidebar {
+      width: 100%;
+      position: static;
+    }
+
     .collection {
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1rem;
@@ -606,8 +1043,24 @@
       gap: 0.5rem;
     }
 
+    .collection-main-wrapper {
+      flex-direction: column;
+    }
+
+    .bestsellers-sidebar {
+      width: 100%;
+      position: static;
+      order: -1;
+    }
+
     .collection {
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .bestsellers-sidebar {
+      width: 280px;
     }
   }
 
