@@ -176,10 +176,12 @@
 </div>
 
 
-<section class="collection-container container" style="display:flex; flex-wrap:wrap; width:100%">
+<!-- Info Cards Section -->
+<div class="info-cards-wrapper container">
+  <div class="info-cards-grid">
     <!-- Why Shop With Us -->
-    <div class="sidebar-card features-card">
-      <h3 class="sidebar-title">
+    <div class="info-card features-card">
+      <h3 class="info-card-title">
         <ion-icon name="star" class="title-icon"></ion-icon>
         Why Our Best Sellers?
       </h3>
@@ -216,8 +218,8 @@
     </div>
 
     <!-- Trending Now -->
-    <div class="sidebar-card trending-card">
-      <h3 class="sidebar-title">
+    <div class="info-card trending-card">
+      <h3 class="info-card-title">
         <ion-icon name="flame" class="title-icon"></ion-icon>
         Trending Now
       </h3>
@@ -229,11 +231,10 @@
         <a href="#" class="trending-tag">#Bestsellers</a>
       </div>
     </div>
-</section>    
-<section class="container" style="display:flex; flex-wrap:wrap;">
+
     <!-- Customer Reviews Summary -->
-    <div class="sidebar-card reviews-card">
-      <h3 class="sidebar-title">
+    <div class="info-card reviews-card">
+      <h3 class="info-card-title">
         <ion-icon name="people" class="title-icon"></ion-icon>
         Customer Love
       </h3>
@@ -251,7 +252,7 @@
     </div>
 
     <!-- Special Offer Banner -->
-    <div class="sidebar-card offer-card">
+    <div class="info-card offer-card">
       <div class="offer-badge">Limited Time</div>
       <h3 class="offer-title">Get 15% Off</h3>
       <p class="offer-description">On your first purchase of any best seller</p>
@@ -263,8 +264,8 @@
     </div>
 
     <!-- Newsletter Signup -->
-    <div class="sidebar-card newsletter-card">
-      <h3 class="sidebar-title">
+    <div class="info-card newsletter-card">
+      <h3 class="info-card-title">
         <ion-icon name="mail" class="title-icon"></ion-icon>
         Stay Updated
       </h3>
@@ -276,7 +277,8 @@
         </button>
       </form>
     </div>
-  </section>
+  </div>
+</div>
 
 <style>
   /* Hero Slider Styles */
@@ -677,38 +679,46 @@
 
 
 
-  .bestsellers-sidebar {
-    width: 100%;
-    max-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    position: relative;
-    align-self: center;
-  }
+/* Info Cards Section */
+.info-cards-wrapper {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
 
-  .sidebar-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
 
-  .sidebar-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-  }
+.info-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  .sidebar-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.info-card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title-icon {
+  font-size: 1.5rem;
+  color: var(--primary-600);
+}
 
   .title-icon {
     font-size: 1.3rem;
