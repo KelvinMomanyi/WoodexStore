@@ -1,12 +1,12 @@
 {
     "sections": {
-      "services": {
-        "type": "services",
+      "search": {
+        "type": "search",
         "settings": {}
       }
     },
     "order": [
-      "services"
+      "search"
     ]
   }
   
