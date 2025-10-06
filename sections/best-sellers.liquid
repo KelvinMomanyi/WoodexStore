@@ -89,96 +89,204 @@
   </button>
 </section>
 
-<!-- Products Section -->
-<!-- Best Sellers Section -->
- 
+<!-- Products Section with Sidebar -->
 <div class="collection-container">
-  <div class="collection">
-      {% comment %} Smart Collection Selection with Fallback {% endcomment %}
-      {% if section.settings.best_sellers_collection != blank %}
-          {% assign selected_collection = collections[section.settings.best_sellers_collection] %}
-      {% elsif collections['best-sellers'] %}
-          {% assign selected_collection = collections['best-sellers'] %}
-      {% else %}
-          {% assign selected_collection = collections.all %}
-      {% endif %}
-      
-      {% if selected_collection and selected_collection.products.size > 0 %}
-          {% for product in selected_collection.products %}
-            <li class="decoration">
-              <div class="product-card">
-                <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-                  {% if product.featured_image %}
-                    <img src="{{ product.featured_image | img_url: 'large' }}" 
-                      alt="{{ product.featured_image.alt | escape }}" 
-                      class="img-cover" 
-                      width="300" 
-                      height="300" 
-                      loading="lazy">
-                  {% else %}
-                   <img src="{{ 'default-image.jpg' | asset_url }}" 
-                      alt="No image available" 
-                      class="img-cover" 
-                       width="300" 
-                       height="300" 
-                       loading="lazy">
-                  {% endif %}
-               <ul class="card-action-list">
-                <li>
-                 <button class="card-action-btn" aria-label="add to cart" title="add to cart">
-                   <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
-                 </button>
-               </li>
-               <li>
-               <button class="card-action-btn" aria-label="view cart" title="view cart">
-               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-           </button>
-         </li>
-         <li>
-           <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
-             <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-           </button>
-         </li>
-       </ul>
-       {% if product.compare_at_price > product.price %}
-       <ul class="badge-list">
-         <li>
-           <div class="badge orange">Sale</div>
-         </li>
-         <li>
-           <div class="badge cyan">
-             10%
-           </div>
-         </li>
-       </ul>
-       {% endif %}
-     </a>
-          <div class="card-content">
-             <h3 class="h3">
-               <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-             </h3>
-              <div class="card-price">
-               {% if product.compare_at_price > product.price %}
-                 <del class="del">{{ product.compare_at_price | money }}</del>
-              {% endif %}
-                 <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
-               </div>
-              </div>
+  <div class="collection-main-wrapper">
+    <!-- Products Grid -->
+    <div class="collection">
+        {% comment %} Smart Collection Selection with Fallback {% endcomment %}
+        {% if section.settings.best_sellers_collection != blank %}
+            {% assign selected_collection = collections[section.settings.best_sellers_collection] %}
+        {% elsif collections['best-sellers'] %}
+            {% assign selected_collection = collections['best-sellers'] %}
+        {% else %}
+            {% assign selected_collection = collections.all %}
+        {% endif %}
+        
+        {% if selected_collection and selected_collection.products.size > 0 %}
+            {% for product in selected_collection.products %}
+              <li class="decoration">
+                <div class="product-card">
+                  <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                    {% if product.featured_image %}
+                      <img src="{{ product.featured_image | img_url: 'large' }}" 
+                        alt="{{ product.featured_image.alt | escape }}" 
+                        class="img-cover" 
+                        width="300" 
+                        height="300" 
+                        loading="lazy">
+                    {% else %}
+                     <img src="{{ 'default-image.jpg' | asset_url }}" 
+                        alt="No image available" 
+                        class="img-cover" 
+                         width="300" 
+                         height="300" 
+                         loading="lazy">
+                    {% endif %}
+                 <ul class="card-action-list">
+                  <li>
+                   <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                     <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                   </button>
+                 </li>
+                 <li>
+                 <button class="card-action-btn" aria-label="view cart" title="view cart">
+                 <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+             </button>
+           </li>
+           <li>
+             <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
+               <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+             </button>
+           </li>
+         </ul>
+         {% if product.compare_at_price > product.price %}
+         <ul class="badge-list">
+           <li>
+             <div class="badge orange">Sale</div>
+           </li>
+           <li>
+             <div class="badge cyan">
+               10%
              </div>
-            </li>
-          {% endfor %}
-      {% else %}
-          <div class="empty-collection-message">
-              <p style="text-align: center; padding: 2rem; color: var(--gray-600);">No products found in the selected collection. Please select a different collection or add products.</p>
-          </div>
-      {% endif %}
+           </li>
+         </ul>
+         {% endif %}
+       </a>
+            <div class="card-content">
+               <h3 class="h3">
+                 <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+               </h3>
+                <div class="card-price">
+                 {% if product.compare_at_price > product.price %}
+                   <del class="del">{{ product.compare_at_price | money }}</del>
+                {% endif %}
+                   <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
+                 </div>
+                </div>
+               </div>
+              </li>
+            {% endfor %}
+        {% else %}
+            <div class="empty-collection-message">
+                <p style="text-align: center; padding: 2rem; color: var(--gray-600);">No products found in the selected collection. Please select a different collection or add products.</p>
+            </div>
+        {% endif %}
+    </div>
+  </div>
+
   </div>
 </div>
 
+<!-- Features Section -->
+<section class="features-section">
+  <div class="features-container">
+    <!-- Why Shop With Us -->
+    <div class="feature-card features-card">
+      <h3 class="feature-card-title">
+        <ion-icon name="star" class="title-icon"></ion-icon>
+        Why Our Best Sellers?
+      </h3>
+      <ul class="features-list">
+        <li class="feature-item">
+          <ion-icon name="checkmark-circle" class="feature-icon"></ion-icon>
+          <div class="feature-content">
+            <h4>Verified Quality</h4>
+            <p>Hand-picked products with verified customer reviews</p>
+          </div>
+        </li>
+        <li class="feature-item">
+          <ion-icon name="shield-checkmark" class="feature-icon"></ion-icon>
+          <div class="feature-content">
+            <h4>100% Authentic</h4>
+            <p>Guaranteed genuine products from trusted brands</p>
+          </div>
+        </li>
+        <li class="feature-item">
+          <ion-icon name="flash" class="feature-icon"></ion-icon>
+          <div class="feature-content">
+            <h4>Fast Shipping</h4>
+            <p>Express delivery on all best-selling items</p>
+          </div>
+        </li>
+        <li class="feature-item">
+          <ion-icon name="refresh" class="feature-icon"></ion-icon>
+          <div class="feature-content">
+            <h4>Easy Returns</h4>
+            <p>30-day hassle-free return policy</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Trending Now -->
+    <div class="feature-card trending-card">
+      <h3 class="feature-card-title">
+        <ion-icon name="flame" class="title-icon"></ion-icon>
+        Trending Now
+      </h3>
+      <div class="trending-tags">
+        <a href="#" class="trending-tag">#Summer2024</a>
+        <a href="#" class="trending-tag">#LuxuryFragrances</a>
+        <a href="#" class="trending-tag">#GiftIdeas</a>
+        <a href="#" class="trending-tag">#NewArrivals</a>
+        <a href="#" class="trending-tag">#Bestsellers</a>
+      </div>
+    </div>
+
+    <!-- Customer Reviews Summary -->
+    <div class="feature-card reviews-card">
+      <h3 class="feature-card-title">
+        <ion-icon name="people" class="title-icon"></ion-icon>
+        Customer Love
+      </h3>
+      <div class="reviews-summary">
+        <div class="rating-display">
+          <div class="stars-large">★★★★★</div>
+          <p class="rating-text">4.8 out of 5</p>
+          <p class="review-count-text">Based on 2,847 reviews</p>
+        </div>
+        <div class="review-highlight">
+          <p class="review-quote">"Amazing quality and fast delivery! These best sellers never disappoint."</p>
+          <p class="review-author">- Sarah M.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Special Offer Banner -->
+    <div class="feature-card offer-card">
+      <div class="offer-badge">Limited Time</div>
+      <h3 class="offer-title">Get 15% Off</h3>
+      <p class="offer-description">On your first purchase of any best seller</p>
+      <div class="offer-code">
+        <span class="code-label">Use code:</span>
+        <span class="code-value">BEST15</span>
+      </div>
+      <a href="#" class="offer-btn">Shop Now</a>
+    </div>
+
+    <!-- Newsletter Signup -->
+    <div class="feature-card newsletter-card">
+      <h3 class="feature-card-title">
+        <ion-icon name="mail" class="title-icon"></ion-icon>
+        Stay Updated
+      </h3>
+      <p class="newsletter-text">Get notified when new best sellers arrive</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" class="newsletter-input" required>
+        <button type="submit" class="newsletter-btn">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
 
 <style>
   /* Hero Slider Styles */
-  .hero1 .slider-btn { display: none; }
+  .hero1 .slider-btn { 
+    display: flex; 
+  }
 
   .hero1 {
     position: relative;
@@ -295,50 +403,90 @@
     font-size: 1.5rem;
   }
 
-  /* Products Section Styles */
-  .section-subtitle {
-    color: var(--gray-600);
-    font-size: var(--fs-7);
-    text-align: center;
-    margin-bottom: 2rem;
+  /* Container and Layout */
+  .collection-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .filter-btn.active {
-    background-color: var(--primary-600);
-    color: white;
+  .collection-main-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    align-items: center;
   }
 
-  .filter-btn:focus-visible,
-  .filter-btn:hover {
-    background-color: var(--primary-500);
+  .collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    width: 100%;
   }
 
-  .products-container {
+  /* Product Card Styles */
+  .product-card {
     position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .product-item {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-2);
   }
 
-  .product-item.hidden {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
+  .card-banner {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid var(--gray-100);
   }
 
-  .card-banner .overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  .card-banner img {
+    border-radius: 12px 12px 0 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 
-  .card-banner:hover .overlay {
-    opacity: 1;
+  .card-content {
+    padding: 1rem 1.2rem;
+  }
+
+  .card-content .h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-price .del {
+    color: var(--gray-500);
+    text-decoration: line-through;
+  }
+
+  .card-price .price {
+    color: var(--primary-600);
+    font-weight: 600;
   }
 
   .card-action-list {
@@ -364,196 +512,311 @@
     box-shadow: var(--shadow-2);
   }
 
-  .card-action-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  /* Features Section - Full Width */
+  .features-section {
+    width: 100%;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 4rem 2rem;
+    margin-top: 4rem;
   }
 
-  .badge {
-    font-size: var(--fs-9);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
+  .features-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
   }
 
-  .badge.gray {
-    background: var(--gray-200);
-    color: var(--gray-600);
+  .feature-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
 
-  .stock-status {
-    color: var(--gray-600);
-    font-size: var(--fs-9);
-    margin-left: 0.5rem;
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   }
 
-  .rating {
+  .feature-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .stars {
-    display: inline-block;
-    background: linear-gradient(90deg, #ffc107 var(--rating, 0%), #e0e0e0 0%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: var(--fs-9);
-  }
-
-  .review-count {
-    font-size: var(--fs-9);
-    color: var(--gray-600);
-  }
-
-  .empty-state {
-    grid-column: 1 / -1;
-    text-align: center;
-    padding: 4rem 2rem;
-  }
-
-  .empty-icon {
-    font-size: 3rem;
-    color: var(--gray-400);
-    margin-bottom: 1rem;
-  }
-
-  .empty-content p {
-    color: var(--gray-600);
-    margin-bottom: 1rem;
-  }
-
-  .btn-link {
+  .title-icon {
+    font-size: 1.5rem;
     color: var(--primary-600);
-    text-decoration: none;
-    font-weight: 500;
   }
 
-  .btn-link:hover {
-    text-decoration: underline;
-  }
-
-  .load-more-wrapper {
-    text-align: center;
-    margin-top: 3rem;
-  }
-
-  .load-more {
-    background: var(--primary-600);
-    color: white;
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .load-more:hover {
-    background: var(--primary-700);
-  }
-
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .collection-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
-    padding: 2rem;
-  }
-
-  .collection {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+  /* Features Card */
+  .features-list {
     list-style: none;
     padding: 0;
-    width: 100%;
-    max-width: 1400px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  .product-card {
-    position: relative;
-    background: white;
+  .feature-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: start;
+  }
+
+  .feature-icon {
+    font-size: 1.5rem;
+    color: var(--primary-600);
+    flex-shrink: 0;
+  }
+
+  .feature-content h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-content p {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    line-height: 1.4;
+  }
+
+  /* Trending Card */
+  .trending-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+  }
+
+  .trending-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .trending-tag {
+    background: var(--gray-200);
+    color: var(--gray-700);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .trending-tag:hover {
+    background: var(--primary-100);
+    color: var(--primary-600);
+  }
+
+  /* Reviews Card */
+  .reviews-summary {
+    text-align: center;
+  }
+
+  .rating-display {
+    padding: 1rem;
+    background: linear-gradient(135deg, #f6f8fb 0%, #f1f4f9 100%);
     border-radius: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .stars-large {
+    font-size: 1.8rem;
+    color: #ffc107;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+
+  .rating-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin-bottom: 0.25rem;
+  }
+
+  .review-count-text {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+  }
+
+  .review-highlight {
+    border-left: 3px solid var(--primary-600);
+    padding-left: 1rem;
+    text-align: left;
+  }
+
+  .review-quote {
+    font-style: italic;
+    color: var(--gray-700);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .review-author {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    font-weight: 600;
+  }
+
+  /* Offer Card */
+  .offer-card {
+    background: var(--primary-50);
+    color: var(--gray-900);
+    text-align: center;
+    position: relative;
     overflow: hidden;
-    box-shadow: var(--shadow-1);
+    border: 1px solid var(--primary-200);
+  }
+
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .offer-badge {
+    display: inline-block;
+    background: var(--primary-600);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .offer-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary-700);
+    margin-bottom: 0.5rem;
+  }
+
+  .offer-description {
+    font-size: 0.9rem;
+    color: var(--gray-700);
+    margin-bottom: 1rem;
+  }
+
+  .offer-code {
+    background: var(--gray-100);
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .code-label {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .code-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    color: var(--primary-600);
+  }
+
+  .offer-btn {
+    display: inline-block;
+    background: var(--primary-600);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-2);
+  .offer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   }
 
-  .card-banner {
-    position: relative;
-    display: block;
-    border-bottom: 1px solid var(--gray-100);
-  }
-
-  .card-banner img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-
-  .card-content {
-    padding: 1rem 1.2rem;
-  }
-
-  .card-content .h3 {
-    font-size: 1.6rem;
-    font-weight: 600;
+  /* Newsletter Card */
+  .newsletter-card {
+    background: var(--gray-50);
     color: var(--gray-900);
-    margin-bottom: 0.3rem;
+    border: 1px solid var(--gray-200);
   }
 
-  .card-price {
-    font-size: 1.2rem;
-    font-weight: 500;
+  .newsletter-text {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    margin-bottom: 1rem;
+  }
+
+  .newsletter-form {
     display: flex;
-    align-items: center;
     gap: 0.5rem;
   }
 
-  .card-price .del {
+  .newsletter-input {
+    flex: 1;
+    padding: 0.7rem;
+    border: 2px solid var(--gray-300);
+    border-radius: 8px;
+    background: white;
+    color: var(--gray-900);
+    font-size: 0.9rem;
+  }
+
+  .newsletter-input::placeholder {
     color: var(--gray-500);
-    text-decoration: line-through;
   }
 
-  .card-price .price {
-    color: var(--primary-600);
-    font-weight: 600;
+  .newsletter-input:focus {
+    outline: none;
+    border-color: var(--primary-600);
   }
 
-  .filter-controls {
+  .newsletter-btn {
+    background: var(--primary-600);
+    color: white;
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
   }
 
-  .filter-btn {
-    color: var(--primary-600);
-    font-weight: 500;
-    text-decoration: none;
+  .newsletter-btn:hover {
+    transform: scale(1.05);
   }
 
-  .filter-btn:hover {
-    text-decoration: underline;
+  .newsletter-btn ion-icon {
+    font-size: 1.2rem;
   }
 
   .empty-collection-message {
@@ -568,6 +831,24 @@
   .empty-collection-message p {
     font-size: 1.1rem;
     font-weight: 500;
+  }
+
+  .badge {
+    font-size: var(--fs-9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
 
   /* Responsive Design */
@@ -589,8 +870,12 @@
       right: 10px;
     }
 
+    .bestsellers-sidebar {
+      max-width: 100%;
+    }
+
     .collection {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1rem;
     }
 
@@ -600,14 +885,31 @@
   }
 
   @media (max-width: 768px) {
-    .filter-btn-list {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
+    .bestsellers-sidebar {
+      max-width: 100%;
     }
 
     .collection {
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    .features-container {
+      grid-template-columns: 1fr;
+    }
+
+    .features-section {
+      padding: 3rem 1.5rem;
+      margin-top: 3rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .bestsellers-sidebar {
+      max-width: 100%;
+    }
+
+    .features-container {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
   }
 
@@ -677,74 +979,24 @@
 
   window.addEventListener("load", autoSlide);
 
-  // Filter functionality
-  const filterBtns = document.querySelectorAll('[data-filter-btn]');
-  const productItems = document.querySelectorAll('.product-item');
-  const tabPanels = document.querySelectorAll('[role="tabpanel"]');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const filterValue = btn.getAttribute('data-filter-btn');
-
-      // Update active button
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Update ARIA
-      filterBtns.forEach(b => b.setAttribute('aria-selected', 'false'));
-      btn.setAttribute('aria-selected', 'true');
-
-      // Hide all tab panels except current
-      tabPanels.forEach(panel => panel.style.display = 'none');
-      const currentPanel = document.getElementById(`${filterValue}-products`);
-      if (currentPanel) currentPanel.style.display = 'block';
-
-      // Filter products
-      productItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        if (filterValue === 'all' || category === filterValue) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
-    });
-  });
-
-  // Quick view modal
-  document.querySelectorAll('.quick-add').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const productTitle = btn.closest('.product-card').querySelector('.card-title').textContent;
-      alert(`Quick view for ${productTitle} - Modal would open here`);
-    });
-  });
-
   // Wishlist toggle
-  document.querySelectorAll('.wishlist').forEach(btn => {
+  document.querySelectorAll('[aria-label="add to wishlist"]').forEach(btn => {
     btn.addEventListener('click', () => {
-      btn.querySelector('ion-icon').setAttribute('name', btn.querySelector('ion-icon').getAttribute('name') === 'heart-outline' ? 'heart' : 'heart-outline');
+      const icon = btn.querySelector('ion-icon');
+      if (icon) {
+        icon.setAttribute('name', icon.getAttribute('name') === 'heart-outline' ? 'heart' : 'heart-outline');
+      }
     });
   });
 
-  // Load more
-  const loadMoreBtn = document.getElementById('load-more-btn');
-  if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', () => {
-      alert('Loading more best sellers...');
+  // Newsletter form
+  const newsletterForm = document.querySelector('.newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for subscribing!');
     });
   }
-
-  // Add to cart feedback
-  document.querySelectorAll('.add-to-cart-form').forEach(form => {
-    form.addEventListener('submit', (e) => {
-      const btn = form.querySelector('button');
-      btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon><span class="visually-hidden">Added to cart</span>';
-      setTimeout(() => {
-        btn.innerHTML = '<ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>';
-      }, 2000);
-    });
-  });
 </script>
 
 {% schema %}
@@ -801,4 +1053,3 @@
   ]
 }
 {% endschema %}
-
