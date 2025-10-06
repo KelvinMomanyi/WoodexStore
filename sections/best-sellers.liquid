@@ -64,16 +64,18 @@
       </li>
     {% else %}
       {% for block in section.blocks %}
-        <li class="slider-item {% if forloop.first %}active{% endif %}" data-hero-slider-item style="padding-block-start: 70px;">
-          <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ block.settings.hero_image | image_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
-          <div class="card-content">
-            <h1 class="h1 hero1-title slider-reveal">{{ block.settings.brand_name }}</h1>
-            <p class="price slider-reveal">Starting at {{ block.settings.starting_price }}</p>
-            <div style="display: flex; justify-content: flex-start;">
-              <a href="{{ block.settings.shop_now_link }}" class="btn btn-primary slider-reveal">{{ block.settings.shop_now_text }}</a>
+        {% if block.type == 'hero_section' %}
+          <li class="slider-item {% if forloop.first %}active{% endif %}" data-hero-slider-item style="padding-block-start: 70px;">
+            <div class="slider-bg hero1-card has-bg-image" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{ block.settings.hero_image | image_url }}'); background-attachment: fixed; background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
+            <div class="card-content">
+              <h1 class="h1 hero1-title slider-reveal">{{ block.settings.brand_name }}</h1>
+              <p class="price slider-reveal">Starting at {{ block.settings.starting_price }}</p>
+              <div style="display: flex; justify-content: flex-start;">
+                <a href="{{ block.settings.shop_now_link }}" class="btn btn-primary slider-reveal">{{ block.settings.shop_now_text }}</a>
+              </div>
             </div>
-          </div>
-        </li>
+          </li>
+        {% endif %}
       {% endfor %}
     {% endif %}
   </ul>
@@ -89,120 +91,89 @@
 
 <!-- Products Section -->
 <!-- Best Sellers Section -->
-<section class="section product" id="product" aria-label="product">
-  <div class="container" style="padding-top:25px;">
-
-    <div class="title-wrapper">
-      <h2 class="h2 section-title">
-        {% if section.settings.specific_collection != blank %}
-          {{ collections[section.settings.specific_collection].title }}
-        {% else %}
-          Best Sellers
-        {% endif %}
-      </h2>
-
-      <div class="filter-controls">
-        <a href="#" class="btn-link filter-btn">
-          {% render 'sorting-filter' %}
-        </a>
-        <a href="#" class="btn-link filter-btn">
-          {% render 'collection-filter' %}
-        </a>
-      </div>
-    </div>
-
-    <div class="collection-container">
-      <ul class="collection grid-list">
-        {% if section.settings.specific_collection != blank %}
-          {% assign selected_collection = collections[section.settings.specific_collection] %}
-          {% assign products = selected_collection.products %}
-        {% else %}
-          {% assign products = collections['best-sellers'].products %}
-        {% endif %}
-
-        {% for product in products %}
-          <li class="decoration product-item {% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% endif %}" data-category="{% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% else %}all{% endif %}">
-            <div class="product-card">
-              <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: 'large' }}"
-                    alt="{{ product.featured_image.alt | escape }}"
-                    class="img-cover"
-                    width="300"
-                    height="300"
-                    loading="lazy">
-                {% else %}
-                  <img src="{{ 'default-image.jpg' | asset_url }}"
-                    alt="No image available"
-                    class="img-cover"
-                    width="300"
-                    height="300"
-                    loading="lazy">
-                {% endif %}
-                <div class="overlay" aria-hidden="true"></div>
-              </a>
-
-              <ul class="card-action-list">
-                <li>
-                  <button class="card-action-btn quick-add" aria-label="Quick view {{ product.title }}" title="Quick view">
-                    <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
-                  </button>
-                </li>
-                <li>
-                  <form action="/cart/add" method="post" enctype="multipart/form-data" class="add-to-cart-form" onsubmit="submitAddToCartForm(this); return false;">
-                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-                    <button type="submit" class="card-action-btn add-to-cart" aria-label="Add {{ product.title }} to cart" {% unless product.available %}disabled{% endunless %}>
-                      <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                    </button>
-                  </form>
-                </li>
-                <li>
-                  <button class="card-action-btn wishlist" aria-label="Add {{ product.title }} to wishlist" title="Add to wishlist">
-                    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                  </button>
-                </li>
-              </ul>
-
-              <ul class="badge-list">
-                {% if product.available %}
-                  {% if product.compare_at_price > product.price %}
-                    <li><div class="badge orange">Sale</div></li>
+ 
+<div class="collection-container">
+  <div class="collection">
+      {% comment %} Smart Collection Selection with Fallback {% endcomment %}
+      {% if section.settings.best_sellers_collection != blank %}
+          {% assign selected_collection = collections[section.settings.best_sellers_collection] %}
+      {% elsif collections['best-sellers'] %}
+          {% assign selected_collection = collections['best-sellers'] %}
+      {% else %}
+          {% assign selected_collection = collections.all %}
+      {% endif %}
+      
+      {% if selected_collection and selected_collection.products.size > 0 %}
+          {% for product in selected_collection.products %}
+            <li class="decoration">
+              <div class="product-card">
+                <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
+                  {% if product.featured_image %}
+                    <img src="{{ product.featured_image | img_url: 'large' }}" 
+                      alt="{{ product.featured_image.alt | escape }}" 
+                      class="img-cover" 
+                      width="300" 
+                      height="300" 
+                      loading="lazy">
+                  {% else %}
+                   <img src="{{ 'default-image.jpg' | asset_url }}" 
+                      alt="No image available" 
+                      class="img-cover" 
+                       width="300" 
+                       height="300" 
+                       loading="lazy">
                   {% endif %}
-                  {% assign discount = 100.0 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round: 0 %}
-                  {% if discount > 0 %}
-                    <li><div class="badge cyan">-{{ discount }}%</div></li>
-                  {% endif %}
-                {% else %}
-                  <li><div class="badge gray">Out of Stock</div></li>
-                {% endif %}
-              </ul>
-
-              <div class="card-content">
-                <h3 class="h3">
-                  <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
-                </h3>
-                <div class="card-price">
-                  {% if product.compare_at_price > product.price %}
-                    <del class="del">{{ product.compare_at_price | money }}</del>
-                  {% endif %}
-                  <data class="price" value="{{ product.price | divided_by: 100.0 }}">{{ product.price | money }}</data>
-                  {% unless product.available %}<span class="stock-status">Out of stock</span>{% endunless %}
-                </div>
-                {% if product.available %}
-                  <div class="rating" aria-label="Average rating {{ product.metafields.custom.rating | default: 4.5 }}/5">
-                    <span class="stars" style="--rating: {{ product.metafields.custom.rating | default: 4.5 }};">★★★★★</span>
-                    <span class="review-count">({{ product.metafields.custom.reviews_count | default: 23 }} reviews)</span>
-                  </div>
-                {% endif %}
+               <ul class="card-action-list">
+                <li>
+                 <button class="card-action-btn" aria-label="add to cart" title="add to cart">
+                   <ion-icon name="add-outline" aria-hidden="true"></ion-icon>
+                 </button>
+               </li>
+               <li>
+               <button class="card-action-btn" aria-label="view cart" title="view cart">
+               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+           </button>
+         </li>
+         <li>
+           <button class="card-action-btn" aria-label="add to wishlist" title="add to wishlist">
+             <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+           </button>
+         </li>
+       </ul>
+       {% if product.compare_at_price > product.price %}
+       <ul class="badge-list">
+         <li>
+           <div class="badge orange">Sale</div>
+         </li>
+         <li>
+           <div class="badge cyan">
+             10%
+           </div>
+         </li>
+       </ul>
+       {% endif %}
+     </a>
+          <div class="card-content">
+             <h3 class="h3">
+               <a href="{{ product.url }}" class="card-title">{{ product.title }}</a>
+             </h3>
+              <div class="card-price">
+               {% if product.compare_at_price > product.price %}
+                 <del class="del">{{ product.compare_at_price | money }}</del>
+              {% endif %}
+                 <data class="price" value="{{ product.price }}">{{ product.price | money }}</data>
+               </div>
               </div>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
+             </div>
+            </li>
+          {% endfor %}
+      {% else %}
+          <div class="empty-collection-message">
+              <p style="text-align: center; padding: 2rem; color: var(--gray-600);">No products found in the selected collection. Please select a different collection or add products.</p>
+          </div>
+      {% endif %}
   </div>
-</section>
+</div>
 
 
 <style>
@@ -324,7 +295,7 @@
     font-size: 1.5rem;
   }
 
-  /* Products Section - Keep Original Styles */
+  /* Products Section Styles */
   .section-subtitle {
     color: var(--gray-600);
     font-size: var(--fs-7);
@@ -494,100 +465,111 @@
     border: 0;
   }
 
-
-
-
-
-
   .collection-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 2rem;
+  }
 
-.collection.grid-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  list-style: none;
-  padding: 0;
-}
+  .collection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 1400px;
+  }
 
-.product-card {
-  position: relative;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: var(--shadow-1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .product-card {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-2);
-}
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-2);
+  }
 
-.card-banner {
-  position: relative;
-  display: block;
-  border-bottom: 1px solid var(--gray-100);
-}
+  .card-banner {
+    position: relative;
+    display: block;
+    border-bottom: 1px solid var(--gray-100);
+  }
 
-.card-banner img {
-  border-radius: 12px 12px 0 0;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
+  .card-banner img {
+    border-radius: 12px 12px 0 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
 
-.card-content {
-  padding: 1rem 1.2rem;
-}
+  .card-content {
+    padding: 1rem 1.2rem;
+  }
 
-.card-content .h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--gray-900);
-  margin-bottom: 0.3rem;
-}
+  .card-content .h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.3rem;
+  }
 
-.card-price {
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+  .card-price {
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-.card-price .del {
-  color: var(--gray-500);
-  text-decoration: line-through;
-}
+  .card-price .del {
+    color: var(--gray-500);
+    text-decoration: line-through;
+  }
 
-.card-price .price {
-  color: var(--primary-600);
-  font-weight: 600;
-}
+  .card-price .price {
+    color: var(--primary-600);
+    font-weight: 600;
+  }
 
-.filter-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
+  .filter-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
 
-.filter-btn {
-  color: var(--primary-600);
-  font-weight: 500;
-  text-decoration: none;
-}
+  .filter-btn {
+    color: var(--primary-600);
+    font-weight: 500;
+    text-decoration: none;
+  }
 
-.filter-btn:hover {
-  text-decoration: underline;
-}
+  .filter-btn:hover {
+    text-decoration: underline;
+  }
 
+  .empty-collection-message {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-collection-message p {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
 
   /* Responsive Design */
   @media screen and (max-width: 575px) {
@@ -607,6 +589,15 @@
     .slider-btn.next {
       right: 10px;
     }
+
+    .collection {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .collection-container {
+      padding: 1rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -616,8 +607,8 @@
       gap: 0.5rem;
     }
 
-    .grid-list {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .collection {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
   }
 
@@ -759,8 +750,15 @@
 
 {% schema %}
 {
-  "name": "best-sellers",
-  "settings": [],
+  "name": "Best Sellers",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "best_sellers_collection",
+      "label": "Best Sellers Collection",
+      "info": "Select a collection to display. If not selected, it will default to 'best-sellers' collection, or all products if that doesn't exist."
+    }
+  ],
   "blocks": [
     {
       "type": "hero_section",
@@ -794,18 +792,6 @@
           "id": "shop_now_text",
           "label": "Shop Now Button Text",
           "default": "Shop Now"
-        }
-      ]
-    },
-    {
-      "type": "collection_section",
-      "name": "Collection Section",
-      "settings": [
-        {
-          "type": "collection",
-          "id": "specific_collection",
-          "label": "Select Best Sellers Collection",
-          "info": "Override the default 'best-sellers' collection here."
         }
       ]
     }
