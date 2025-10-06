@@ -88,50 +88,60 @@
 </section>
 
 <!-- Products Section -->
+<!-- Best Sellers Section -->
 <section class="section product" id="product" aria-label="product">
-  <div class="container">
+  <div class="container" style="padding-top:25px;">
 
     <div class="title-wrapper">
-      <h2 class="h2 section-title">Best Sellers</h2>
-      <p class="section-subtitle">Discover our top-rated fragrances loved by customers</p>
+      <h2 class="h2 section-title">
+        {% if section.settings.specific_collection != blank %}
+          {{ collections[section.settings.specific_collection].title }}
+        {% else %}
+          Best Sellers
+        {% endif %}
+      </h2>
 
-      <ul class="filter-btn-list" role="tablist">
-        <li class="filter-btn-item">
-          <button class="filter-btn active" data-filter-btn="all" role="tab" aria-selected="true" aria-controls="all-products">All</button>
-        </li>
-        <li class="filter-btn-item">
-          <button class="filter-btn" data-filter-btn="men" role="tab" aria-selected="false" aria-controls="men-products">Men</button>
-        </li>
-        <li class="filter-btn-item">
-          <button class="filter-btn" data-filter-btn="women" role="tab" aria-selected="false" aria-controls="women-products">Women</button>
-        </li>
-      </ul>
+      <div class="filter-controls">
+        <a href="#" class="btn-link filter-btn">
+          {% render 'sorting-filter' %}
+        </a>
+        <a href="#" class="btn-link filter-btn">
+          {% render 'collection-filter' %}
+        </a>
+      </div>
     </div>
 
-    <div class="products-container">
-      <ul class="grid-list product-list" data-filter="all" id="all-products" role="tabpanel">
-        {% assign collection_handle = 'best-sellers' %}
-        {% for product in collections[collection_handle].products limit: 12 %}
+    <div class="collection-container">
+      <ul class="collection grid-list">
+        {% if section.settings.specific_collection != blank %}
+          {% assign selected_collection = collections[section.settings.specific_collection] %}
+          {% assign products = selected_collection.products %}
+        {% else %}
+          {% assign products = collections['best-sellers'].products %}
+        {% endif %}
+
+        {% for product in products %}
           <li class="decoration product-item {% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% endif %}" data-category="{% if product.tags contains 'men' %}men{% elsif product.tags contains 'women' %}women{% else %}all{% endif %}">
             <div class="product-card">
-              <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;" aria-label="{{ product.title }}">
+              <a href="{{ product.url }}" class="card-banner img-holder has-before" style="--width: 300; --height: 300;">
                 {% if product.featured_image %}
-                  <img src="{{ product.featured_image | img_url: 'large' }}" 
-                    alt="{{ product.featured_image.alt | escape }}" 
-                    class="img-cover" 
-                    width="300" 
-                    height="300" 
+                  <img src="{{ product.featured_image | img_url: 'large' }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="img-cover"
+                    width="300"
+                    height="300"
                     loading="lazy">
                 {% else %}
-                  <img src="{{ 'default-image.jpg' | asset_url }}" 
-                    alt="No image available" 
-                    class="img-cover" 
-                    width="300" 
-                    height="300" 
+                  <img src="{{ 'default-image.jpg' | asset_url }}"
+                    alt="No image available"
+                    class="img-cover"
+                    width="300"
+                    height="300"
                     loading="lazy">
                 {% endif %}
                 <div class="overlay" aria-hidden="true"></div>
               </a>
+
               <ul class="card-action-list">
                 <li>
                   <button class="card-action-btn quick-add" aria-label="Quick view {{ product.title }}" title="Quick view">
@@ -143,7 +153,6 @@
                     <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                     <button type="submit" class="card-action-btn add-to-cart" aria-label="Add {{ product.title }} to cart" {% unless product.available %}disabled{% endunless %}>
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
-                      {% if product.available == false %}<span class="visually-hidden">Out of stock</span>{% endif %}
                     </button>
                   </form>
                 </li>
@@ -157,20 +166,14 @@
               <ul class="badge-list">
                 {% if product.available %}
                   {% if product.compare_at_price > product.price %}
-                    <li>
-                      <div class="badge orange">Sale</div>
-                    </li>
+                    <li><div class="badge orange">Sale</div></li>
                   {% endif %}
                   {% assign discount = 100.0 | times: product.compare_at_price | minus: product.price | divided_by: product.compare_at_price | round: 0 %}
                   {% if discount > 0 %}
-                    <li>
-                      <div class="badge cyan">-{{ discount }}%</div>
-                    </li>
+                    <li><div class="badge cyan">-{{ discount }}%</div></li>
                   {% endif %}
                 {% else %}
-                  <li>
-                    <div class="badge gray">Out of Stock</div>
-                  </li>
+                  <li><div class="badge gray">Out of Stock</div></li>
                 {% endif %}
               </ul>
 
@@ -195,28 +198,12 @@
             </div>
           </li>
         {% endfor %}
-        {% unless collections[collection_handle].products.size > 0 %}
-          <li class="decoration empty-state">
-            <div class="product-card">
-              <div class="empty-content">
-                <ion-icon name="flame-outline" class="empty-icon"></ion-icon>
-                <p>No best sellers available at the moment. Check back soon!</p>
-                <a href="/collections/all" class="btn-link">Browse All Products</a>
-              </div>
-            </div>
-          </li>
-        {% endunless %}
       </ul>
     </div>
 
-    {% if collections[collection_handle].products.size > 6 %}
-      <div class="load-more-wrapper">
-        <button class="btn load-more" id="load-more-btn">Load More</button>
-      </div>
-    {% endif %}
-
   </div>
 </section>
+
 
 <style>
   /* Hero Slider Styles */
@@ -506,6 +493,101 @@
     white-space: nowrap;
     border: 0;
   }
+
+
+
+
+
+
+  .collection-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.collection.grid-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+}
+
+.product-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-2);
+}
+
+.card-banner {
+  position: relative;
+  display: block;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.card-banner img {
+  border-radius: 12px 12px 0 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.card-content {
+  padding: 1rem 1.2rem;
+}
+
+.card-content .h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 0.3rem;
+}
+
+.card-price {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-price .del {
+  color: var(--gray-500);
+  text-decoration: line-through;
+}
+
+.card-price .price {
+  color: var(--primary-600);
+  font-weight: 600;
+}
+
+.filter-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.filter-btn {
+  color: var(--primary-600);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.filter-btn:hover {
+  text-decoration: underline;
+}
+
 
   /* Responsive Design */
   @media screen and (max-width: 575px) {
