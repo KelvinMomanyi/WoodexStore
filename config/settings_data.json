@@ -1,6 +1,12 @@
 {
-  "current": "Default",
+  "current": {
+    "sections": {},
+    "content_for_index": []
+  },
   "presets": {
-    "Default": { }
+    "Themekit template theme": {
+      "sections": {},
+      "content_for_index": []
+    }
   }
 }
