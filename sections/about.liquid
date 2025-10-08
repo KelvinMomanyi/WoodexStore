@@ -124,7 +124,7 @@
     {% endif %}
 
     <!-- Collections Section -->
-    {% if section.settings.show_collections %}
+    {% comment %} {% if section.settings.show_collections %}
     <section id="collections" class="shine-fashion-collections-section-main-w1z8">
         <div class="shine-fashion-collections-container-wrapper-d5p4">
             <div class="shine-fashion-collections-header-section-t7l3 shine-fashion-fade-in-animation-z8t3">
@@ -144,7 +144,58 @@
             </div>
         </div>
     </section>
-    {% endif %}
+    {% endif %} {% endcomment %}
+    <!-- Collections Section -->
+{% if section.settings.show_collections %}
+<section id="collections" class="shine-fashion-collections-section-main-w1z8">
+    <div class="shine-fashion-collections-container-wrapper-d5p4">
+        <div class="shine-fashion-collections-header-section-t7l3 shine-fashion-fade-in-animation-z8t3">
+            <h2 class="shine-fashion-collections-title-heading-y2h6 shine-fashion-heading-typography-x9z7">{{ section.settings.collections_title }}</h2>
+            <p class="shine-fashion-collections-subtitle-desc-b9x7">{{ section.settings.collections_subtitle }}</p>
+        </div>
+        <div class="shine-fashion-collections-grid-layout-k3r1">
+            {% for block in section.blocks %}
+            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3" {{ block.shopify_attributes }}>
+                <div class="shine-fashion-collection-image-container-n4v8">
+                    {% if block.settings.collection_image != blank %}
+                        <img src="{{ block.settings.collection_image | img_url: 'master' }}" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
+                    {% else %}
+                        <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
+                    {% endif %}
+                </div>
+                <h3 class="shine-fashion-collection-name-title-x1j9">{{ block.settings.collection_name }}</h3>
+                <p class="shine-fashion-collection-description-text-g7s4">{{ block.settings.collection_description }}</p>
+            </div>
+            {% endfor %}
+            
+            <!-- Fallback collection cards if no blocks are added -->
+            {% if section.blocks.size == 0 %}
+            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-1-timing-a5w7">
+                <div class="shine-fashion-collection-image-container-n4v8">
+                    <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="Executive Collection" class="shine-fashion-collection-image-photo-m8q5">
+                </div>
+                <h3 class="shine-fashion-collection-name-title-x1j9">Executive Collection</h3>
+                <p class="shine-fashion-collection-description-text-g7s4">Sophisticated business attire for the modern professional</p>
+            </div>
+            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-2-timing-u2f6">
+                <div class="shine-fashion-collection-image-container-n4v8">
+                    <img src="https://images.unsplash.com/photo-1538330627166-33d1908c210d?w=1080&q=80" alt="Casual Luxe" class="shine-fashion-collection-image-photo-m8q5">
+                </div>
+                <h3 class="shine-fashion-collection-name-title-x1j9">Casual Luxe</h3>
+                <p class="shine-fashion-collection-description-text-g7s4">Elevated everyday essentials with premium comfort</p>
+            </div>
+            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-3-timing-l9p1">
+                <div class="shine-fashion-collection-image-container-n4v8">
+                    <img src="https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?w=1080&q=80" alt="Evening Elegance" class="shine-fashion-collection-image-photo-m8q5">
+                </div>
+                <h3 class="shine-fashion-collection-name-title-x1j9">Evening Elegance</h3>
+                <p class="shine-fashion-collection-description-text-g7s4">Sophisticated pieces for special occasions</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}
 
     <!-- Testimonials Section -->
     {% if section.settings.show_testimonials %}
