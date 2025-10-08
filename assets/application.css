@@ -658,7 +658,7 @@ body.active { overflow: hidden; }
 
 .product-card .badge.orange { background-color: var(--red-orange-color-wheel); }
 
-.product-card .badge.cyan { background-color: var(--middle-blue-green); }
+.product-card .badge.cyan { background-color: var(--black); }
 
 .product-card .badge1.gray { background-color:gray; }
 
