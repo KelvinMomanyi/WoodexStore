@@ -1,6 +1,6 @@
-{% if section.settings.enabled %}
 <div class="about-page">
     <!-- Hero Section -->
+    {% if section.settings.enabled %}
     <section class="shine-fashion-hero-section-main-k4p8">
         <div class="shine-fashion-hero-grid-layout-m2q5">
             <div class="shine-fashion-hero-left-panel-n8w3" style="background-image: url('{{ section.settings.hero_left_image | img_url: 'master' }}');">
@@ -72,23 +72,37 @@
     <section class="container cosmic-container">
         <div class="universe-wrapper">
             <div class="galaxy-grid">
+                <!-- Left Content -->
                 <div class="stellar-content">
                     <h1 class="nebula-title">
                         {{ section.settings.feature_title_part1 }}
-                        <span class="aurora-highlight">{{ section.settings.feature_title_highlight }}</span>
+                        <span class="aurora-highlight">
+                            {{ section.settings.feature_title_highlight }}
+                        </span>
                         {{ section.settings.feature_title_part2 }}
                     </h1>
-                    <p class="plasma-description">{{ section.settings.feature_description }}</p>
+                    
+                    <p class="plasma-description">
+                        {{ section.settings.feature_description }}
+                    </p>
+                    
                     <div class="meteor-actions">
-                        {% if section.settings.primary_btn_text != blank %}
-                        <a href="{{ section.settings.primary_btn_url }}" class="btn btn-primary">{{ section.settings.primary_btn_text }}</a>
+                        {% if section.settings.primary_btn_url != blank %}
+                        <a href="{{ section.settings.primary_btn_url }}" class="btn btn-primary">
+                            {{ section.settings.primary_btn_text }}
+                        </a>
                         {% endif %}
-                        {% if section.settings.secondary_btn_text != blank %}
-                        <a href="{{ section.settings.secondary_btn_url }}" class="btn btn-secondary">{{ section.settings.secondary_btn_text }}</a>
+                        {% if section.settings.secondary_btn_url != blank %}
+                        <a href="{{ section.settings.secondary_btn_url }}" class="btn btn-secondary">
+                            {{ section.settings.secondary_btn_text }}
+                        </a>
                         {% endif %}
                     </div>
+                    
                     <div class="constellation-trust">
-                        <div class="cosmic-label">{{ section.settings.trust_label }}</div>
+                        <div class="cosmic-label">
+                            {{ section.settings.trust_label }}
+                        </div>
                         <div class="satellite-logos">
                             <div class="brand-placeholder brand-alpha"></div>
                             <div class="brand-placeholder brand-beta"></div>
@@ -96,7 +110,10 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Right Content - Floating Cards -->
                 <div class="dimension-showcase">
+                    <!-- Main Dashboard Card -->
                     <div class="levitating-element">
                         <div class="prism-border radiant-glow">
                             <div class="matrix-interior command-center" style="background-image: url('{{ section.settings.card_1_image | img_url: 'master' }}');">
@@ -107,11 +124,15 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Workflow Card -->
                     <div class="levitating-element workflow-panel">
                         <div class="prism-border">
                             <div class="matrix-interior workflow-interior" style="background-image: url('{{ section.settings.card_2_image | img_url: 'master' }}');"></div>
                         </div>
                     </div>
+                    
+                    <!-- Analytics Card -->
                     <div class="levitating-element analytics-widget">
                         <div class="prism-border">
                             <div class="matrix-interior analytics-interior" style="background-image: url('{{ section.settings.card_3_image | img_url: 'master' }}');"></div>
@@ -124,7 +145,7 @@
     {% endif %}
 
     <!-- Collections Section -->
-    {% comment %} {% if section.settings.show_collections %}
+    {% if section.settings.show_collections %}
     <section id="collections" class="shine-fashion-collections-section-main-w1z8">
         <div class="shine-fashion-collections-container-wrapper-d5p4">
             <div class="shine-fashion-collections-header-section-t7l3 shine-fashion-fade-in-animation-z8t3">
@@ -133,69 +154,47 @@
             </div>
             <div class="shine-fashion-collections-grid-layout-k3r1">
                 {% for block in section.blocks %}
-                <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3">
+                <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3" {{ block.shopify_attributes }}>
                     <div class="shine-fashion-collection-image-container-n4v8">
-                        <img src="{{ block.settings.collection_image | img_url: 'master' }}" alt="{{ block.settings.collection_name }}" class="shine-fashion-collection-image-photo-m8q5">
+                        {% if block.settings.collection_image != blank %}
+                            <img src="{{ block.settings.collection_image | img_url: 'master' }}" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
+                        {% else %}
+                            <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
+                        {% endif %}
                     </div>
                     <h3 class="shine-fashion-collection-name-title-x1j9">{{ block.settings.collection_name }}</h3>
                     <p class="shine-fashion-collection-description-text-g7s4">{{ block.settings.collection_description }}</p>
                 </div>
                 {% endfor %}
+                
+                <!-- Fallback collection cards if no blocks are added -->
+                {% if section.blocks.size == 0 %}
+                <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-1-timing-a5w7">
+                    <div class="shine-fashion-collection-image-container-n4v8">
+                        <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="Executive Collection" class="shine-fashion-collection-image-photo-m8q5">
+                    </div>
+                    <h3 class="shine-fashion-collection-name-title-x1j9">Executive Collection</h3>
+                    <p class="shine-fashion-collection-description-text-g7s4">Sophisticated business attire for the modern professional</p>
+                </div>
+                <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-2-timing-u2f6">
+                    <div class="shine-fashion-collection-image-container-n4v8">
+                        <img src="https://images.unsplash.com/photo-1538330627166-33d1908c210d?w=1080&q=80" alt="Casual Luxe" class="shine-fashion-collection-image-photo-m8q5">
+                    </div>
+                    <h3 class="shine-fashion-collection-name-title-x1j9">Casual Luxe</h3>
+                    <p class="shine-fashion-collection-description-text-g7s4">Elevated everyday essentials with premium comfort</p>
+                </div>
+                <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-3-timing-l9p1">
+                    <div class="shine-fashion-collection-image-container-n4v8">
+                        <img src="https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?w=1080&q=80" alt="Evening Elegance" class="shine-fashion-collection-image-photo-m8q5">
+                    </div>
+                    <h3 class="shine-fashion-collection-name-title-x1j9">Evening Elegance</h3>
+                    <p class="shine-fashion-collection-description-text-g7s4">Sophisticated pieces for special occasions</p>
+                </div>
+                {% endif %}
             </div>
         </div>
     </section>
-    {% endif %} {% endcomment %}
-    <!-- Collections Section -->
-{% if section.settings.show_collections %}
-<section id="collections" class="shine-fashion-collections-section-main-w1z8">
-    <div class="shine-fashion-collections-container-wrapper-d5p4">
-        <div class="shine-fashion-collections-header-section-t7l3 shine-fashion-fade-in-animation-z8t3">
-            <h2 class="shine-fashion-collections-title-heading-y2h6 shine-fashion-heading-typography-x9z7">{{ section.settings.collections_title }}</h2>
-            <p class="shine-fashion-collections-subtitle-desc-b9x7">{{ section.settings.collections_subtitle }}</p>
-        </div>
-        <div class="shine-fashion-collections-grid-layout-k3r1">
-            {% for block in section.blocks %}
-            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3" {{ block.shopify_attributes }}>
-                <div class="shine-fashion-collection-image-container-n4v8">
-                    {% if block.settings.collection_image != blank %}
-                        <img src="{{ block.settings.collection_image | img_url: 'master' }}" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
-                    {% else %}
-                        <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="{{ block.settings.collection_name | escape }}" class="shine-fashion-collection-image-photo-m8q5">
-                    {% endif %}
-                </div>
-                <h3 class="shine-fashion-collection-name-title-x1j9">{{ block.settings.collection_name }}</h3>
-                <p class="shine-fashion-collection-description-text-g7s4">{{ block.settings.collection_description }}</p>
-            </div>
-            {% endfor %}
-            
-            <!-- Fallback collection cards if no blocks are added -->
-            {% if section.blocks.size == 0 %}
-            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-1-timing-a5w7">
-                <div class="shine-fashion-collection-image-container-n4v8">
-                    <img src="https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1080&q=80" alt="Executive Collection" class="shine-fashion-collection-image-photo-m8q5">
-                </div>
-                <h3 class="shine-fashion-collection-name-title-x1j9">Executive Collection</h3>
-                <p class="shine-fashion-collection-description-text-g7s4">Sophisticated business attire for the modern professional</p>
-            </div>
-            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-2-timing-u2f6">
-                <div class="shine-fashion-collection-image-container-n4v8">
-                    <img src="https://images.unsplash.com/photo-1538330627166-33d1908c210d?w=1080&q=80" alt="Casual Luxe" class="shine-fashion-collection-image-photo-m8q5">
-                </div>
-                <h3 class="shine-fashion-collection-name-title-x1j9">Casual Luxe</h3>
-                <p class="shine-fashion-collection-description-text-g7s4">Elevated everyday essentials with premium comfort</p>
-            </div>
-            <div class="shine-fashion-collection-card-item-p6w2 shine-fashion-fade-in-animation-z8t3 shine-fashion-fade-in-delay-3-timing-l9p1">
-                <div class="shine-fashion-collection-image-container-n4v8">
-                    <img src="https://images.unsplash.com/photo-1538331269258-6c97a6bdeae0?w=1080&q=80" alt="Evening Elegance" class="shine-fashion-collection-image-photo-m8q5">
-                </div>
-                <h3 class="shine-fashion-collection-name-title-x1j9">Evening Elegance</h3>
-                <p class="shine-fashion-collection-description-text-g7s4">Sophisticated pieces for special occasions</p>
-            </div>
-            {% endif %}
-        </div>
-    </div>
-</section>
-{% endif %}
+    {% endif %}
 
     <!-- Testimonials Section -->
     {% if section.settings.show_testimonials %}
@@ -227,8 +226,8 @@
         </div>
     </section>
     {% endif %}
+    {% endif %}
 </div>
-{% endif %}
 
 <style> 
     .section-padding { padding: 4rem 2rem; }
